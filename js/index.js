@@ -407,11 +407,11 @@ function Game(_args){
         
         animations:{
           "running":{
-              "total_frames":6,
+              "total_frames":30,
               "spritesheet":"url(img/hero_running.png)"
           },
           "sprinting":{
-              "total_frames":6,
+              "total_frames":18,
               "spritesheet":"url(img/hero_sprinting.png)"
           }
         },
