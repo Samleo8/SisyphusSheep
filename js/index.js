@@ -419,7 +419,7 @@ function Game(_args){
               "spritesheet":"url(img/hero_sprinting.png)"
           }, 
           "backRunning":{
-              "total_frames":18,
+              "total_frames":30,
               "spritesheet":"url(img/hero_running.png)"
           }
         },
