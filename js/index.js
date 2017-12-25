@@ -406,6 +406,10 @@ function Game(_args){
         backRunning: false,
         
         animations:{
+          "still":{
+              "total_frames":1,
+              "spritesheet":"url(img/hero.png)"
+          },
           "running":{
               "total_frames":30,
               "spritesheet":"url(img/hero_running.png)"
@@ -413,6 +417,10 @@ function Game(_args){
           "sprinting":{
               "total_frames":18,
               "spritesheet":"url(img/hero_sprinting.png)"
+          }, 
+          "backRunning":{
+              "total_frames":18,
+              "spritesheet":"url(img/hero_running.png)"
           }
         },
         
@@ -603,7 +611,12 @@ function Game(_args){
         
         obj.hero.img.style.height = obj.hero.height+"px";
         obj.hero.img.style.backgroundSize = obj.hero.width+"px "+obj.hero.height+"px";
-    
+        
+        //Load all spritesheets first
+        obj.hero.img.style.backgroundImage = obj.hero.animations["running"].spritesheet;
+        obj.hero.img.style.backgroundImage = obj.hero.animations["sprinting"].spritesheet;
+        obj.hero.img.style.backgroundImage = obj.hero.animations["still"].spritesheet;
+        
         //Game button resize
         for(var i=0;i<obj.gameBtns.length;i++){
             var gBtn = obj.gameBtns[i];
@@ -691,6 +704,14 @@ function Game(_args){
             else{
                 overallSpd -= plyr.backRunningSpeed*mod;
             }
+            
+             //Animations
+            var _total_width = parseFloat(plyr.animations["backRunning"].total_frames*plyr.width);
+            
+            plyr.img.style.backgroundImage = plyr.animations["backRunning"].spritesheet;
+            plyr.img.style.backgroundSize = _total_width+"px "+plyr.height+"px";
+            
+            plyr.img.style.backgroundPosition = parseFloat(plyr.img.style.backgroundPosition)%_total_width+parseFloat(plyr.width)+"px";
         }
         else if(plyr.running){
             overallSpd += plyr.speed*mod;
