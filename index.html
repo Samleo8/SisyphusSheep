@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+        
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+        <title>Sisyphus Sheep</title>
+    </head>
+    <body>
+        <div id="game_canvas">
+            <div id="top_bar">
+                <div id="game_menu">
+                    <span class="button material-icons md-48">chevron_left</span>
+                    <span class="button material-icons md-48">info_outline</span>
+                </div>
+                <span id="scoreDiv"></span>
+                <div id="buttonHolder">
+                    <span class="button vol-btn material-icons md-48">volume_up</span>
+                    <span class="button pause-btn material-icons md-48 ">pause</span>
+                </div>
+                <div id="sprintbar">
+                    <div id="sprintlevel"></div>
+                </div>
+            </div> 
+            <div id="game_player">
+                <div class="img"></div>
+            </div>
+            <div id="game_treadmill">
+            </div>
+            <div id="game_flag">
+                <img src="img/flag.png" />
+            </div>
+            <div id="game_button_holder">
+                <span class="game_button icon-run inactive"></span>
+                <span class="game_button icon-run-backwards inactive"></span>
+                <span class="game_button icon-sprint inactive"></span>
+            </div>
+            <div id="splashScreen" class="">
+                <span>
+                    GAME OVER
+                </span>
+                <div id="splashScreenScore">
+                    <span id="splashScreenGameScore" class="scoreHolder"></span>
+                    <span id="splashScreenGameHighscore" class="scoreHolder"></span>
+                </div>
+                
+                <span class="splashScreenInfo"></span>
+            </div>
+            <div id="instructionsSplashScreen" class="">
+                <div id="instructionsSplashScreenHolder" class="circle center invertedCircleColor">
+                    <div class="center">
+                        <h1>SISYPHUS SHEEP</h1>
+                        <div>
+                            <h2>OBJECTIVE</h2>
+                            <p>Run to the end. Avoid falling spikes. Repeat.</p>
+                        </div>
+
+                        <div>
+                            <h2>CONTROLS</h2>
+                            <p><b>Run Backward:</b> [LEFT ARROW/A]</p>
+                            <p><b>Run Forward:</b> [DOWN ARROW/S]</p>
+                            <p><b>Sprint forward:</b> [RIGHT ARROW/D]</p>
+                            <p><i>(Sprint and run backwards consume energy)</i></p>
+                        </div>
+
+                        <div>
+                            <h3>-- ANY KEY TO START --</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="infoSplash">
+            <div id="infoSplashCircle" class="circle center">
+                <div class="center">
+                    <h1>Sisyphus Sheep</h1>
+                    <p>Please reorientate <br>your device to landscape.</p>
+                </div>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/hitTest.js"></script>
+    </body>
+</html>

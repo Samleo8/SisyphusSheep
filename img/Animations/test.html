@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sheep Animation Test</title>
+        <style>
+            .hero{
+                background: url(Hero/spritesheet_running.png) left center;
+                background-repeat: repeat-x;
+                height: 307px;
+            }
+        </style>
+        
+        <script>
+            var ele, width, total_width;
+            
+            function init(){
+                ele = document.getElementsByClassName("hero")[0];
+                width = 430; //[px]
+                total_width = 3010; //[px]
+                
+                ele.style.width = width+"px";
+                ele.style.backgroundPosition = "0px";
+                
+                setInterval(nextFrame, 100);
+            }
+            
+            function runAnimation(){
+                for(i=0;i<parseInt(total_width/width);i++){
+                    nextFrame(+1);
+                }
+            }
+
+            function nextFrame(n){
+                if( n==null || isNaN(n) ) n = 1;
+                
+                _inc = parseFloat(width*n);
+                _pos = parseFloat(ele.style.backgroundPosition);
+
+                ele.style.backgroundPosition = parseFloat(_pos+_inc)+"px";
+            }
+            
+            window.addEventListener("load", init);
+        </script>
+    </head>
+    <body>
+        <div class="hero"></div>
+    </body>
+</html>

@@ -1,0 +1,554 @@
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+@font-face{
+    font-family: "RobotoBold";
+    src: url("../fonts/roboto/Roboto-Bold.ttf");   
+}
+
+@font-face{
+    font-family: "RobotoReg";
+    src: url("../fonts/roboto/Roboto-Regular.ttf");   
+}
+
+@font-face{
+    font-family: "RobotoThin";
+    src: url("../fonts/roboto/Roboto-Thin.ttf");   
+}
+
+/*-------MATERIAL ICONS--------*/
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/material-icons/MaterialIcons.eot"); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url("../fonts/material-icons/MaterialIcons.woff") format('woff'),
+       url("../fonts/material-icons/MaterialIcons.ttf") format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+
+/*-----------------ICOMOON------------------*/
+@font-face {
+    font-family: 'icomoon';
+    src: url('../fonts/icomoon/icomoon.eot');
+    src: url('../fonts/icomoon/icomoon.eot?5wv70f#iefix') format('embedded-opentype'),
+         url('../fonts/icomoon/icomoon.ttf?5wv70f') format('truetype'),
+         url('../fonts/icomoon/icomoon.woff?5wv70f') format('woff'),
+         url('../fonts/icomoon/icomoon.svg?5wv70f#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-sprint:before {
+    content: "\e900";
+}
+.icon-run-backwards:before {
+    content: "\e901";
+}
+.icon-run:before {
+    content: "\e902";
+}
+
+/*--------When mobile is in Portrait--------*/
+#infoSplash{
+    display:none;
+}
+
+#infoSplashCircle{
+    position: absolute;
+    width:250px;
+    height:250px;
+}
+
+#infoSplashCircle div{
+    height:50%;
+}
+
+#infoSplashCircle div p{
+    font-size: 120%;
+}
+
+@media screen and (orientation:portrait) {
+    #infoSplash{
+        display:inline-block;
+        height:100%;
+        width:100%;
+        position:fixed;
+        top:0;
+        bottom:0;
+        background:#37474f;
+        text-align:center;
+        z-index:2147483641; /* mobile info screen takes precedence*/
+    }
+}
+
+html, body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    /*background-color:#E4E4E4;
+    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #A7A7A7),
+        color-stop(0.51, #E4E4E4)
+    );
+    */
+    background-attachment:fixed;
+    font-family: 'RobotoThin', Helvetica, Calibri, Arial, sans-serif;
+    font-size:12px;
+    height:100%;
+    width:100%;
+    margin:0px;
+    padding:0px;
+    
+    color:#FFF;
+	background:#455a64;
+    overflow: hidden;
+}
+
+/*
+/* Portrait layout (default) */
+.app {
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        
+    }
+}
+/**/
+
+/*------------CANVAS-----------*/
+#game_canvas{
+    background:#81d4fa;
+    
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    margin:auto;
+    
+    overflow: hidden;
+}
+
+#game_canvas div{
+    position: absolute;
+}
+
+#game_treadmill{
+    width:100%;
+    height:10%;
+    background:#607d8b;
+    background-repeat: repeat;
+    /*border:#455A64 0.9vmin solid;*/
+    bottom:0%;
+    z-index: 10000;
+}
+
+#game_treadmill .treadmill_overlay{
+    position: absolute;
+    left:0; right:0; top:0; bottom:0;
+    background:url(../img/treadmill_overlay.png);
+    background-repeat: repeat;
+    z-index: 10000000;
+}
+
+#game_flag{
+    position: absolute;
+    right: 1px;
+    bottom: 7%;
+}
+
+#game_button_holder{
+    position: absolute;
+    /*height: 8.4vh;*/
+    bottom: 10px;
+    z-index: 20000 !important;
+    width:100%;
+    text-align: right;
+}   
+
+#game_button_holder .game_button:first-child{
+    left:3%;
+}
+
+#game_button_holder .game_button:nth-child(n+2){
+    right:20%;
+}
+
+#game_button_holder .game_button:last-child{
+    right:3%;
+}
+
+#game_button_holder .game_button{
+    /*padding: 1.2vh;*/
+    border-radius: 100%;
+    cursor: pointer;
+	position: absolute;
+    
+    color:#000;
+    
+    transition: all 0.3s ease;
+}
+
+/*
+#game_button_holder .game_button:hover, #game_button_holder .game_button:active{
+    background:#FFF9C4;   
+}
+*/
+
+#game_button_holder .game_button.active{
+    background:rgba(255,249,196,0.6);
+	top:2px;
+}
+
+#game_button_holder .game_button.inactive{
+    background: rgba(255,193,7,0.6);
+    top:0px;
+}
+
+#top_bar{
+    width:100%;
+    height:12%;
+    background:#37474f;
+    top:0%;
+    z-index: 10000;
+    position: absolute;
+    
+    transition: all 0.3s ease;
+}
+
+#game_menu{
+    position: absolute;
+    top:0;bottom: 0; margin: auto;
+    height:10vh;   
+    display: inline-flex;
+}
+
+#game_menu .button:last-child{
+    padding-top: 1vh;
+}
+
+#game_menu .button:first-child{
+    font-size:10vh !important;
+}
+
+#buttonHolder{
+    right:1.5%;
+    position: absolute;
+    top:0;bottom: 0; margin: auto;
+    height:8vh;
+}
+
+.button{
+    font-size:8vh !important;
+    cursor: pointer;
+    
+    transition: all 0.3s ease;
+}   
+
+.button.inactive{
+    color:#FFF;
+}
+
+.button.active{
+    color:rgba(255,255,255,0.4);
+}
+
+#scoreDiv{
+    position: absolute;
+    font-family: 'RobotoReg', Helvetica, Calibri, Arial, sans-serif;
+    width:20vw;
+    color:#FFF;/*rgb(225,245,254);*/
+    padding-top:2px; padding-bottom:5px;
+    font-size: 6.1vh;
+    height:6.1vh;
+    
+    margin: auto;
+    top:0;
+    bottom: 0;
+    left:0;
+    right:0;
+    
+    text-align:center;
+}
+
+/*----------PLAYER----------*/
+#game_player{
+    position: absolute;
+    /*transition: all 0.3s ease;*/
+}
+
+#game_player .img{
+    background-image: url(../img/hero.png);
+    background-position: 0px;
+    background-repeat: repeat-x;
+}
+
+/*--------SPRINT BAR---------*/
+#sprintbar{
+    width:100%;
+    height:10%;
+    background:#fff3e0;
+    bottom: -10%;
+}
+
+#sprintlevel{
+    width:100%;
+    background:#ffa726;
+    top:0;bottom:0;
+    z-index: 1000;
+}
+
+/*--------OBSTACLES---------*/
+.obstacle{
+    position: absolute;
+}
+.obstacle.spike{
+    bottom:10%;
+}
+.obstacle.spike_top{
+}
+
+.obstacle img{
+}
+
+/*--------GAMEOVER SPLASH SCREEN-------*/
+#game_canvas #splashScreen{
+    position: relative;
+    width:100%;
+    height:100%;
+    
+    color:#000;
+    
+    -webkit-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+}
+
+#splashScreen span:not(.scoreHolder), #splashScreenScore{
+    height:10%;
+    width:100%;
+    position: absolute;
+    /*top:0; bottom:0; left:0; right:0;*/
+    top: 25%;
+    text-align: center;
+    font-family: 'RobotoThin', Helvetica, Calibri, Arial, sans-serif;
+    font-weight: 900;
+    font-size: 11vh;
+}
+
+#splashScreen #splashScreenScore{
+    top: 58%;
+    height: 30%;
+    font-size: 5.5vh;
+}
+
+.bold{
+    font-family: 'RobotoReg', Helvetica, Calibri, Arial, sans-serif;
+    font-weight: 100;
+}
+
+#splashScreen span.splashScreenInfo{
+    display: inline-block;
+    padding-top: 15vh;
+    font-size: 6vh;
+    font-weight: 200;
+}
+
+#splashScreen.appear{
+    opacity: 1;
+}
+
+#splashScreen.disappear{
+    opacity: 0;
+    width:0px;
+}
+
+/*--------STARTING INFO SPLASH SCREEN-------*/
+#game_canvas #instructionsSplashScreen{
+    width:100%;
+    height:100%;
+    position: relative;
+    background:#81d4fa;
+    text-align: center;
+    font-size: 95%;
+
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#game_canvas #instructionsSplashScreen h1{
+    margin-top: 0;
+    /*padding-top: 30px;*/
+    font-family: 'RobotoBold', Helvetica, Calibri, Arial, sans-serif;
+}
+
+#game_canvas #instructionsSplashScreen div:not(.center){
+    position: static;
+    font-family: 'RobotoReg', Helvetica, Calibri, Arial, sans-serif;
+}
+
+#game_canvas #instructionsSplashScreenHolder{
+    position: absolute;
+    width:350px;
+    height:350px;
+}
+
+#game_canvas #instructionsSplashScreenHolder .center{
+    position: absolute;
+    width:320px;
+    height:260px;
+}
+
+#instructionsSplashScreen.appear{
+    opacity: 1;
+    top:-100%;
+    
+    z-index:2147483640;
+}
+
+#instructionsSplashScreen.disappear{
+    opacity: 0;
+    top:-300%;
+    z-index: -1;
+}
+
+
+/*----------------------*/
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+
+.hr-divider{
+    height:0px;
+    border-top:1px #CCC dotted;
+    width:100%;
+    clear:both;
+    /*box-shadow:0px 0px 20px 1px #FFF;   */
+}
+
+.hr-divider.pad{   
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.hr-divider.pad-top{   
+    margin-top:10px;
+}
+
+.hr-divider.pad-bottom{   
+    margin-bottom:10px;
+}
+
+.invertedColor, .circle:not(.invertedCircleColor){
+	background:#FFF;
+	color:#37474f;
+}
+
+.mirror-x, .invert-x{    
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+
+    /* IE6 and 7 via hack */
+    *filter: progid:DXImageTransform.Microsoft.BasicImage(mirror=1);
+}
+
+.mirror-y, .invert-y{
+    -moz-transform: scale(1, -1);
+    -webkit-transform: scale(1, -1);
+    -o-transform: scale(1, -1);
+    -ms-transform: scale(1, -1);
+    transform: scale(1, -1);
+    
+    /* IE6 and 7 via hack */
+    *filter: progid:DYImageTransform.Microsoft.BasicImage(mirror=1);
+}
+
+.circle.invertedCircleColor{
+    color:#FFF;
+	background:#37474f;
+}
+
+.circle{
+	border-radius:100%;	
+	position:fixed;
+    box-sizing:content-box;
+	text-align:center;
+    
+    font: "RobotoThin";
+}
+
+.center{
+	position:absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin:auto;
+}
