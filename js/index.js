@@ -406,22 +406,26 @@ function Game(_args){
         backRunning: false,
         
         animations:{
-          "still":{
+            "spritesheet":"url(img/hero_spritesheet.png)",
+            "totalWidth":30,
+            "totalAnimations":3,
+            
+            "still":{
               "total_frames":1,
-              "spritesheet":"url(img/hero.png)"
-          },
-          "running":{
+              "id": 0,
+            },
+            "running":{
               "total_frames":30,
-              "spritesheet":"url(img/hero_running.png)"
-          },
-          "sprinting":{
+              "id":1
+            },
+            "sprinting":{
               "total_frames":18,
-              "spritesheet":"url(img/hero_sprinting.png)"
-          }, 
-          "backRunning":{
+              "id":2
+            }, 
+            "backRunning":{
               "total_frames":30,
-              "spritesheet":"url(img/hero_running.png)"
-          }
+              "id":1
+            }
         },
         
         portalsPassed:0,
@@ -610,12 +614,12 @@ function Game(_args){
         obj.hero.height = obj.hero.width*obj.hero.hwratio;
         
         obj.hero.img.style.height = obj.hero.height+"px";
-        obj.hero.img.style.backgroundSize = obj.hero.width+"px "+obj.hero.height+"px";
+        obj.hero.img.style.backgroundSize = (obj.hero.width*obj.hero.animations.totalWidth)+"px "+(obj.hero.height*obj.hero.animations.totalAnimations)+"px";
         
         //Load all spritesheets first
-        obj.hero.img.style.backgroundImage = obj.hero.animations["running"].spritesheet;
-        obj.hero.img.style.backgroundImage = obj.hero.animations["sprinting"].spritesheet;
-        obj.hero.img.style.backgroundImage = obj.hero.animations["still"].spritesheet;
+        obj.hero.img.style.backgroundImage = obj.hero.animations.spritesheet;
+        
+        obj.hero.img.style.backgroundPositionY = (obj.hero.height*obj.hero.animations["still"].id)+"px";
         
         //Game button resize
         for(var i=0;i<obj.gameBtns.length;i++){
@@ -679,6 +683,8 @@ function Game(_args){
         var plyr = self.hero;
         var overallSpd = -self.treadmill.speed*mod;
 
+        var _pos, _total_width; //for animations
+        
         if(plyr.sprinting){
             if(plyr.sprintLevel>0){
                 overallSpd += plyr.speed*plyr.sprintSpeed*mod;
@@ -687,14 +693,13 @@ function Game(_args){
             else{
                 overallSpd += plyr.speed*mod;
             }
+           
+             //Animations
+            _pos = parseFloat(plyr.img.style.backgroundPosition);
+            _total_width = parseFloat(plyr.animations["sprinting"].total_frames*plyr.width);
             
-            //Animations
-            var _total_width = parseFloat(plyr.animations["sprinting"].total_frames*plyr.width);
-            
-            plyr.img.style.backgroundImage = plyr.animations["sprinting"].spritesheet;
-            plyr.img.style.backgroundSize = _total_width+"px "+plyr.height+"px";
-            
-            plyr.img.style.backgroundPosition = parseFloat(plyr.img.style.backgroundPosition)%_total_width+parseFloat(plyr.width)+"px";
+            plyr.img.style.backgroundPositionX = (_pos+plyr.width)%_total_width+"px";
+            plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["sprinting"].id)+"px";
         }
         else if(plyr.backRunning){
             if(plyr.sprintLevel>0){
@@ -705,29 +710,27 @@ function Game(_args){
                 overallSpd -= plyr.backRunningSpeed*mod;
             }
             
-             //Animations
-            var _total_width = parseFloat(plyr.animations["backRunning"].total_frames*plyr.width);
+            //Animations
+            _pos = parseFloat(plyr.img.style.backgroundPosition);
+            _total_width = parseFloat(plyr.animations["backRunning"].total_frames*plyr.width);
             
-            plyr.img.style.backgroundImage = plyr.animations["backRunning"].spritesheet;
-            plyr.img.style.backgroundSize = _total_width+"px "+plyr.height+"px";
-            
-            plyr.img.style.backgroundPosition = parseFloat(plyr.img.style.backgroundPosition)%_total_width+parseFloat(plyr.width)+"px";
+            plyr.img.style.backgroundPositionX = (_pos+plyr.width)%_total_width+"px";
+            plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["backRunning"].id)+"px";
         }
         else if(plyr.running){
             overallSpd += plyr.speed*mod;
             
             //Animations
-            var _total_width = parseFloat(plyr.animations["running"].total_frames*plyr.width);
+            _pos = parseFloat(plyr.img.style.backgroundPosition);
+            _total_width = parseFloat(plyr.animations["sprinting"].total_frames*plyr.width);
             
-            plyr.img.style.backgroundImage = plyr.animations["running"].spritesheet;
-            plyr.img.style.backgroundSize = _total_width+"px "+plyr.height+"px";
-            
-            plyr.img.style.backgroundPosition = parseFloat(plyr.img.style.backgroundPosition)%_total_width+parseFloat(plyr.width)+"px";
+            plyr.img.style.backgroundPositionX = (_pos+plyr.width)%_total_width+"px";
+            plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["sprinting"].id)+"px";
         }
         else{
-            plyr.img.style.backgroundImage = "url(img/hero.png)";
-            plyr.img.style.backgroundPosition = "0px";
-            plyr.img.style.backgroundSize = plyr.width+"px "+plyr.height+"px";
+            //Reset to Still 
+            plyr.img.style.backgroundPositionX = "0px";
+            plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["still"].id)+"px";
             
             plyr.sprintLevel += 0.1;    
         }

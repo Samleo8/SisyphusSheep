@@ -330,9 +330,8 @@ html, body {
 }
 
 #game_player .img{
-    background-image: url(../img/hero.png);
+    background-image: url(../img/hero_spritesheet.png);
     background-position: 0px;
-    background-repeat: repeat-x;
 }
 
 /*--------SPRINT BAR---------*/
