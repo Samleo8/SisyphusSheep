@@ -406,25 +406,30 @@ function Game(_args){
         backRunning: false,
         
         animations:{
-            "spritesheet":"url(img/hero_spritesheet.png)",
+            "spritesheet":"url('img/hero_spritesheet.png')",
             "totalWidth":30,
-            "totalAnimations":4,
+            
+            "names":["still","running","sprinting","backRunning"],
             
             "still":{
-              "total_frames":1,
-              "id": 0,
+                "current_frame":0,
+                "total_frames":1,
+                "id": 0,
             },
             "running":{
-              "total_frames":30,
-              "id":1
+                "current_frame":0,
+                "total_frames":30,
+                "id":1
             },
             "sprinting":{
-              "total_frames":18,
-              "id":2
+                "current_frame":0,
+                "total_frames":18,
+                "id":2
             }, 
             "backRunning":{
-              "total_frames":30,
-              "id":3
+                "current_frame":0,
+                "total_frames":30,
+                "id":3
             }
         },
         
@@ -614,12 +619,15 @@ function Game(_args){
         obj.hero.height = obj.hero.width*obj.hero.hwratio;
         
         obj.hero.img.style.height = obj.hero.height+"px";
-        obj.hero.img.style.backgroundSize = (obj.hero.width*obj.hero.animations.totalWidth)+"px "+(obj.hero.height*obj.hero.animations.totalAnimations)+"px";
+        obj.hero.img.style.backgroundSize = (obj.hero.width*obj.hero.animations.totalWidth)+"px "+(obj.hero.height*obj.hero.animations.names.length)+"px";
         
         //Load all spritesheets first
         obj.hero.img.style.backgroundImage = obj.hero.animations.spritesheet;
         
+        obj.hero.img.style.backgroundPositionX = "0px";
         obj.hero.img.style.backgroundPositionY = (obj.hero.height*obj.hero.animations["still"].id)+"px";
+        
+        
         
         //Game button resize
         for(var i=0;i<obj.gameBtns.length;i++){
@@ -683,7 +691,7 @@ function Game(_args){
         var plyr = self.hero;
         var overallSpd = -self.treadmill.speed*mod;
 
-        var _pos, _total_width; //for animations
+        var _pos; //for animations
         
         if(plyr.sprinting){
             if(plyr.sprintLevel>0){
@@ -694,12 +702,12 @@ function Game(_args){
                 overallSpd += plyr.speed*mod;
             }
            
-             //Animations
-            _pos = parseFloat(plyr.img.style.backgroundPosition);
-            _total_width = parseFloat(plyr.animations["sprinting"].total_frames*plyr.width);
+            //Animations
+            plyr.animations["sprinting"].current_frame+=1;
+            _pos = (plyr.animations["sprinting"].current_frame)%(plyr.animations["sprinting"].total_frames);
             
-            plyr.img.style.backgroundPositionX = (_pos+plyr.width)%_total_width+"px";
             plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["sprinting"].id)+"px";
+            plyr.img.style.backgroundPositionX = "-"+(_pos*plyr.width)+"px";
         }
         else if(plyr.backRunning){
             if(plyr.sprintLevel>0){
@@ -711,26 +719,34 @@ function Game(_args){
             }
             
             //Animations
-            _pos = parseFloat(plyr.img.style.backgroundPosition);
-            _total_width = parseFloat(plyr.animations["backRunning"].total_frames*plyr.width);
+            plyr.animations["backRunning"].current_frame+=1;
+            _pos = (plyr.animations["backRunning"].current_frame)%(plyr.animations["backRunning"].total_frames);
             
-            plyr.img.style.backgroundPositionX = (_pos+plyr.width)%_total_width+"px";
             plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["backRunning"].id)+"px";
+            plyr.img.style.backgroundPositionX = "-"+(_pos*plyr.width)+"px";
+            
         }
         else if(plyr.running){
             overallSpd += plyr.speed*mod;
-            
+         
             //Animations
-            _pos = parseFloat(plyr.img.style.backgroundPosition);
-            _total_width = parseFloat(plyr.animations["sprinting"].total_frames*plyr.width);
+            plyr.animations["running"].current_frame+=1;
+            _pos = (plyr.animations["running"].current_frame)%(plyr.animations["running"].total_frames);
             
-            plyr.img.style.backgroundPositionX = (_pos+plyr.width)%_total_width+"px";
-            plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["sprinting"].id)+"px";
+            plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["running"].id)+"px";
+            plyr.img.style.backgroundPositionX = "-"+(_pos*plyr.width)+"px";
+            
         }
         else{
             //Reset to Still 
             plyr.img.style.backgroundPositionX = "0px";
             plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["still"].id)+"px";
+            
+            for(var i=0;i<plyr.animations.names.length;i++){ //reset all frames
+                var _name = plyr.animations.names[i];
+                
+                plyr.animations[_name].current_frame = 0;
+            }
             
             plyr.sprintLevel += 0.1;    
         }

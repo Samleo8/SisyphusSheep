@@ -331,7 +331,7 @@ html, body {
 
 #game_player .img{
     background-image: url(../img/hero_spritesheet.png);
-    background-position: 0px;
+    background-position:0px 0px;
 }
 
 /*--------SPRINT BAR---------*/
