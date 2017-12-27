@@ -406,7 +406,7 @@ function Game(_args){
         backRunning: false,
         
         animations:{
-            "runAnimations":false,
+            "runAnimations":true,
             "spritesheet":"url('img/hero_spritesheet.png')",
             "totalWidth":30,
             
@@ -565,6 +565,9 @@ function Game(_args){
                 
             }
     
+            //Turn off Animations for Mobile App because of lag.
+            if(isApp) self.hero.animations.runAnimations = false;
+            
             return;
         }
         
