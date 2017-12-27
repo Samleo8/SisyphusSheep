@@ -413,14 +413,13 @@ function Game(_args){
             "names":["still","running","sprinting","backRunning"],
             
             "still":{
-                "current_frame":0,
                 "total_frames":1,
-                "id": 0,
-            },
+                "id":0
+            }, 
             "running":{
                 "current_frame":0,
                 "total_frames":30,
-                "id":1
+                "id":3 //for some reason, if id=1, does not register for mobile??!
             },
             "sprinting":{
                 "current_frame":0,
@@ -565,9 +564,6 @@ function Game(_args){
                 
             }
     
-            //Turn off Animations for Mobile App because of lag.
-            if(isApp) self.hero.animations.runAnimations = false;
-            
             return;
         }
         
@@ -640,8 +636,6 @@ function Game(_args){
             gBtn.style.padding = obj.canvasWidth*obj.gameBtnWidth*0.15/100+"px";
             
             gBtn.parentElement.style.height = obj.canvasWidth*obj.gameBtnWidth*0.8/100+"px";
-            
-            //console.log(obj.canvasWidth*obj.gameBtnWidth/100);
         }
     }
     
@@ -695,7 +689,10 @@ function Game(_args){
         var plyr = self.hero;
         var overallSpd = -self.treadmill.speed*mod;
 
-        var _pos; //for animations
+        //Turn off Animations for Mobile App because of lag.
+        //if(isApp) self.hero.animations.runAnimations = false;
+        
+        var _pos; //for animations        
         
         if(plyr.sprinting){
             if(plyr.sprintLevel>0){
@@ -742,7 +739,7 @@ function Game(_args){
                 plyr.animations["running"].current_frame+=1;
                 _pos = (plyr.animations["running"].current_frame)%(plyr.animations["running"].total_frames);
 
-                plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["running"].id)+"px";
+                plyr.img.style.backgroundPositionY = ((plyr.height)*(plyr.animations["running"].id))+"px";
                 plyr.img.style.backgroundPositionX = "-"+(_pos*plyr.width)+"px";
             }
             
