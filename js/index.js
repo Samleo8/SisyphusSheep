@@ -408,7 +408,7 @@ function Game(_args){
         animations:{
             "spritesheet":"url(img/hero_spritesheet.png)",
             "totalWidth":30,
-            "totalAnimations":3,
+            "totalAnimations":4,
             
             "still":{
               "total_frames":1,
@@ -424,7 +424,7 @@ function Game(_args){
             }, 
             "backRunning":{
               "total_frames":30,
-              "id":1
+              "id":3
             }
         },
         
