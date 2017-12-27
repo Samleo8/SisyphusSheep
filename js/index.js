@@ -406,6 +406,7 @@ function Game(_args){
         backRunning: false,
         
         animations:{
+            "runAnimations":false,
             "spritesheet":"url('img/hero_spritesheet.png')",
             "totalWidth":30,
             
@@ -702,12 +703,14 @@ function Game(_args){
                 overallSpd += plyr.speed*mod;
             }
            
-            //Animations
-            plyr.animations["sprinting"].current_frame+=1;
-            _pos = (plyr.animations["sprinting"].current_frame)%(plyr.animations["sprinting"].total_frames);
-            
-            plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["sprinting"].id)+"px";
-            plyr.img.style.backgroundPositionX = "-"+(_pos*plyr.width)+"px";
+            if(plyr.animations.runAnimations){
+                //Animations
+                plyr.animations["sprinting"].current_frame+=1;
+                _pos = (plyr.animations["sprinting"].current_frame)%(plyr.animations["sprinting"].total_frames);
+
+                plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["sprinting"].id)+"px";
+                plyr.img.style.backgroundPositionX = "-"+(_pos*plyr.width)+"px";
+            }
         }
         else if(plyr.backRunning){
             if(plyr.sprintLevel>0){
@@ -719,22 +722,26 @@ function Game(_args){
             }
             
             //Animations
-            plyr.animations["backRunning"].current_frame+=1;
-            _pos = (plyr.animations["backRunning"].current_frame)%(plyr.animations["backRunning"].total_frames);
-            
-            plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["backRunning"].id)+"px";
-            plyr.img.style.backgroundPositionX = "-"+(_pos*plyr.width)+"px";
+            if(plyr.animations.runAnimations){
+                plyr.animations["backRunning"].current_frame+=1;
+                _pos = (plyr.animations["backRunning"].current_frame)%(plyr.animations["backRunning"].total_frames);
+
+                plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["backRunning"].id)+"px";
+                plyr.img.style.backgroundPositionX = "-"+(_pos*plyr.width)+"px";
+            }
             
         }
         else if(plyr.running){
             overallSpd += plyr.speed*mod;
          
             //Animations
-            plyr.animations["running"].current_frame+=1;
-            _pos = (plyr.animations["running"].current_frame)%(plyr.animations["running"].total_frames);
-            
-            plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["running"].id)+"px";
-            plyr.img.style.backgroundPositionX = "-"+(_pos*plyr.width)+"px";
+            if(plyr.animations.runAnimations){
+                plyr.animations["running"].current_frame+=1;
+                _pos = (plyr.animations["running"].current_frame)%(plyr.animations["running"].total_frames);
+
+                plyr.img.style.backgroundPositionY = (plyr.height*plyr.animations["running"].id)+"px";
+                plyr.img.style.backgroundPositionX = "-"+(_pos*plyr.width)+"px";
+            }
             
         }
         else{
