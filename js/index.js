@@ -507,6 +507,9 @@ function Game(_args){
         
         self.treadmill.img = document.getElementById("game_treadmill");
         
+        if(MobileAndTabletCheck()){ //No treadmill animations
+            self.treadmill.img.animationPlayState = "paused";
+        }        
         //Game Buttons
         self.gameBtns = document.getElementsByClassName("game_button");
         
