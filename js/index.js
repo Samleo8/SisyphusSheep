@@ -686,6 +686,9 @@ function Game(_args){
                 plyr.sprintLevel+=plyr.sprintReload["add"];
             }
         }
+        
+        //TREADMILL ANIMATIONS
+        self.treadmill.img.style.animationDuration = (2/self.treadmill.speed)+"s";
     };
     
     this.movePlayer = function(mod){
@@ -911,6 +914,10 @@ function Game(_args){
             
             self.audio["mainMusic"].pause();
             
+            //Pause CSS Animations
+            for(var i=0;i<self.obstacleArray.length;i++){
+                self.obstacleArray[i].img.style.animationPlayState = "paused";
+            }
             self.treadmill.img.style.animationPlayState = "paused";
         }
         else if(!self.gamePaused){
@@ -921,6 +928,10 @@ function Game(_args){
             
             if(!self.gameMuted) self.audio["mainMusic"].play();
             
+            //Play CSS Animations
+            for(i=0;i<self.obstacleArray.length;i++){
+                self.obstacleArray[i].img.style.animationPlayState = "running";
+            }
             self.treadmill.img.style.animationPlayState = "running";
         }
     };
@@ -1065,27 +1076,19 @@ var Obstacle = function(_type,_x,_y,_args){
     //Create div element
     var obs_ele = document.createElement("div");
     obs_ele.className = "obstacle ";
-    var obs_img = document.createElement("img");
-
+    
     if(!this.type){
         obs_ele.className += "spike";
-        obs_img.src = "img/spike.png";
     }
     else{
         obs_ele.className += "spike_top";
-        obs_img.src = "img/spike_top.png";
     }
 
     obs_ele.style.width = this.width + "px";
     obs_ele.style.height = this.height + "px";
     
-    obs_img.width = this.width;
-    obs_img.height = this.height;
-    
     obs_ele.style.top = _y+"px";
     obs_ele.style.left = _x+"px";
-    
-    obs_ele.appendChild(obs_img);
     
     document.getElementById("game_canvas").appendChild(obs_ele);
     

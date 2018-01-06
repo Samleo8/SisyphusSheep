@@ -359,9 +359,14 @@ html, body {
     bottom:10%;
 }
 .obstacle.spike_top{
+    background: url(../img/shuriken_spritesheet.png);
+    background-repeat: no-repeat;
+    background-size:600% 100%;
+    animation: spike_animation 0.4s steps(5) infinite;
 }
 
-.obstacle img{
+@keyframes spike_animation{
+    100% { background-position: 100% 0% }
 }
 
 /*--------GAMEOVER SPLASH SCREEN-------*/
