@@ -387,7 +387,8 @@ function Game(_args){
         
     //Player
     this.treadmill = {
-        speed: 5 //percentage of canvas width per "run" [35]
+        speed: 5, //percentage of canvas width per "run" [35]
+        img: null
     };
     
     this.hero = {
@@ -683,6 +684,9 @@ function Game(_args){
                 plyr.sprintLevel+=plyr.sprintReload["add"];
             }
         }
+        
+        //TREADMILL ANIMATIONS
+        
     };
     
     this.movePlayer = function(mod){
@@ -943,7 +947,6 @@ function Game(_args){
         self.obstaclesReloadTime = Math.max(self.obstaclesReloadTime,250);
         self.treadmill.speed *= 1.2;
         self.treadmill.speed = Math.min(self.treadmill.speed,self.hero.speed*0.5);
-
     };
     
     this.game_over = function(win){

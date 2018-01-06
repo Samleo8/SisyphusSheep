@@ -191,17 +191,18 @@ html, body {
     
     background:url(../img/treadmill_spritesheet.png);
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 100%;
     background-position: 0% 0%;
     
-    animation: treadmill_animation 0.8s steps(4) infinite;
+    animation: treadmill_animation 0.25s steps(3) infinite;
+    transition: 0s;
     
     bottom:0%;
     z-index: 10000;
 }
 
 @keyframes treadmill_animation{
-    100% { background-position: 0% -40%; }
+    100% { background-position: 0% 100%; }
 }
 
 #game_flag{
