@@ -188,19 +188,20 @@ html, body {
 #game_treadmill{
     width:100%;
     height:10%;
-    background:#607d8b;
-    background-repeat: repeat;
-    /*border:#455A64 0.9vmin solid;*/
+    
+    background:url(../img/treadmill_spritesheet.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0% 0%;
+    
+    animation: treadmill_animation 0.8s steps(4) infinite;
+    
     bottom:0%;
     z-index: 10000;
 }
 
-#game_treadmill .treadmill_overlay{
-    position: absolute;
-    left:0; right:0; top:0; bottom:0;
-    background:url(../img/treadmill_overlay.png);
-    background-repeat: repeat;
-    z-index: 10000000;
+@keyframes treadmill_animation{
+    100% { background-position: 0% -40%; }
 }
 
 #game_flag{
