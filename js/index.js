@@ -505,6 +505,8 @@ function Game(_args){
         
         self.hero.holder.style.opacity = 1;
         
+        self.treadmill.img = document.getElementById("game_treadmill");
+        
         //Game Buttons
         self.gameBtns = document.getElementsByClassName("game_button");
         
@@ -684,9 +686,6 @@ function Game(_args){
                 plyr.sprintLevel+=plyr.sprintReload["add"];
             }
         }
-        
-        //TREADMILL ANIMATIONS
-        
     };
     
     this.movePlayer = function(mod){
@@ -911,6 +910,8 @@ function Game(_args){
             self.pauseBtn.innerHTML = "play_arrow";
             
             self.audio["mainMusic"].pause();
+            
+            self.treadmill.img.style.animationPlayState = "paused";
         }
         else if(!self.gamePaused){
             var now = new Date().getTime();
@@ -919,6 +920,8 @@ function Game(_args){
             self.pauseBtn.innerHTML = "pause";
             
             if(!self.gameMuted) self.audio["mainMusic"].play();
+            
+            self.treadmill.img.style.animationPlayState = "running";
         }
     };
     
