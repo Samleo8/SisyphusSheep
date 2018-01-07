@@ -507,7 +507,7 @@ function Game(_args){
         
         self.treadmill.img = document.getElementById("game_treadmill");
         
-        if(MobileAndTabletCheck()){ //No treadmill animations
+        if(MobileAndTabletCheck() || isApp){ //No treadmill animations
             self.treadmill.img.animationPlayState = "paused";
         }        
         //Game Buttons
@@ -935,7 +935,9 @@ function Game(_args){
             for(i=0;i<self.obstacleArray.length;i++){
                 self.obstacleArray[i].img.style.animationPlayState = "running";
             }
-            self.treadmill.img.style.animationPlayState = "running";
+            if(!MobileAndTabletCheck() && !isApp){
+               self.treadmill.img.style.animationPlayState = "running";
+            }
         }
     };
     
