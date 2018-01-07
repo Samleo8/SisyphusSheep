@@ -358,6 +358,7 @@ html, body {
 .obstacle.spike{
     bottom:10%;
 }
+/**/
 .obstacle.spike_top{
     background: url(../img/shuriken_spritesheet.png);
     background-repeat: no-repeat;
@@ -368,6 +369,14 @@ html, body {
 @keyframes spike_animation{
     100% { background-position: 100% 0% }
 }
+/**/
+/*
+.obstacle.spike_top{
+    background: url(../img/shuriken.gif);
+    background-repeat: no-repeat;
+    background-size:100%;
+}
+/**/
 
 /*--------GAMEOVER SPLASH SCREEN-------*/
 #game_canvas #splashScreen{
