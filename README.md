@@ -21,7 +21,7 @@ According to Greek legend, Sisyphus was a cruel Greek king who was punished to p
 Similarly, in this game, an innocent sheep is made to run towards a meaningless goal, avoid random obstacles, and repeat this meaningless goal. 
 
 
-The game is meant to point you towards the meaninglessness of life. Find, treasure and do the things that actually matter, and consider storing up a treasure for eternity through Jesus Christ (*<insert sheep reference here>*). 
+The game is meant to point you towards the meaninglessness of life. Find, treasure and do the things that actually matter, and consider storing up a treasure for eternity through Jesus Christ (*insert sheep reference here*). 
 
 ### What inspired you to make this game?
 
