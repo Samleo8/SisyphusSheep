@@ -1480,6 +1480,7 @@ var SisyphusSheepGame = function(){
 			stroke: "#90a4ae",
 			strokeThickness: 10,
 			letterSpacing: 10,
+			padding: 10,
 			align: 'center',
 			fontSize:120
 		};
@@ -2238,11 +2239,11 @@ var SisyphusSheepGame = function(){
 			this.sprites.background.alpha = 0;
 
 			//Sheep
-			sheep = new PIXI.Sprite(this.animations.sheep_running.frames[0]);
+			sheep = new PIXI.Sprite(this.animations.sheep_running.frames[1]);
 			sheep.anchor.set(0.5,0.5);
 			sheep.scale.set(0.35,0.35);
-			sheep.rotation = -Math.PI/40;
-			sheep.position.set(this.canvasWidth/2-200,this.canvasHeight/2-90);
+			sheep.rotation = -Math.PI/50;
+			sheep.position.set(this.canvasWidth/2-190,this.canvasHeight/2-90);
 
 			//Speech bubble
 			var speech_bubble = new PIXI.Container();
@@ -2250,12 +2251,12 @@ var SisyphusSheepGame = function(){
 
 			//-Bubble
 			var bubble = new PIXI.Graphics();
-			bubble._width = 600+50;
-			bubble._height = 250+30;
+			bubble._width = 800+60;
+			bubble._height = 300+30;
 			bubble._radius = 40;
 			bubble.beginFill(0xcfd8dc)
 				.drawRoundedRect(-bubble._width/2,-bubble._height/2,bubble._width,bubble._height,bubble._radius)
-				.drawPolygon( new PIXI.Point(-bubble._width/2+180,-bubble._height/2-60) , new PIXI.Point(-125,-bubble._height/2), new PIXI.Point(-95,-bubble._height/2) )
+				.drawPolygon( new PIXI.Point(-bubble._width/2+290,-bubble._height/2-30) , new PIXI.Point(-125,-bubble._height/2), new PIXI.Point(-95,-bubble._height/2) )
 			.endFill();
 
 			//-Text
@@ -2267,7 +2268,7 @@ var SisyphusSheepGame = function(){
 				fontSize:38
 			};
 
-			var text = new PIXI.Text("Avoid the falling spikes!\nScore by bouncing off the sides.\n"+((_isMobile)?"Tap":"Click/[SPACE]")+" to JUMP\n\n- JUMP to Start! -",textOpt);
+			var text = new PIXI.Text("Run to the End of the Treadmill. \nAvoid the Spikes. Repeat. \n"+((_isMobile)?"Tap anywhere":"Click/[DOWN]")+" to START/STOP RUNNING\n[RIGHT] to SPRINT\n\n- RUN/SPRINT to Start! -",textOpt);
 			text.anchor.set(0.5,0.5);
 
 			speech_bubble.addChild(bubble);
