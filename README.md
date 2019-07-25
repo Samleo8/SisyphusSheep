@@ -11,7 +11,7 @@ Move forth: Down arrow
 Sprint forth: Right arrow
 
 ## Music 
-Credits: Miqz {http://www.newgrounds.com/audio/listen/719242}
+Credits: [Miqz](http://www.newgrounds.com/audio/listen/719242)
 
 ## FAQ
 ### Why is this game called Sisyphus Sheep?
