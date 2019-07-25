@@ -1,0 +1,3 @@
+var SisyphusSheepGame = function(){
+	
+};

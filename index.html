@@ -27,77 +27,19 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-        
+
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+		<!--PRELOADING FONTS (IN CASE THIS DOESN'T WORK, THERE'S FontFaceObserver.JS)-->
+        <link rel="preload" href="fonts/TimeBurner/timeburner.ttf" as="font" crossorigin="anonymous" />
+    	<link rel="preload" href="fonts/TimeBurner/timeburnerbold.ttf" as="font" crossorigin="anonymous" />
 
         <title>Sisyphus Sheep</title>
     </head>
     <body>
-        <div id="game_canvas">
-            <div id="top_bar">
-                <div id="game_menu">
-                    <span class="button material-icons md-48">chevron_left</span>
-                    <span class="button material-icons md-48">info_outline</span>
-                </div>
-                <span id="scoreDiv"></span>
-                <div id="buttonHolder">
-                    <span class="button vol-btn material-icons md-48">volume_up</span>
-                    <span class="button pause-btn material-icons md-48 ">pause</span>
-                </div>
-                <div id="sprintbar">
-                    <div id="sprintlevel"></div>
-                </div>
-            </div> 
-            <div id="game_player">
-                <div class="img"></div>
-            </div>
-            <div id="game_treadmill">
-            </div>
-            <div id="game_flag">
-                <img src="img/flag.png" />
-            </div>
-            <div id="game_button_holder">
-                <span class="game_button icon-run inactive"></span>
-                <span class="game_button icon-run-backwards inactive"></span>
-                <span class="game_button icon-sprint inactive"></span>
-            </div>
-            <div id="splashScreen" class="">
-                <span>
-                    GAME OVER
-                </span>
-                <div id="splashScreenScore">
-                    <span id="splashScreenGameScore" class="scoreHolder"></span>
-                    <span id="splashScreenGameHighscore" class="scoreHolder"></span>
-                </div>
-                
-                <span class="splashScreenInfo"></span>
-            </div>
-            <div id="instructionsSplashScreen" class="">
-                <div id="instructionsSplashScreenHolder" class="circle center invertedCircleColor">
-                    <div class="center">
-                        <h1>SISYPHUS SHEEP</h1>
-                        <div>
-                            <h2>OBJECTIVE</h2>
-                            <p>Run to the end. Avoid falling spikes. Repeat.</p>
-                        </div>
+		<div align="center" id="canvas_container"></div>
 
-                        <div>
-                            <h2>CONTROLS</h2>
-                            <p><b>Run Backward:</b> [LEFT ARROW/A]</p>
-                            <p><b>Run Forward:</b> [DOWN ARROW/S]</p>
-                            <p><b>Sprint forward:</b> [RIGHT ARROW/D]</p>
-                            <p><i>(Sprint and run backwards consume energy)</i></p>
-                        </div>
-
-                        <div>
-                            <h3>-- ANY KEY TO START --</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
         <div id="infoSplash">
             <div id="infoSplashCircle" class="circle center">
                 <div class="center">
@@ -106,8 +48,12 @@
                 </div>
             </div>
         </div>
-        
+
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/index.lib.js"></script>
+		<script type="text/javascript" src="js/SisyphusSheep.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/pixi.js"></script>
+        <script type="text/javascript" src="js/pixi-sound.js"></script>
     </body>
 </html>

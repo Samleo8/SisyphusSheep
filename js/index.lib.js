@@ -1,3 +1,10 @@
+ var forceIsApp = false;
+
+ var _isApp = null;
+ var _isAndroid = null;
+
+ var _isMobile = false;
+
 //*--------UNIVERSAL FUNCTIONS--------*//
 function isApp(){
 	if(!MobileCheck()) return false;
