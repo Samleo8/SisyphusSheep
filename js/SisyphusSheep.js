@@ -93,14 +93,14 @@ var SisyphusSheepGame = function(){
 	};
 
 	//Audio
-	this.audioLib = ["main_music"];
-	this.audioVol = [0.4];
+	this.audioLib = [ "main_music" ];
+	this.audioVol = [ 0.4 ];
 	this.audio = {
 
 	}
 
 	//Icons and Buttons
-	this.iconNames = ["pause","play","music_on","music_off","fx_on","fx_off","games","info","web","logout","leaderboard","achievements","restart","ad","shop","coin","dollar","post","back","left_arrow","right_arrow","shirt","tick","restore"];
+	this.iconNames = [ "pause","play","music_on","music_off","fx_on","fx_off","games","info","web","logout","leaderboard","achievements","restart","ad","shop","coin","dollar","post","back","left_arrow","right_arrow","shirt","tick","restore" ];
 
 	this.pauseButton = null;
 	this.muteMusicButton = null;
@@ -696,13 +696,11 @@ var SisyphusSheepGame = function(){
 	//Ads
 	this.totalGamesPlayed = 0;
 
-	/*
 	this.ads = {
-		"enabled": true,
-		"testing": false,
+		"enabled": false,
+		"testing": true,
 		"reward_type": "revive",
 		"types":{
-			/*
 			"banner":{
 				"id": "ca-app-pub-1626473425552959/6430092502",
 				"autoShow": true,
@@ -860,8 +858,7 @@ var SisyphusSheepGame = function(){
 
 			renderer.render(stage);
 		}
-	}
-	*/
+	};
 
 	//In-app purchases
 	this.purchases = {
