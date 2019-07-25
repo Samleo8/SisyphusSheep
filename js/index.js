@@ -57,8 +57,6 @@ var app = {
 	onDeviceReady: function() {
 		console.log((isApp())?"Device Ready!":"DOM Loaded...");
 
-		//GPlay = new GooglePlayServices();
-
 		FastClick.attach(document.body);
 		Game.initStage();
 	},
