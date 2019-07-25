@@ -78,7 +78,7 @@ var SisyphusSheepGame = function(){
 
 	//Animations and sprites
 	this.animations = {
-		"sheep_base":{
+		"sheep_running":{
 			"frames":[],
 			"totalFrames":7
 		},
@@ -1484,7 +1484,7 @@ var SisyphusSheepGame = function(){
 			fontSize:120
 		};
 
-		var text = new PIXI.Text("SOARING",Object.assign(textOpt));
+		var text = new PIXI.Text("SISYPHUS",Object.assign(textOpt, { fontSize: 110 }));
 		text.anchor.set(0.5,0.5);
 		text.x = this.canvasWidth/2;
 		text.y = this.canvasHeight/2-150;
@@ -1493,7 +1493,7 @@ var SisyphusSheepGame = function(){
 
 		var text2 = new PIXI.Text("SHEEP",Object.assign(textOpt));
 		text2.anchor.set(0.5,0.5);
-		text2.x = this.canvasWidth/2+73;
+		text2.x = this.canvasWidth/2+90;
 		text2.y = this.canvasHeight/2-20;
 
 		var _offset = 70;
@@ -1634,7 +1634,7 @@ var SisyphusSheepGame = function(){
 			padding: 10,
 			fontSize: 30
 		};
-		var text2 = new PIXI.Text("This game was created by Samuel Leong Chee Weng\nusing PIXI.js renderer library.\n\nThe web version is available on my website at\n https://samleo8.github.io/SoaringSheep",textOpt2);
+		var text2 = new PIXI.Text("This game was created by Samuel Leong Chee Weng\nusing PIXI.js renderer library.\n\nThe web version is available on my website at\n https://samleo8.github.io/SisyphusSheep",textOpt2);
 		text2.anchor.set(0.5,0);
 		text2.alpha = 0.98;
 		text2.x = this.canvasWidth/2;
@@ -4240,7 +4240,7 @@ var SisyphusSheepGame = function(){
 				this.togglePause(true);
 
 				if(confirm("Google Play Games is only supported in the Mobile App! Click 'OK' to be redirected to the Google Play Store. Cancel otherwise.")){
-					this.gotoURL("https://play.google.com/store/apps/details?id=io.samleo8.SoaringSheep");
+					this.gotoURL("https://play.google.com/store/apps/details?id=io.samleo8.SisyphusSheep");
 				}
 
 				return;
@@ -4621,9 +4621,9 @@ var SisyphusSheepGame = function(){
 
 	this.share_social = function(){
 		var options = {
-		  message: 'Can you beat my score of '+this.score+' on Soaring Sheep?', // not supported on some apps (Facebook, Instagram)
-		  subject: 'Soaring Sheep Highscore', // fi. for email
-		  url: 'https://play.google.com/store/apps/details?id=io.samleo8.SoaringSheep'
+		  message: 'Can you beat my score of '+this.score+' on Sisyphus Sheep?', // not supported on some apps (Facebook, Instagram)
+		  subject: 'Sisyphus Sheep Highscore', // fi. for email
+		  url: 'https://play.google.com/store/apps/details?id=io.samleo8.SisyphusSheep'
 		  //chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
 		};
 
@@ -4638,7 +4638,7 @@ var SisyphusSheepGame = function(){
 		}
 		else{
 			if(confirm("For now, you can only share your scores on the Android app. Click 'OK' to download it now!")){
-				this.gotoURL("https://play.google.com/store/apps/details?id=io.samleo8.SoaringSheep");
+				this.gotoURL("https://play.google.com/store/apps/details?id=io.samleo8.SisyphusSheep");
 			}
 
 		}
