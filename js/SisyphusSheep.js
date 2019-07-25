@@ -80,12 +80,12 @@ var SisyphusSheepGame = function(){
 	this.animations = {
 		"sheep_running":{
 			"frames":[],
-			"totalFrames":7
-		},
+			"totalFrames":6
+		}/*,
 		"sheep_gold":{
 			"frames":[],
 			"totalFrames":7
-		}
+		}*/
 	};
 
 	this.sprites = {
@@ -223,7 +223,7 @@ var SisyphusSheepGame = function(){
 		- "type" is either: skin, hat or cape (necklaces are under capes)
 	*/
 	this.accessories = {
-		"sheep_base":{
+		"sheep_running":{
 			"title":"Base Sheep",
 			"desc":"Back to basics",
 			"type":"skin",
@@ -2238,7 +2238,7 @@ var SisyphusSheepGame = function(){
 			this.sprites.background.alpha = 0;
 
 			//Sheep
-			sheep = new PIXI.Sprite(this.animations.sheep_base.frames[0]);
+			sheep = new PIXI.Sprite(this.animations.sheep_running.frames[0]);
 			sheep.anchor.set(0.5,0.5);
 			sheep.scale.set(0.35,0.35);
 			sheep.rotation = -Math.PI/40;
@@ -3344,7 +3344,7 @@ var SisyphusSheepGame = function(){
 						this.skinsSection[nm].img.scale.set(0.45,0.45);
 					}
 					else if(nm=="little_lamb"){
-						this.skinsSection[nm].img.texture = this.animations["sheep_base"].frames[0];
+						this.skinsSection[nm].img.texture = this.animations["sheep_running"].frames[0];
 						this.skinsSection[nm].img.scale.set(0.28,0.28);
 					}
 					break;
@@ -3788,8 +3788,8 @@ var SisyphusSheepGame = function(){
 		renderer.render(stage);
 	}
 
-	this.setAccessory = function(accessory,type){
-		if(accessory == null) accessory = "sheep_base";
+	this.setAccessory = function(accessory, type){
+		if(accessory == null) accessory = "sheep_running";
 		if(type == null) return;
 
 		var data, currFrame, scaleDir;
@@ -3821,7 +3821,7 @@ var SisyphusSheepGame = function(){
 				if(this.hero.sheep == null || typeof this.hero.sheep == "undefined"){
 					//Initializing of the sheep
 
-					this.hero.sheep = new PIXI.extras.AnimatedSprite(this.animations[((accessory=="little_lamb")?"sheep_base":accessory)].frames);
+					this.hero.sheep = new PIXI.extras.AnimatedSprite(this.animations["sheep_running"].frames); //new PIXI.extras.AnimatedSprite(this.animations[((accessory=="little_lamb")?"sheep_running":accessory)].frames);
 					this.hero.sheep.animationSpeed = 0.15;
 					this.hero.sheep.loop = false;
 					this.hero.sheep.anchor.set(0.5);
@@ -3836,7 +3836,7 @@ var SisyphusSheepGame = function(){
 				}
 				else{
 					currFrame = this.hero.sheep.currentFrame;
-					this.hero.sheep.textures = this.animations[((accessory=="little_lamb")?"sheep_base":accessory)].frames;
+					this.hero.sheep.textures = this.animations["sheep_running"]; //this.animations[((accessory=="little_lamb")?"sheep_running":accessory)].frames;
 					this.hero.sheep.gotoAndPlay(currFrame);
 
 					scaleDir = (this.hero.sheep.scale.x<0)?-1:1;
