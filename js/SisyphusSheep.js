@@ -1497,7 +1497,7 @@ var SisyphusSheepGame = function(){
 		text2.x = this.canvasWidth/2+90;
 		text2.y = this.canvasHeight/2-20;
 
-		var _offset = 70;
+		var _offset = 95;
 		rect.y -= _offset; text.y -= _offset; text2.y -= _offset;
 
 		this.startScreen.addChild(rect);
@@ -1534,7 +1534,7 @@ var SisyphusSheepGame = function(){
 		this.loadingBar.progressText.y = this.loadingBar.progressBar.maxHeight/2+this.loadingBar.progressBar.strokeWidth/2;
 		this.loadingBar.progressText.x = this.loadingBar.progressBar.width/2+80;
 
-		this.loadingBar.position.set(this.canvasWidth/2-50,this.canvasHeight*(7/8));
+		this.loadingBar.position.set(this.canvasWidth/2-50,this.canvasHeight*(7/8)+10);
 
 		this.loadingBar.addChild(this.loadingBar.progressBar);
 		this.loadingBar.addChild(this.loadingBar.progressText);
@@ -1637,7 +1637,7 @@ var SisyphusSheepGame = function(){
 		};
 		var text2 = new PIXI.Text(
 			"This game was created by Samuel Leong Chee Weng\nusing PIXI.js renderer library.\n\n"+
-			(isApp())?"The web version is available on my website at\n https://samleo8.github.io/SisyphusSheep":"The mobile app is available on the Google Play Store under the name \'Sisyphus Sheep\'",
+			((isApp())?"The web version is available on my website at\n https://samleo8.github.io/SisyphusSheep":"The mobile app is available on the Google Play Store under the name \'Sisyphus Sheep\'"),
 			textOpt2
 		);
 		text2.anchor.set(0.5,0);
@@ -2247,11 +2247,11 @@ var SisyphusSheepGame = function(){
 			sheep.anchor.set(0.5,0.5);
 			sheep.scale.set(0.35,0.35);
 			sheep.rotation = -Math.PI/50;
-			sheep.position.set(this.canvasWidth/2-190,this.canvasHeight/2-90);
+			sheep.position.set(this.canvasWidth/2-190,this.canvasHeight/2-120);
 
 			//Speech bubble
 			var speech_bubble = new PIXI.Container();
-			speech_bubble.position.set(this.canvasWidth/2,this.canvasHeight*0.66);
+			speech_bubble.position.set(this.canvasWidth/2,this.canvasHeight*0.66-10);
 
 			//-Bubble
 			var bubble = new PIXI.Graphics();
@@ -2260,7 +2260,7 @@ var SisyphusSheepGame = function(){
 			bubble._radius = 40;
 			bubble.beginFill(0xcfd8dc)
 				.drawRoundedRect(-bubble._width/2,-bubble._height/2,bubble._width,bubble._height,bubble._radius)
-				.drawPolygon( new PIXI.Point(-bubble._width/2+290,-bubble._height/2-30) , new PIXI.Point(-125,-bubble._height/2), new PIXI.Point(-95,-bubble._height/2) )
+				.drawPolygon( new PIXI.Point(-bubble._width/2+275,-bubble._height/2-45) , new PIXI.Point(-125,-bubble._height/2), new PIXI.Point(-95,-bubble._height/2) )
 			.endFill();
 
 			//-Text
