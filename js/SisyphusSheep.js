@@ -2567,7 +2567,7 @@ var SisyphusSheepGame = function(){
 		this.setAccessoriesPositions(1);
 
 		//--Reset speeds and jumpStrength
-		this.hero.vx = this.maxSpeed;
+		this.hero.vx = this.minSpeed;
 		this.hero.ax = 0;
 		this.hero.vy = 0;
 		this.hero.ay = 0;
@@ -2670,8 +2670,29 @@ var SisyphusSheepGame = function(){
 
 		//HERO MOVEMENT
 		var overallSpeed = -this.treadmill.speed;
+		this.hero.visible = true;
+		if(this.hero.running){
+			if(this.hero.sprinting){
+	            if(this.sprintLevel>0){
+	                overallSpd += this.hero.speed*this.sprintMultiplier;
+	                this.sprintLevel--;
+	            }
+				else {
+					overallSpd += this.hero.speed;
+				}
+				this.hero.animationSpeed = 0.35;
+	        }
+			else{
+				this.hero.animationSpeed = 0.15;
+			}
+        }
+        else{
+            this.sprintLevel += 0.1;
+        }
 
+        this.sprintLevel = Math.max(Math.min(100,this.sprintLevel),0);
 
+		this.hero.vx = overallSpeed;
 
 		this.hero.vx += this.hero.ax;
 		this.hero.vy += this.hero.ay;
@@ -2680,7 +2701,6 @@ var SisyphusSheepGame = function(){
 		this.hero.x += this.hero.vx;
 
 		this.heroShield.position = this.hero.position;
-
 
 
 		//OBSTACLE MOVEMENT
