@@ -12,29 +12,33 @@ var SisyphusSheepGame = function(){
 	this.canvasHeight = 900;
 
 	this.controls = {
-		"":{
-			"keys":[32,38], //Space, Up-Arrow
-			"callback":"heroJump"
+		"movement": {
+			"keys": [40, 83], //Down-Arrow, S
+			"callback": "toggleHeroMovement"
 		},
-		"pause":{
-			"keys":["P".charCodeAt(),27], //P, Esc
-			"callback":"togglePause"
+		"sprint": {
+			"keys": [39, 68, 32], //Right Arrow, D, Space
+			"callback": "heroSprint"
 		},
-		"muteMain":{
-			"keys":["M".charCodeAt()], //M
-			"callback":"toggleMuteMain"
+		"pause": {
+			"keys": ["P".charCodeAt(), 27], //P, Esc
+			"callback": "togglePause"
 		},
-		"muteFX":{
-			"keys":["M".charCodeAt()], //M
-			"callback":"toggleMuteFX"
+		"muteMain": {
+			"keys": ["M".charCodeAt()], //M
+			"callback": "toggleMuteMain"
 		},
-		"info":{
-			"keys":["I".charCodeAt()], //I
-			"callback":"showInfo"
+		"muteFX": {
+			"keys": ["M".charCodeAt()], //M
+			"callback": "toggleMuteFX"
 		},
-		"store":{
-			"keys":["S".charCodeAt()], //S
-			"callback":"showShop"
+		"info": {
+			"keys": ["I".charCodeAt()], //I
+			"callback": "showInfo"
+		},
+		"store": {
+			"keys": ["S".charCodeAt()], //S
+			"callback": "showShop"
 		}
 	};
 
@@ -93,8 +97,8 @@ var SisyphusSheepGame = function(){
 	};
 
 	//Audio
-	this.audioLib = [ "main_music" ];
-	this.audioVol = [ 0.4 ];
+	this.audioLib = ["main_music", "coin", "die", "freeze", "shield"];
+	this.audioVol = [0.4, 0.6, 0.8, 0.6, 0.8];
 	this.audio = {
 
 	}
@@ -1406,6 +1410,7 @@ var SisyphusSheepGame = function(){
 
 			//-HERO
 			this.hero = new PIXI.Container();
+			this.hero.startY = this.canvasHeight-40;
 
 			this.setAllAccessories();
 
@@ -2426,10 +2431,10 @@ var SisyphusSheepGame = function(){
 
 		//CREATE OBSTACLE CONTAINER
 		this.obstacles = new PIXI.Container();
-		this.obstacleSections = new PIXI.Container();
-		this.showObstacleSections();
+		//this.obstacleSections = new PIXI.Container();
+		//this.showObstacleSections();
 
-		stage.addChild(this.obstacleSections);
+		//stage.addChild(this.obstacleSections);
 		stage.addChild(this.obstacles);
 
 		//CREATE POWERUP CONTAINER
@@ -2516,7 +2521,7 @@ var SisyphusSheepGame = function(){
 		//-Hero
 		this.hero.visible = true;
 		this.hero.x = this.canvasWidth/2;
-		this.hero.y = this.canvasHeight/2;
+		this.hero.y = this.hero.startY;
 
 		//--Reset direction of all hero's children to the right
 		for(var i=0; i<this.hero.children.length; i++){
@@ -2556,11 +2561,13 @@ var SisyphusSheepGame = function(){
 
 		//-Obstacles
 		var i;
-		this.nObstacleSections = 1;
-		this.showObstacleSections();
+		//this.nObstacleSections = 1;
+		//this.showObstacleSections();
+		/*
 		for(i=0;i<=this.nObstacleSections;i++){
 			this.obstacleSectionActive[i] = false;
 		}
+		*/
 
 		this.obstaclesFrozen = false;
 
@@ -2649,7 +2656,7 @@ var SisyphusSheepGame = function(){
 
 			if(obs.y>=this.canvasHeight+obs.height+this.powerupOffset){
 				this.obstacles.removeChild(obs);
-				this.obstacleSectionActive[obs.section] = false;
+				//this.obstacleSectionActive[obs.section] = false;
 			}
 		};
 
@@ -2706,7 +2713,7 @@ var SisyphusSheepGame = function(){
 
 			if(this.hitTest(this.hero,obs,this.hero.sheep.width*0.25,this.hero.sheep.height*0.15)){
 				this.obstacles.removeChild(obs);
-				this.obstacleSectionActive[obs.section] = false;
+				//this.obstacleSectionActive[obs.section] = false;
 
 				if(this.heroShield.alpha){
 					this.heroShield.alpha = 0;
@@ -2797,6 +2804,7 @@ var SisyphusSheepGame = function(){
 		this.scoreText.text = this.score;
 
 		//Gradually increase the number of obstacle sections in the game to max of 3
+		/*
 		switch(this.score){
 			case 5:
 				this.nObstacleSections = 2;
@@ -2817,6 +2825,7 @@ var SisyphusSheepGame = function(){
 			default:
 				break;
 		}
+		*/
 
 		this.saveOptions();
 		this.highscoreText.text = this.highscore;
@@ -2826,6 +2835,7 @@ var SisyphusSheepGame = function(){
 		renderer.render(stage);
 	}
 
+	/*
 	this.showObstacleSections = function(){
 		this.clearObstacleSections();
 
@@ -2860,6 +2870,7 @@ var SisyphusSheepGame = function(){
 
 		renderer.render(stage);
 	}
+	*/
 
 	this.spawnObstacle = function(){
 		if(this.obstaclesFrozen) return;
@@ -2871,6 +2882,7 @@ var SisyphusSheepGame = function(){
 		obs.scale.set(0.2,-0.2);
 
 		//Ensure obstacle does not appear twice in the section at one time.
+		/*
 		var hasEmptySection = false;
 		for(i=1;i<=this.nObstacleSections;i++){
 			if(!this.obstacleSectionActive[i]){
@@ -2879,11 +2891,13 @@ var SisyphusSheepGame = function(){
 			}
 		}
 		if(!hasEmptySection) return;
+		*/
 
 		//RESET TIMERS
 		this.pauseTime["obstacle"] = 0;
 		this.obstacleTimer = new Date().getTime();
 
+		/*
 		var section;
 		var sectionFound = false;
 		for(i=0;i<10;i++){ //prevent infinite loop
@@ -2897,6 +2911,7 @@ var SisyphusSheepGame = function(){
 
 		obs.section = section;
 		this.obstacleSectionActive[section] = true;
+		*/
 
 		var startX = section*(this.canvasWidth/(this.nObstacleSections+1));
 		var startY = obs.height/2;
