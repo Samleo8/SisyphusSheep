@@ -2874,7 +2874,7 @@ var SisyphusSheepGame = function(){
 		this.saveOptions();
 		this.highscoreText.text = this.highscore;
 
-		this.audio["bounce"].play();
+		//this.audio["bounce"].play();
 
 		renderer.render(stage);
 	}
