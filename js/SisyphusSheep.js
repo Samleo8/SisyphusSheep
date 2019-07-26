@@ -1482,7 +1482,7 @@ var SisyphusSheepGame = function(){
 			letterSpacing: 10,
 			padding: 10,
 			align: 'center',
-			fontSize:120
+			fontSize: 120
 		};
 
 		var text = new PIXI.Text("SISYPHUS",Object.assign(textOpt, { fontSize: 110 }));
@@ -1635,7 +1635,11 @@ var SisyphusSheepGame = function(){
 			padding: 10,
 			fontSize: 30
 		};
-		var text2 = new PIXI.Text("This game was created by Samuel Leong Chee Weng\nusing PIXI.js renderer library.\n\nThe web version is available on my website at\n https://samleo8.github.io/SisyphusSheep",textOpt2);
+		var text2 = new PIXI.Text(
+			"This game was created by Samuel Leong Chee Weng\nusing PIXI.js renderer library.\n\n"+
+			(isApp())?"The web version is available on my website at\n https://samleo8.github.io/SisyphusSheep":"The mobile app is available on the Google Play Store under the name \'Sisyphus Sheep\'",
+			textOpt2
+		);
 		text2.anchor.set(0.5,0);
 		text2.alpha = 0.98;
 		text2.x = this.canvasWidth/2;
@@ -1653,7 +1657,7 @@ var SisyphusSheepGame = function(){
 
 		this.infoOverlay.addChild(text3);
 
-		text2 = new PIXI.Text("http://www.noiseforfun.com/\nhttp://www.playonloop.com/",textOpt2);
+		text2 = new PIXI.Text("[Miqz] http://www.newgrounds.com/audio/listen/719242\nhttp://www.noiseforfun.com/",textOpt2);
 		text2.anchor.set(0.5,0);
 		text2.alpha = 0.98;
 		text2.x = this.canvasWidth/2;
@@ -2251,7 +2255,7 @@ var SisyphusSheepGame = function(){
 
 			//-Bubble
 			var bubble = new PIXI.Graphics();
-			bubble._width = 800+60;
+			bubble._width = 800+20;
 			bubble._height = 300+30;
 			bubble._radius = 40;
 			bubble.beginFill(0xcfd8dc)
@@ -2264,8 +2268,9 @@ var SisyphusSheepGame = function(){
 				fontFamily: 'TimeBurner',
 				fill: "#607d8b",
 				letterSpacing: 2,
+				padding: 10,
 				align: 'center',
-				fontSize:38
+				fontSize: 38
 			};
 
 			var text = new PIXI.Text("Run to the End of the Treadmill. \nAvoid the Spikes. Repeat. \n"+((_isMobile)?"Tap anywhere":"Click/[DOWN]")+" to START/STOP RUNNING\n[RIGHT] to SPRINT\n\n- RUN/SPRINT to Start! -",textOpt);
