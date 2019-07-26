@@ -7,17 +7,18 @@ var SisyphusSheepGame = function(){
 	this._gameStarted = false;
 	this._jumpToStartGame = false;
 
+	//Canvas and Controls
 	this.hwratio = 9/16; //most screens are of game resolution
 	this.canvasWidth = 1600;
 	this.canvasHeight = 900;
 
 	this.controls = {
 		"movement": {
-			"keys": [40, 83], //Down-Arrow, S
+			"keys": [40, "S".charCodeAt()], //Down-Arrow, S
 			"callback": "toggleHeroMovement"
 		},
 		"sprint": {
-			"keys": [39, 68, 32], //Right Arrow, D, Space
+			"keys": [39, "D".charCodeAt(), 32], //Right Arrow, D, Space
 			"callback": "heroSprint"
 		},
 		"pause": {
@@ -42,6 +43,7 @@ var SisyphusSheepGame = function(){
 		}
 	};
 
+	//Hero
 	this.hero = null;
 	this.heroShield = null;
 	this.toggleHeroMovementStrength = 5.5;
@@ -59,8 +61,11 @@ var SisyphusSheepGame = function(){
 		"muteMain":false
 	};
 
+	this.portalsPassed = 0;
 	this.score = 0;
 	this.highscore = 0;
+
+	this.scoreTimer = null;
 
 	this.scoreText = null;
 	this.overSym = null;
@@ -69,6 +74,13 @@ var SisyphusSheepGame = function(){
 	this.speedInc = 0.985; //anything below 0.95 is a problem
 	this.minSpeed = 6.5;
 	this.maxSpeed = 11.5;
+
+	this.sprintLevel = 100;
+	this.sprintMultiplier = 1.8;
+	this.sprintReload = { //in milliseconds
+		"time":100,
+		"add":0.1
+	}
 
 	this._paused = false;
 	this._musicMuted = false;
@@ -80,11 +92,19 @@ var SisyphusSheepGame = function(){
 	this.fadeObjects = null;
 	this.fadeInTimer = null;
 
+	//Treadmill
+	this.treadmill = null;
+	this.treadmillBaseSpeed = 10;
+
 	//Animations and sprites
 	this.animations = {
+		"treadmill":{
+			"frames":[],
+			"totalFrames": 4
+		},
 		"sheep_running":{
 			"frames":[],
-			"totalFrames":6
+			"totalFrames": 6
 		}/*,
 		"sheep_gold":{
 			"frames":[],
@@ -92,16 +112,12 @@ var SisyphusSheepGame = function(){
 		}*/
 	};
 
-	this.sprites = {
-
-	};
+	this.sprites = {};
 
 	//Audio
 	this.audioLib = ["main_music", "coin", "die", "freeze", "shield"];
 	this.audioVol = [0.4, 0.6, 0.8, 0.6, 0.8];
-	this.audio = {
-
-	}
+	this.audio = {};
 
 	//Icons and Buttons
 	this.iconNames = [ "pause","play","music_on","music_off","fx_on","fx_off","games","info","web","logout","leaderboard","achievements","restart","ad","shop","coin","dollar","post","back","left_arrow","right_arrow","shirt","tick","restore" ];
@@ -126,6 +142,7 @@ var SisyphusSheepGame = function(){
 	this.obstacles = null;
 	this.obstacleTimer = null;
 	this.obstacleSpawnTime = 1000; //in ms
+	this.obstacleRange = 4;
 
 	this.obstaclesFrozen = false;
 	this.freezeTimer = null;
@@ -1119,8 +1136,8 @@ var SisyphusSheepGame = function(){
 			window.addEventListener("blur", this.appBlur.bind(this), false);
 		}
 
-		//renderer.view.addEventListener((_isMobile)?"touchstart":"mousedown", this.toggleHeroMovement.bind(this), false);
-		renderer.view.addEventListener((_isMobile)?"touchstart":"mousedown", this.toggleHeroMovement.bind(this), false);
+		//renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.toggleHeroMovement.bind(this), false);
+		renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.toggleHeroMovement.bind(this), false);
 
 		//LOAD IMAGES, FONTS AND MUSIC
 		this.loadFonts(); //(load fonts first to make sure start screen has proper fonts)
@@ -1251,7 +1268,7 @@ var SisyphusSheepGame = function(){
 			this.pauseButton.interactive = true;
 			this.pauseButton.buttonMode = true;
 
-			this.pauseButton.on((_isMobile)?"touchstart":"mousedown",this.togglePause.bind(this));
+			this.pauseButton.on((_isMobile)?"touchend":"mouseup",this.togglePause.bind(this));
 
 			this.pauseButton.position.set(this.canvasWidth-60,50);
 
@@ -1264,7 +1281,7 @@ var SisyphusSheepGame = function(){
 			this.muteMusicButton.interactive = true;
 			this.muteMusicButton.buttonMode = true;
 
-			this.muteMusicButton.on((_isMobile)?"touchstart":"mousedown",this.toggleMuteMain.bind(this));
+			this.muteMusicButton.on((_isMobile)?"touchend":"mouseup",this.toggleMuteMain.bind(this));
 
 			this.muteMusicButton.position.set(this.canvasWidth-145,50);
 
@@ -1292,7 +1309,7 @@ var SisyphusSheepGame = function(){
 			this.muteFXButton.interactive = true;
 			this.muteFXButton.buttonMode = true;
 
-			this.muteFXButton.on((_isMobile)?"touchstart":"mousedown",this.toggleMuteFX.bind(this));
+			this.muteFXButton.on((_isMobile)?"touchend":"mouseup",this.toggleMuteFX.bind(this));
 
 			this.muteFXButton.position.set(this.canvasWidth-235,50);
 
@@ -1313,7 +1330,7 @@ var SisyphusSheepGame = function(){
 			this.gamesButton.interactive = true;
 			this.gamesButton.buttonMode = true;
 
-			this.gamesButton.on((_isMobile)?"touchstart":"mousedown",this.showPlayGamesMenu.bind(this));
+			this.gamesButton.on((_isMobile)?"touchend":"mouseup",this.showPlayGamesMenu.bind(this));
 
 			this.gamesButton.position.set(80,50);
 
@@ -1333,7 +1350,7 @@ var SisyphusSheepGame = function(){
 			this.infoButton.interactive = true;
 			this.infoButton.buttonMode = true;
 
-			this.infoButton.on((_isMobile)?"touchstart":"mousedown",this.showInfo.bind(this));
+			this.infoButton.on((_isMobile)?"touchend":"mouseup",this.showInfo.bind(this));
 
 			this.infoButton.position.set(190,50);
 
@@ -1353,7 +1370,7 @@ var SisyphusSheepGame = function(){
 			this.webButton.interactive = true;
 			this.webButton.buttonMode = true;
 
-			this.webButton.on((_isMobile)?"touchstart":"mousedown",this.gotoURL.bind(this,"https://samleo8.github.io/games/"));
+			this.webButton.on((_isMobile)?"touchend":"mouseup",this.gotoURL.bind(this,"https://samleo8.github.io/games/"));
 
 			this.webButton.position.set(292,50);
 
@@ -1373,7 +1390,7 @@ var SisyphusSheepGame = function(){
 			this.shopButton.interactive = true;
 			this.shopButton.buttonMode = true;
 
-			this.shopButton.on((_isMobile)?"touchstart":"mousedown",this.showShop.bind(this));
+			this.shopButton.on((_isMobile)?"touchend":"mouseup",this.showShop.bind(this));
 
 			this.shopButton.position.set(395,51);
 
@@ -1410,7 +1427,6 @@ var SisyphusSheepGame = function(){
 
 			//-HERO
 			this.hero = new PIXI.Container();
-			this.hero.startY = this.canvasHeight-40;
 
 			this.setAllAccessories();
 
@@ -1600,7 +1616,7 @@ var SisyphusSheepGame = function(){
 		this.pauseOverlay.addChild(text2);
 
 		//-Add Event Listener
-		this.pauseOverlay.on((_isMobile)?"touchstart":"mousedown",this.togglePause.bind(this,false));
+		this.pauseOverlay.on((_isMobile)?"touchend":"mouseup",this.togglePause.bind(this,false));
 
 		/* INFO OVERLAY */
 		this.infoOverlay = new PIXI.Container();
@@ -1686,7 +1702,7 @@ var SisyphusSheepGame = function(){
 
 		this.infoOverlay.addChild(text2);
 
-		this.infoOverlay.on((_isMobile)?"touchstart":"mousedown",this.showInfo.bind(this));
+		this.infoOverlay.on((_isMobile)?"touchend":"mouseup",this.showInfo.bind(this));
 
 		this.infoOverlay.alpha = 0;
 
@@ -1783,7 +1799,7 @@ var SisyphusSheepGame = function(){
 
 		this.restartButton.interactive = true;
 		this.restartButton.buttonMode = true;
-		this.restartButton.on((_isMobile)?"touchstart":"mousedown",this.newGame.bind(this));
+		this.restartButton.on((_isMobile)?"touchend":"mouseup",this.newGame.bind(this));
 
 		textOpt3 = {
 			fontFamily: 'TimeBurnerBold',
@@ -1837,7 +1853,7 @@ var SisyphusSheepGame = function(){
 
 		this.reviveButton.interactive = true;
 		this.reviveButton.buttonMode = true;
-		this.reviveButton.on((_isMobile)?"touchstart":"mousedown",this.try_revive.bind(this));
+		this.reviveButton.on((_isMobile)?"touchend":"mouseup",this.try_revive.bind(this));
 
 		this.reviveButton.overlay = new PIXI.Graphics();
 		this.reviveButton.overlay.beginFill(0xb0bec5,0.75)
@@ -1893,7 +1909,7 @@ var SisyphusSheepGame = function(){
 
 		this.shareButton.buttonMode = true;
 		this.shareButton.interactive = true;
-		this.shareButton.on((_isMobile)?"touchstart":"mousedown",this.share_social.bind(this));
+		this.shareButton.on((_isMobile)?"touchend":"mouseup",this.share_social.bind(this));
 
 		this.gameoverScreen.addChild(this.shareButton);
 
@@ -2034,7 +2050,7 @@ var SisyphusSheepGame = function(){
 
 			tab.interactive = true;
 			tab.buttonMode = true;
-			tab.on((_isMobile)?"touchstart":"mousedown",this.switchShopTab.bind(this,tab.name));
+			tab.on((_isMobile)?"touchend":"mouseup",this.switchShopTab.bind(this,tab.name));
 		}
 
 		var content;
@@ -2067,7 +2083,7 @@ var SisyphusSheepGame = function(){
 
 		this.shop.interactive = true;
 		this.shop.buttonMode = true;
-		this.shop.on((_isMobile)?"touchstart":"mousedown",function(){
+		this.shop.on((_isMobile)?"touchend":"mouseup",function(){
 			this.preventHeroMovement++;
 		}.bind(this));
 
@@ -2189,12 +2205,12 @@ var SisyphusSheepGame = function(){
 
 			tab.interactive = true;
 			tab.buttonMode = true;
-			tab.on((_isMobile)?"touchstart":"mousedown",this.pressPlayGamesButton.bind(this,tab.name));
+			tab.on((_isMobile)?"touchend":"mouseup",this.pressPlayGamesButton.bind(this,tab.name));
 		}
 
 		this.playGamesMenu.interactive = true;
 		this.playGamesMenu.buttonMode = true;
-		this.playGamesMenu.on((_isMobile)?"touchstart":"mousedown",function(){
+		this.playGamesMenu.on((_isMobile)?"touchend":"mouseup",function(){
 			this.preventHeroMovement++;
 		}.bind(this));
 
@@ -2231,7 +2247,7 @@ var SisyphusSheepGame = function(){
 
 		this.backButton.interactive = true;
 		this.backButton.buttonMode = true;
-		this.backButton.on((_isMobile)?"touchstart":"mousedown", this.closeAllMenus.bind(this));
+		this.backButton.on((_isMobile)?"touchend":"mouseup", this.closeAllMenus.bind(this));
 
 		this.backButton.visible = false;
 	};
@@ -2402,7 +2418,7 @@ var SisyphusSheepGame = function(){
 		};
 
 		//-Score text
-		this.scoreText =  new PIXI.Text(this.score.toString(),Object.assign(textOpt,{fontSize:120}));
+		this.scoreText =  new PIXI.Text(this.score.toString(), Object.assign(textOpt, { fontSize: 120 }));
 
 		this.scoreText.alpha = 0.7;
 		this.scoreText.anchor.set(0.5,0.5);
@@ -2412,7 +2428,7 @@ var SisyphusSheepGame = function(){
 		stage.addChild(this.scoreText);
 
 		//-Highscore text
-		this.highscoreText = new PIXI.Text(this.highscore.toString(),Object.assign(textOpt,{fontSize:40}));
+		this.highscoreText = new PIXI.Text(this.highscore.toString(), Object.assign(textOpt, { fontSize:40 }));
 
 		this.highscoreText.alpha = 0.7;
 		this.highscoreText.anchor.set(0.5,0.5);
@@ -2429,6 +2445,21 @@ var SisyphusSheepGame = function(){
 		this.overSym.y = this.canvasHeight/2+50;
 		stage.addChild(this.overSym);
 
+		//CREATE TREADMILL CONTAINER AND SET SPECS
+		this.treadmill = new PIXI.extras.AnimatedSprite(this.animations["treadmill"].frames);
+		this.treadmill.animationSpeed = 0.15;
+		this.treadmill.loop = true;
+		this.treadmill.anchor.set(0.5);
+
+		this.treadmill.height = 90;
+		this.treadmill.width = this.canvasWidth;
+		this.treadmill.x = this.treadmill.width/2;
+		this.treadmill.y = this.canvasHeight-this.treadmill.height/2;
+
+		this.treadmill.speed = this.treadmillBaseSpeed;
+
+		stage.addChild(this.treadmill);
+
 		//CREATE OBSTACLE CONTAINER
 		this.obstacles = new PIXI.Container();
 		//this.obstacleSections = new PIXI.Container();
@@ -2442,15 +2473,19 @@ var SisyphusSheepGame = function(){
 		stage.addChild(this.powerups);
 
 		//HERO INITIALIZE
-		this.hero.x = this.canvasWidth/2;
-		this.hero.y = this.canvasHeight/2;
+		this.hero.x = this.canvasWidth*(1/4);
+		this.hero.y = this.canvasHeight - this.hero.width/2 - this.treadmill.height;
+		this.portalsPassed = 0;
 
 		//--Speed and jump strength
 		this.hero.vx = this.maxSpeed;
 		this.hero.ax = 0;
 		this.hero.vy = 0;
-		this.hero.ay = 0.10;
-		this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.toggleHeroMovementStrength:this.toggleHeroMovementStrength_lamb;
+		this.hero.ay = 0;
+
+		this.hero.running = false;
+		this.hero.sprinting = false;
+		//this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.toggleHeroMovementStrength:this.toggleHeroMovementStrength_lamb;
 
 		this.preventHeroMovement = 0;
 
@@ -2535,7 +2570,7 @@ var SisyphusSheepGame = function(){
 		this.hero.vx = this.maxSpeed;
 		this.hero.ax = 0;
 		this.hero.vy = 0;
-		this.hero.ay = 0.10;
+		this.hero.ay = 0;
 		this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.toggleHeroMovementStrength:this.toggleHeroMovementStrength_lamb;
 
 		//--Hero's shield
@@ -2631,9 +2666,13 @@ var SisyphusSheepGame = function(){
 		if(this._paused || !this._gameStarted) return;
 
 		//BACKGROUND MOVEMENT
-		this.sprites.background.tilePosition.x -= this.sprites.background.scrollingSpeed;
+		//this.sprites.background.tilePosition.x -= this.sprites.background.scrollingSpeed;
 
 		//HERO MOVEMENT
+		var overallSpeed = -this.treadmill.speed;
+
+
+
 		this.hero.vx += this.hero.ax;
 		this.hero.vy += this.hero.ay;
 
@@ -2641,6 +2680,8 @@ var SisyphusSheepGame = function(){
 		this.hero.x += this.hero.vx;
 
 		this.heroShield.position = this.hero.position;
+
+
 
 		//OBSTACLE MOVEMENT
 		for(i=0;i<this.obstacles.children.length;i++){
@@ -2696,12 +2737,15 @@ var SisyphusSheepGame = function(){
 
 		this.hero.leeway = 0;
 
-		//Check for hero y-direction bounds, and gameover if necessary
-		if(this.hero.y<=-this.hero.sheep.height/2-this.hero.leeway || this.hero.y>=(this.canvasHeight+this.hero.sheep.height/2+this.hero.leeway)){
+		//Check for hero x-direction (left-side) bounds, and gameover if necessary
+		if(this.hero.x<=-this.hero.sheep.width/2-this.hero.leeway){
 			this.gameover();
 			return;
 		}
 
+		if(this.hero.x>=(this.canvasWidth+this.hero.sheep.width/2+this.hero.leeway)){
+
+		}
 		//RENDER
 			//Do it here so that hit test doesn't seem to be "off"
 		renderer.render(stage);
@@ -2745,24 +2789,24 @@ var SisyphusSheepGame = function(){
 		}
 
 		//TIMERS
-			var t=new Date().getTime();
-			//OBSTACLE SPAWN
-			if(t-this.obstacleTimer>=this.obstacleSpawnTime+this.pauseTime["obstacle"]){
-				this.spawnObstacle();
-			}
+		var t = new Date().getTime();
+		//OBSTACLE SPAWN
+		if(t-this.obstacleTimer>=this.obstacleSpawnTime+this.pauseTime["obstacle"]){
+			this.spawnObstacle();
+		}
 
-			//SHIELD FADE AWAY
-			if(this.heroShield.alpha && t-this.shieldTimer>=this.shieldTimeInc+this.pauseTime["shield"]){
-				this.shieldTimer = t;
-				this.pauseTime["shield"] = 0;
+		//SHIELD FADE AWAY
+		if(this.heroShield.alpha && t-this.shieldTimer>=this.shieldTimeInc+this.pauseTime["shield"]){
+			this.shieldTimer = t;
+			this.pauseTime["shield"] = 0;
 
-				this.heroShield.alpha = Math.max(0,this.heroShield.alpha-this.shieldFadeInc);
-			}
+			this.heroShield.alpha = Math.max(0,this.heroShield.alpha-this.shieldFadeInc);
+		}
 
-			if(this.obstaclesFrozen && t-this.obstaclesTimer>=this.obstaclesFreezeTime+this.pauseTime["freeze"]){
-				this.pauseTime["freeze"] = 0;
-				this.obstaclesFrozen = false;
-			}
+		if(this.obstaclesFrozen && t-this.obstaclesTimer>=this.obstaclesFreezeTime+this.pauseTime["freeze"]){
+			this.pauseTime["freeze"] = 0;
+			this.obstaclesFrozen = false;
+		}
 
 		//UPDATE
 		requestAnimationFrame(this.update.bind(this));
@@ -2897,33 +2941,24 @@ var SisyphusSheepGame = function(){
 		this.pauseTime["obstacle"] = 0;
 		this.obstacleTimer = new Date().getTime();
 
-		/*
-		var section;
-		var sectionFound = false;
-		for(i=0;i<10;i++){ //prevent infinite loop
-			section = getRandomInt(1,this.nObstacleSections);
-			if(!this.obstacleSectionActive[section]){
-				sectionFound = true;
-				break;
-			}
-		}
-		if(!sectionFound) return;
+		//"Algo" to generate startX position of the obstacle. Very Evil.
+		var _dir;
+		var _range = this.width*this.obstacleRange; //maximum range away from center of player
 
-		obs.section = section;
-		this.obstacleSectionActive[section] = true;
-		*/
+		if(Math.random()<0.3) _dir=-1; else _dir = 1; //choose whether spike is behind or in front of player
+	    var startX = _dir*getRandomFloat(0, _range) + this.hero.x; //make it such that it's near to the player positon (muhaha)
+        startX = Math.min(this.canvasWidth-obs.width/2, Math.max(obs.width/2, startX)); //ensure still within range
 
-		var startX = section*(this.canvasWidth/(this.nObstacleSections+1));
 		var startY = obs.height/2;
 
 		obs.x = startX;
 		obs.y = startY;
 		obs.vy = 0;
 
-		//Ramp up acceleration as score increases
+		//Ramp up acceleration as number of portals passed increases
 		var _startG = 0.03;
 		var _maxG = 0.15;
-		obs.ay = getRandomFloat(_startG,Math.min(_startG+this.score*0.01,_maxG));
+		obs.ay = getRandomFloat(_startG,Math.min(_startG+this.portalsPassed*0.01,_maxG));
 
 		//Spawn powerup a few pixels above the spike. It'll fall at the same speed as the spike. Not easy to attain tho...
 		/* --POWERUPS--
@@ -3029,7 +3064,7 @@ var SisyphusSheepGame = function(){
 		//alert("Work in progress... Watch out for the next update!");
 
 		if(typeof e == "object"){
-			if(e.type=="mousedown" || e.type=="touchstart"){
+			if(e.type=="mouseup" || e.type=="touchend"){
 				this.preventHeroMovement++;
 			}
 		}
@@ -3200,7 +3235,7 @@ var SisyphusSheepGame = function(){
 
 			this.upgradesSection[nm].button.interactive = true;
 			this.upgradesSection[nm].button.buttonMode = true;
-			this.upgradesSection[nm].button.on((_isMobile)?"touchstart":"mousedown",this.performUpgrade.bind(this,nm));
+			this.upgradesSection[nm].button.on((_isMobile)?"touchend":"mouseup",this.performUpgrade.bind(this,nm));
 
 			this.upgradesSection[nm].button.footnote = new PIXI.Text(footnoteText,textOpt2);
 			this.upgradesSection[nm].button.footnote.anchor.set(0.5,0);
@@ -3269,7 +3304,7 @@ var SisyphusSheepGame = function(){
 		this.shop.navArrows.left.addChild(this.shop.navArrows.left.bg);
 		this.shop.navArrows.left.addChild(this.shop.navArrows.left.icon);
 
-		this.shop.navArrows.left.on((_isMobile)?"touchstart":"mousedown",this.skinPagesNav.bind(this,"prev"));
+		this.shop.navArrows.left.on((_isMobile)?"touchend":"mouseup",this.skinPagesNav.bind(this,"prev"));
 		this.shop.navArrows.left.buttonMode = true;
 		this.shop.navArrows.left.interactive = true;
 
@@ -3293,7 +3328,7 @@ var SisyphusSheepGame = function(){
 		this.shop.navArrows.right.addChild(this.shop.navArrows.right.bg);
 		this.shop.navArrows.right.addChild(this.shop.navArrows.right.icon);
 
-		this.shop.navArrows.right.on((_isMobile)?"touchstart":"mousedown",this.skinPagesNav.bind(this,"next"));
+		this.shop.navArrows.right.on((_isMobile)?"touchend":"mouseup",this.skinPagesNav.bind(this,"next"));
 		this.shop.navArrows.right.buttonMode = true;
 		this.shop.navArrows.right.interactive = true;
 
@@ -3417,7 +3452,7 @@ var SisyphusSheepGame = function(){
 
 			this.skinsSection[nm].button.interactive = true;
 			this.skinsSection[nm].button.buttonMode = true;
-			this.skinsSection[nm].button.on((_isMobile)?"touchstart":"mousedown",this.setAccessory.bind(this,nm,data["type"]));
+			this.skinsSection[nm].button.on((_isMobile)?"touchend":"mouseup",this.setAccessory.bind(this,nm,data["type"]));
 
 			this.skinsSection[nm].button.footnote = new PIXI.Text("",textOpt2);
 			this.skinsSection[nm].button.footnote.anchor.set(0.5,0);
@@ -3494,7 +3529,7 @@ var SisyphusSheepGame = function(){
 
 		this.coinAdButton.interactive = true;
 		this.coinAdButton.buttonMode = true;
-		this.coinAdButton.on((_isMobile)?"touchstart":"mousedown",this.ads.showAd.bind(this.ads,"rewardvideo","coins",10*getRandomInt(1,15)));
+		this.coinAdButton.on((_isMobile)?"touchend":"mouseup",this.ads.showAd.bind(this.ads,"rewardvideo","coins",10*getRandomInt(1,15)));
 
 		this.coinAdButton.overlay = new PIXI.Graphics();
 		this.coinAdButton.overlay.beginFill(0xb0bec5,0.75)
@@ -3544,7 +3579,7 @@ var SisyphusSheepGame = function(){
 
 		this.coinBuyButton.interactive = true;
 		this.coinBuyButton.buttonMode = true;
-		this.coinBuyButton.on((_isMobile)?"touchstart":"mousedown",this.purchases.buy.bind(this.purchases,"coins500"));
+		this.coinBuyButton.on((_isMobile)?"touchend":"mouseup",this.purchases.buy.bind(this.purchases,"coins500"));
 
 		this.coinBuyButton.overlay = new PIXI.Graphics();
 		this.coinBuyButton.overlay.beginFill(0xb0bec5,0.75)
@@ -3595,7 +3630,7 @@ var SisyphusSheepGame = function(){
 
 		this.restorePurchasesButton.interactive = true;
 		this.restorePurchasesButton.buttonMode = true;
-		this.restorePurchasesButton.on((_isMobile)?"touchstart":"mousedown",this.purchases.restore.bind(this.purchases));
+		this.restorePurchasesButton.on((_isMobile)?"touchend":"mouseup",this.purchases.restore.bind(this.purchases));
 
 		this.restorePurchasesButton.overlay = new PIXI.Graphics();
 		this.restorePurchasesButton.overlay.beginFill(0xb0bec5,0.75)
@@ -3624,7 +3659,7 @@ var SisyphusSheepGame = function(){
 
 	this.performUpgrade = function(nm, e){
 		if(typeof e == "object"){
-			if(e.type=="mousedown" || e.type=="touchstart"){
+			if(e.type=="mouseup" || e.type=="touchend"){
 				//this.preventHeroMovement++;
 			}
 		}
@@ -4064,7 +4099,7 @@ var SisyphusSheepGame = function(){
 	this.showInfo = function(e){
 
 		if(typeof e == "object"){
-			if(e.type=="mousedown" || e.type=="touchstart"){
+			if(e.type=="mouseup" || e.type=="touchend"){
 				this.preventHeroMovement++;
 			}
 		}
@@ -4245,7 +4280,7 @@ var SisyphusSheepGame = function(){
 	this.showPlayGamesMenu = function(e){
 
 		if(typeof event == "object"){
-			if(e.type=="mousedown" || e.type=="touchstart"){
+			if(e.type=="mouseup" || e.type=="touchend"){
 				this.preventHeroMovement++;
 			}
 		}
@@ -4289,7 +4324,7 @@ var SisyphusSheepGame = function(){
 
 	this.toggleMuteMain = function(forcedVal){
 		if(typeof forcedVal == "object"){
-			if(forcedVal.type=="mousedown" || forcedVal.type=="touchstart"){
+			if(forcedVal.type=="mouseup" || forcedVal.type=="touchend"){
 				this.preventHeroMovement++;
 			}
 		}
@@ -4327,7 +4362,7 @@ var SisyphusSheepGame = function(){
 		var i,nm;
 
 		if(typeof forcedVal == "object"){
-			if(forcedVal.type=="mousedown" || forcedVal.type=="touchstart"){
+			if(forcedVal.type=="mouseup" || forcedVal.type=="touchend"){
 				this.preventHeroMovement++;
 			}
 		}
@@ -4378,7 +4413,7 @@ var SisyphusSheepGame = function(){
 
 		if(typeof event == "object" || typeof forcedVal == "object"){
 			e = (typeof event == "object")?event:forcedVal; //sometimes `forcedVal` is the `event`
-			if(e.type=="mousedown" || e.type=="touchstart"){
+			if(e.type=="mouseup" || e.type=="touchend"){
 				this.preventHeroMovement++;
 			}
 		}
@@ -4538,7 +4573,7 @@ var SisyphusSheepGame = function(){
 
 	this.closeAllMenus = function(e){
 		if(typeof e == "object"){
-			if(e.type=="mousedown" || e.type=="touchstart"){
+			if(e.type=="mouseup" || e.type=="touchend"){
 				this.preventHeroMovement++;
 			}
 		}
@@ -5036,7 +5071,7 @@ var SisyphusSheepGame = function(){
 
 	this.gotoURL = function(url,e){
 		if(typeof e == "object"){
-			if(e.type=="mousedown" || e.type=="touchstart"){
+			if(e.type=="mouseup" || e.type=="touchend"){
 				this.preventHeroMovement++;
 			}
 		}
