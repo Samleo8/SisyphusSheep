@@ -72,8 +72,7 @@ var SisyphusSheepGame = function(){
 	this.highscoreText = null;
 
 	this.speedInc = 0.985; //anything below 0.95 is a problem
-	this.minSpeed = 6.5;
-	this.maxSpeed = 11.5;
+	this.heroSpeed = 20; //cannot be below treadmillMaxSpeed
 
 	this.sprintLevel = 100;
 	this.sprintMultiplier = 1.8;
@@ -94,7 +93,8 @@ var SisyphusSheepGame = function(){
 
 	//Treadmill
 	this.treadmill = null;
-	this.treadmillBaseSpeed = 10;
+	this.treadmillMinSpeed = 10;
+	this.treadmillMaxSpeed = 15;
 
 	//Animations and sprites
 	this.animations = {
@@ -2456,7 +2456,7 @@ var SisyphusSheepGame = function(){
 		this.treadmill.x = this.treadmill.width/2;
 		this.treadmill.y = this.canvasHeight-this.treadmill.height/2;
 
-		this.treadmill.speed = this.treadmillBaseSpeed;
+		this.treadmill.speed = this.treadmillMinSpeed;
 		this.treadmill.gotoAndPlay(1);
 
 		stage.addChild(this.treadmill);
@@ -2479,7 +2479,7 @@ var SisyphusSheepGame = function(){
 		this.portalsPassed = 0;
 
 		//--Speed and jump strength
-		this.hero.vx = this.maxSpeed;
+		this.hero.vx = 0;//this.maxSpeed;
 		this.hero.ax = 0;
 		this.hero.vy = 0;
 		this.hero.ay = 0;
@@ -2555,6 +2555,7 @@ var SisyphusSheepGame = function(){
 		this._revived = false;
 
 		//-Hero
+		this.treadmill.visible = true;
 		this.hero.visible = true;
 		this.hero.x = this.canvasWidth*(1/3)
 
@@ -2567,7 +2568,7 @@ var SisyphusSheepGame = function(){
 		this.setAccessoriesPositions(1);
 
 		//--Reset speeds and jumpStrength
-		this.hero.vx = this.minSpeed;
+		this.hero.vx = 0; //this.minSpeed;
 		this.hero.ax = 0;
 		this.hero.vy = 0;
 		this.hero.ay = 0;
@@ -2654,10 +2655,20 @@ var SisyphusSheepGame = function(){
 
 		if(this._paused) return;
 
-		this.audio["jump"].play();
+		//this.audio["jump"].play();
 
-		this.hero.sheep.gotoAndPlay(1);
-		this.hero.vy = -this.hero.jumpStrength;
+		//Toggle Running
+		if(this.hero.running){
+			this.hero.running = false;
+			this.hero.sprinting = false;
+			this.hero.sheep.gotoAndStop(4);
+		}
+		else{
+			this.hero.running = true;
+			this.hero.sheep.gotoAndPlay(1);
+		}
+
+		console.log(this.hero.running);
 	};
 
 	this.update = function(){
@@ -2669,20 +2680,22 @@ var SisyphusSheepGame = function(){
 		//this.sprites.background.tilePosition.x -= this.sprites.background.scrollingSpeed;
 
 		//HERO MOVEMENT
-		var overallSpeed = -this.treadmill.speed;
+		var overallSpd = -this.treadmill.speed;
+		this.treadmill.visible = true;
 		this.hero.visible = true;
 		if(this.hero.running){
 			if(this.hero.sprinting){
 	            if(this.sprintLevel>0){
-	                overallSpd += this.hero.speed*this.sprintMultiplier;
+	                overallSpd += this.heroSpeed*this.sprintMultiplier;
 	                this.sprintLevel--;
 	            }
 				else {
-					overallSpd += this.hero.speed;
+					overallSpd += this.heroSpeed;
 				}
 				this.hero.animationSpeed = 0.35;
 	        }
 			else{
+				overallSpd += this.heroSpeed;
 				this.hero.animationSpeed = 0.15;
 			}
         }
@@ -2692,7 +2705,7 @@ var SisyphusSheepGame = function(){
 
         this.sprintLevel = Math.max(Math.min(100,this.sprintLevel),0);
 
-		this.hero.vx = overallSpeed;
+		this.hero.vx = overallSpd;
 
 		this.hero.vx += this.hero.ax;
 		this.hero.vy += this.hero.ay;
@@ -3880,7 +3893,7 @@ var SisyphusSheepGame = function(){
 
 					this.hero.sheep = new PIXI.extras.AnimatedSprite(this.animations["sheep_running"].frames); //new PIXI.extras.AnimatedSprite(this.animations[((accessory=="little_lamb")?"sheep_running":accessory)].frames);
 					this.hero.sheep.animationSpeed = 0.15;
-					this.hero.sheep.loop = false;
+					this.hero.sheep.loop = true;
 					this.hero.sheep.anchor.set(0.5);
 
 					if(accessory == "little_lamb"){
@@ -4636,6 +4649,7 @@ var SisyphusSheepGame = function(){
 		this.gameoverScreen.visible = false;
 
 		//Reset Hero Position
+		this.treadmill.visible = true;
 		this.hero.visible = true;
 		this.hero.x = this.canvasWidth*(1/3)
 		//this.hero.y = this.canvasHeight/2;
