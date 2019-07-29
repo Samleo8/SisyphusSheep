@@ -2625,13 +2625,6 @@ var SisyphusSheepGame = function(){
 
 		//-Obstacles
 		var i;
-		//this.nObstacleSections = 1;
-		//this.showObstacleSections();
-		/*
-		for(i=0;i<=this.nObstacleSections;i++){
-			this.obstacleSectionActive[i] = false;
-		}
-		*/
 
 		this.obstaclesFrozen = false;
 
@@ -2675,10 +2668,9 @@ var SisyphusSheepGame = function(){
 		}
 		this.preventHeroMovement = 0;
 
-		//Remove all obstacles, reset obstacle timers
-		
+		//TODO: Remove all obstacles, reset obstacle timers
 
-		//Increment Score Accordingly
+		//TODO: Increment Score Accordingly
 		this.portalsPassed++;
 
 		//"Continue" the Game
@@ -2784,7 +2776,6 @@ var SisyphusSheepGame = function(){
 
 		this.heroShield.position = this.hero.position;
 
-
 		//OBSTACLE MOVEMENT
 		for(i=0;i<this.obstacles.children.length;i++){
 			var obs = this.obstacles.children[i];
@@ -2799,7 +2790,6 @@ var SisyphusSheepGame = function(){
 
 			if(obs.y>=this.canvasHeight+obs.height+this.powerupOffset){
 				this.obstacles.removeChild(obs);
-				//this.obstacleSectionActive[obs.section] = false;
 			}
 		};
 
@@ -2839,7 +2829,6 @@ var SisyphusSheepGame = function(){
 
 			if(this.hitTest(this.hero,obs,this.hero.sheep.width*0.25,this.hero.sheep.height*0.15)){
 				this.obstacles.removeChild(obs);
-				//this.obstacleSectionActive[obs.section] = false;
 
 				if(this.heroShield.alpha){
 					this.heroShield.alpha = 0;
