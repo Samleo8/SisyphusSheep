@@ -2457,6 +2457,7 @@ var SisyphusSheepGame = function(){
 		this.treadmill.y = this.canvasHeight-this.treadmill.height/2;
 
 		this.treadmill.speed = this.treadmillBaseSpeed;
+		this.treadmill.gotoAndPlay(1);
 
 		stage.addChild(this.treadmill);
 
@@ -2556,7 +2557,6 @@ var SisyphusSheepGame = function(){
 		//-Hero
 		this.hero.visible = true;
 		this.hero.x = this.canvasWidth/2;
-		this.hero.y = this.hero.startY;
 
 		//--Reset direction of all hero's children to the right
 		for(var i=0; i<this.hero.children.length; i++){
@@ -4653,7 +4653,7 @@ var SisyphusSheepGame = function(){
 		//Reset Hero Position
 		this.hero.visible = true;
 		this.hero.x = this.canvasWidth/2;
-		this.hero.y = this.canvasHeight/2;
+		//this.hero.y = this.canvasHeight/2;
 
 		this.heroShield.position = this.hero.position;
 		if(this.startingShield){
