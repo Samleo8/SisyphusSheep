@@ -15,31 +15,45 @@ var SisyphusSheepGame = function(){
 	this.controls = {
 		"movement": {
 			"keys": [40, "S".charCodeAt()], //Down-Arrow, S
-			"callback": "toggleHeroMovement"
+			"callback": "toggleHeroMovement",
+			"keyup": true,
+			"keydown": false
 		},
 		"sprint": {
 			"keys": [39, "D".charCodeAt(), 32], //Right Arrow, D, Space
-			"callback": "heroSprint"
+			"callback": "heroSprint",
+			"keyup": true,
+			"keydown": true
 		},
 		"pause": {
 			"keys": ["P".charCodeAt(), 27], //P, Esc
-			"callback": "togglePause"
+			"callback": "togglePause",
+			"keyup": true,
+			"keydown": false
 		},
 		"muteMain": {
 			"keys": ["M".charCodeAt()], //M
-			"callback": "toggleMuteMain"
+			"callback": "toggleMuteMain",
+			"keyup": true,
+			"keydown": false
 		},
 		"muteFX": {
 			"keys": ["M".charCodeAt()], //M
-			"callback": "toggleMuteFX"
+			"callback": "toggleMuteFX",
+			"keyup": true,
+			"keydown": false
 		},
 		"info": {
 			"keys": ["I".charCodeAt()], //I
-			"callback": "showInfo"
+			"callback": "showInfo",
+			"keyup": true,
+			"keydown": false
 		},
 		"store": {
 			"keys": ["S".charCodeAt()], //S
-			"callback": "showShop"
+			"callback": "showShop",
+			"keyup": true,
+			"keydown": false
 		}
 	};
 
@@ -1124,6 +1138,7 @@ var SisyphusSheepGame = function(){
 		}
 
 		window.addEventListener("keyup", this.keyEvent.bind(this), false);
+		window.addEventListener("keydown", this.keyEvent.bind(this), false);
 
 		if(isApp()){
 			console.log("Added pause and resume event listeners");
@@ -2628,9 +2643,11 @@ var SisyphusSheepGame = function(){
 		var i,j;
 		for(i in this.controls){
 			var keyArr = this.controls[i]["keys"];
+			if(!this.controls[i][e.type]) continue;
+
 			for(j=0;j<keyArr.length;j++){
 				if(e.keyCode == keyArr[j]){
-					this[this.controls[i]["callback"]]();
+					this[this.controls[i]["callback"]](e);
 					break;
 				}
 			}
@@ -2672,7 +2689,9 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.heroSprint = function(e){
-		console.log(e);
+		this.hero.sprinting = (e.type == "keydown");
+
+		console.log(e.type, this.hero.sprinting);
 	}
 
 	this.update = function(){
@@ -4424,7 +4443,7 @@ var SisyphusSheepGame = function(){
 		console.log("BG Music "+((this._FXMuted)?"Muted":"Playing"));
 	};
 
-	this.togglePause = function(forcedVal,event){
+	this.togglePause = function(forcedVal, event){
 		var i, e;
 
 		if(!this._gameStarted) return;
