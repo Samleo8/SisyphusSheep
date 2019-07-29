@@ -85,8 +85,8 @@ var SisyphusSheepGame = function(){
 	this.overSym = null;
 	this.highscoreText = null;
 
-	this.speedInc = 0.985; //anything below 0.95 is a problem
-	this.heroSpeed = 20; //cannot be below treadmillMaxSpeed
+	this.speedInc = 1.1;
+	this.heroSpeed = 13; //cannot be below treadmillMaxSpeed
 
 	this.sprintLevel = 100;
 	this.sprintMultiplier = 1.8;
@@ -107,8 +107,8 @@ var SisyphusSheepGame = function(){
 
 	//Treadmill
 	this.treadmill = null;
-	this.treadmillMinSpeed = 10;
-	this.treadmillMaxSpeed = 15;
+	this.treadmillMinSpeed = 5;
+	this.treadmillMaxSpeed = 10;
 
 	//Animations and sprites
 	this.animations = {
@@ -1166,6 +1166,7 @@ var SisyphusSheepGame = function(){
 		this.loader = new PIXI.loaders.Loader();
 		this.loader.add("sprite_background","img/background.png");
 		this.loader.add("sprite_spike","img/spike.png");
+		this.loader.add("sprite_flag","img/flag.png");
 		this.loader.add("dead_sheep","img/dead_sheep.png");
 
 		for(i=0;i<this.powerupNames.length;i++){
@@ -1231,6 +1232,9 @@ var SisyphusSheepGame = function(){
 
 			//-Dead Sheep
 			this.sprites.dead_sheep = new PIXI.Sprite(resources["dead_sheep"].texture);
+
+			//-Flag
+			this.sprites.flag = new PIXI.Sprite(resources["sprite_flag"].texture);
 
 			stage.addChild(this.sprites.background);
 
@@ -2461,20 +2465,34 @@ var SisyphusSheepGame = function(){
 		stage.addChild(this.overSym);
 
 		//CREATE TREADMILL CONTAINER AND SET SPECS
-		this.treadmill = new PIXI.extras.AnimatedSprite(this.animations["treadmill"].frames);
-		this.treadmill.animationSpeed = 0.15;
-		this.treadmill.loop = true;
-		this.treadmill.anchor.set(0.5);
+		this.treadmill = new PIXI.Container();
 
-		this.treadmill.height = 90;
-		this.treadmill.width = this.canvasWidth;
-		this.treadmill.x = this.treadmill.width/2;
-		this.treadmill.y = this.canvasHeight-this.treadmill.height/2;
+		//--Treadmill Gear Animation
+		this.treadmill.gears = new PIXI.extras.AnimatedSprite(this.animations["treadmill"].frames);
+		this.treadmill.gears.animationSpeed = 0.15;
+		this.treadmill.gears.loop = true;
+		this.treadmill.gears.gotoAndPlay(1);
+
+		var _r = this.treadmill.gears.height/this.treadmill.gears.width;
+		this.treadmill.gears.width = this.canvasWidth;
+		this.treadmill.gears.height = _r * this.treadmill.gears.width;
+		this.treadmill.gears.x = this.canvasWidth/2;
+		this.treadmill.gears.y = this.canvasHeight-this.treadmill.gears.height/2;
+		this.treadmill.gears.anchor.set(0.5);
+
+		//--Treadmill Flag indicating
+		this.treadmill.flag = new PIXI.Sprite(this.sprites.flag.texture);
+
+		this.treadmill.flag.x = this.canvasWidth - this.treadmill.flag.width;
+		this.treadmill.flag.y = this.canvasHeight - this.treadmill.flag.height/2 - this.treadmill.gears.height;
+		this.treadmill.flag.anchor.set(0.5);
 
 		this.treadmill.speed = this.treadmillMinSpeed;
-		this.treadmill.gotoAndPlay(1);
 
 		stage.addChild(this.treadmill);
+
+		this.treadmill.addChild(this.treadmill.gears);
+		this.treadmill.addChild(this.treadmill.flag);
 
 		//CREATE OBSTACLE CONTAINER
 		this.obstacles = new PIXI.Container();
@@ -2489,8 +2507,8 @@ var SisyphusSheepGame = function(){
 		stage.addChild(this.powerups);
 
 		//HERO INITIALIZE
-		this.hero.x = this.canvasWidth*(1/3)
-		this.hero.y = this.canvasHeight - this.hero.width/2 - this.treadmill.height;
+		this.hero.x = this.canvasWidth*(1/3);
+		this.hero.y = this.canvasHeight - this.hero.height/2 - this.treadmill.gears.height;
 		this.portalsPassed = 0;
 
 		//--Speed and jump strength
@@ -4674,8 +4692,7 @@ var SisyphusSheepGame = function(){
 		//Reset Hero Position
 		this.treadmill.visible = true;
 		this.hero.visible = true;
-		this.hero.x = this.canvasWidth*(1/3)
-		//this.hero.y = this.canvasHeight/2;
+		this.hero.x = this.canvasWidth*(1/3);
 
 		this.heroShield.position = this.hero.position;
 		if(this.startingShield){
