@@ -3067,7 +3067,6 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.collectPowerup = function(type_name){
-
 		var i;
 
 		/* --POWERUPS--
@@ -3103,7 +3102,8 @@ var SisyphusSheepGame = function(){
 
 		//ACHIEVEMENT:
 			//-Single:
-			if(!this.achievements.single.shield_once[0].complete || !this.achievements.single.shield_once[0].synced)  {   this.GooglePlayServices.unlockAchievement("shield_once");
+			if(!this.achievements.single.shield_once[0].complete || !this.achievements.single.shield_once[0].synced)  {
+				this.GooglePlayServices.unlockAchievement("shield_once");
 			}
 			//-Incremental:
 			for(i=0;i<this.achievements.incremental.shield.length;i++){
@@ -3114,8 +3114,6 @@ var SisyphusSheepGame = function(){
 	}
 
 	this.appBlur = function(){
-		//console.log("App Blurred");
-
 		//Turn off music otherwise it will play in the background
 		if(this.audio["main_music"])
 			this.audio["main_music"].pause();
@@ -3124,8 +3122,6 @@ var SisyphusSheepGame = function(){
 	}
 
 	this.appFocus = function(){
-		//console.log("App Focused");
-
 		//Turn back on music, checking if it was playing originally
 		if(!this._musicMuted){
 			if(this.audio["main_music"])
@@ -3134,8 +3130,6 @@ var SisyphusSheepGame = function(){
 	}
 
 	this.showShop = function(e){
-		//alert("Work in progress... Watch out for the next update!");
-
 		if(typeof e == "object"){
 			if(e.type=="mouseup" || e.type=="touchend"){
 				this.preventHeroMovement++;
@@ -3211,8 +3205,7 @@ var SisyphusSheepGame = function(){
 
 		width = (this.canvasWidth)/Math.min(totalUpgrades,5);
 		height = contentHeight/2;
-		//height = contentHeight/Math.ceil(totalUpgrades/5);
-
+		
 		var textOpt = {
 			fontFamily: 'TimeBurner',
 			fill: "#cfd8dc",
