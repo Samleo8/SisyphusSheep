@@ -85,9 +85,6 @@ var SisyphusSheepGame = function(){
 	this.overSym = null;
 	this.highscoreText = null;
 
-	this.speedInc = 1.1;
-	this.heroSpeed = 13; //cannot be below treadmillMaxSpeed
-
 	this.sprintLevel = 100;
 	this.sprintMultiplier = 1.8;
 	this.sprintReload = { //in milliseconds
@@ -106,9 +103,12 @@ var SisyphusSheepGame = function(){
 	this.fadeInTimer = null;
 
 	//Treadmill
+	this.heroSpeed = 13; //cannot be below treadmillMaxSpeed
+
 	this.treadmill = null;
 	this.treadmillMinSpeed = 5;
 	this.treadmillMaxSpeed = 10;
+	this.treadmillIncSpeed = 1.1;
 
 	//Animations and sprites
 	this.animations = {
@@ -2469,7 +2469,7 @@ var SisyphusSheepGame = function(){
 
 		//--Treadmill Gear Animation
 		this.treadmill.gears = new PIXI.extras.AnimatedSprite(this.animations["treadmill"].frames);
-		this.treadmill.gears.animationSpeed = 0.15;
+		this.treadmill.gears.animationSpeed = 0.25;
 		this.treadmill.gears.loop = true;
 		this.treadmill.gears.gotoAndPlay(1);
 
@@ -2590,12 +2590,7 @@ var SisyphusSheepGame = function(){
 		//-Hero
 		this.treadmill.visible = true;
 		this.hero.visible = true;
-		this.hero.x = this.canvasWidth*(1/3)
-
-		//--Reset direction of all hero's children to the right
-		for(var i=0; i<this.hero.children.length; i++){
-			this.hero.children[i].scale.x = Math.abs(this.hero.children[i].scale.x);
-		}
+		this.hero.x = this.canvasWidth*(1/3);
 
 		//--Reset positions of hats and capes
 		this.setAccessoriesPositions(1);
@@ -2654,6 +2649,39 @@ var SisyphusSheepGame = function(){
 			};
 			this.obstacleTimer = new Date().getTime();
 
+		requestAnimationFrame(this.update.bind(this));
+	};
+
+	this.nextLevel = function(){
+		//Hero
+		//--Reset positions of hero
+		this.hero.x = this.canvasWidth*(1/3);
+		this.setAccessoriesPositions(1);
+
+		//--Increment Treadmill Speed
+		this.treadmill.speed *= this.treadmillIncSpeed;
+		this.treadmill.speed = Math.min(this.treadmill.speed, this.treadmillMaxSpeed);
+		//TODO: Treadmill animation speed is in proportion with actual speed of treadmill
+
+		//--Hero's shield
+		this.heroShield.position = this.hero.position;
+		if(this.startingShield){
+			this.collectPowerup("shield");
+		}
+		else{
+			this.heroShield.alpha = 0;
+
+			this.shieldTimer = null;
+		}
+		this.preventHeroMovement = 0;
+
+		//Remove all obstacles, reset obstacle timers
+		
+
+		//Increment Score Accordingly
+		this.portalsPassed++;
+
+		//"Continue" the Game
 		requestAnimationFrame(this.update.bind(this));
 	};
 
@@ -2787,7 +2815,7 @@ var SisyphusSheepGame = function(){
 		};
 
 		//HERO BOUNDS CHECKS
-		this.hero.leeway = 0;
+		this.hero.leeway = 10;
 
 		//Check for hero x-direction (left-side) bounds, and gameover if necessary
 		if(this.hero.x<=-this.hero.sheep.width/2-this.hero.leeway){
@@ -2796,8 +2824,9 @@ var SisyphusSheepGame = function(){
 		}
 
 		//Check for y-direction (right-side) bounds, reset with next level
-		if(this.hero.x>=(this.canvasWidth+this.hero.sheep.width/2+this.hero.leeway)){
-			//TODO: Reset function
+		if(this.hero.x>=(this.canvasWidth-this.hero.sheep.width/2+this.hero.leeway)){
+			this.nextLevel();
+			return;
 		}
 		//RENDER
 			//Do it here so that hit test doesn't seem to be "off"
