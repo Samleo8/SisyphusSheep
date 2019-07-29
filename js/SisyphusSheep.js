@@ -2556,7 +2556,7 @@ var SisyphusSheepGame = function(){
 
 		//-Hero
 		this.hero.visible = true;
-		this.hero.x = this.canvasWidth/2;
+		this.hero.x = this.canvasWidth*(1/4);
 
 		//--Reset direction of all hero's children to the right
 		for(var i=0; i<this.hero.children.length; i++){
@@ -2733,28 +2733,6 @@ var SisyphusSheepGame = function(){
 		};
 
 		//HERO BOUNDS CHECKS
-		//Check for hero x-direction bounds, and bounce off wall
-		if(this.hero.x<=this.hero.sheep.width/2 || this.hero.x>=(this.canvasWidth-this.hero.sheep.width/2)){
-			this.hero.x = Math.min(Math.max(this.hero.sheep.width/2,this.hero.x), (this.canvasWidth-this.hero.sheep.width/2));
-
-			this.hero.vx *= -this.speedInc;
-
-			var _dir = (this.hero.vx<0)?-1:1;
-
-			this.hero.vx = _dir*Math.max(Math.abs(this.hero.vx),this.minSpeed);
-
-			for(i=0;i<this.hero.children.length;i++){
-				this.hero.children[i].scale.x *= -1;
-			}
-
-			//Flip the position of the hats and capes
-			this.setAccessoriesPositions(_dir);
-
-			this.sprites.background.scrollingSpeed *= -1;
-
-			this.incScore();
-		};
-
 		this.hero.leeway = 0;
 
 		//Check for hero x-direction (left-side) bounds, and gameover if necessary
@@ -2763,8 +2741,9 @@ var SisyphusSheepGame = function(){
 			return;
 		}
 
+		//Check for y-direction (right-side) bounds, reset with next level
 		if(this.hero.x>=(this.canvasWidth+this.hero.sheep.width/2+this.hero.leeway)){
-
+			//TODO: Reset function
 		}
 		//RENDER
 			//Do it here so that hit test doesn't seem to be "off"
@@ -2810,6 +2789,8 @@ var SisyphusSheepGame = function(){
 
 		//TIMERS
 		var t = new Date().getTime();
+		//TODO: Global Score timer
+
 		//OBSTACLE SPAWN
 		if(t-this.obstacleTimer>=this.obstacleSpawnTime+this.pauseTime["obstacle"]){
 			this.spawnObstacle();
