@@ -2474,7 +2474,7 @@ var SisyphusSheepGame = function(){
 		stage.addChild(this.powerups);
 
 		//HERO INITIALIZE
-		this.hero.x = this.canvasWidth*(1/4);
+		this.hero.x = this.canvasWidth*(1/3)
 		this.hero.y = this.canvasHeight - this.hero.width/2 - this.treadmill.height;
 		this.portalsPassed = 0;
 
@@ -2556,7 +2556,7 @@ var SisyphusSheepGame = function(){
 
 		//-Hero
 		this.hero.visible = true;
-		this.hero.x = this.canvasWidth*(1/4);
+		this.hero.x = this.canvasWidth*(1/3)
 
 		//--Reset direction of all hero's children to the right
 		for(var i=0; i<this.hero.children.length; i++){
@@ -4471,11 +4471,14 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.gameover = function(){
-		if( (this.noDeathChance || this.hero.cape.name == "royal_cape") && Math.random()<(this.noDeathChance+this.whiteCapeBonus) ){
-			//Just continue game
-			requestAnimationFrame(this.update.bind(this));
+		//Only allow revive if the guy didn't die by falling off screen
+		if(this.hero.x >= this.hero.width/2){
+			if( (this.noDeathChance || this.hero.cape.name == "royal_cape") && Math.random()<(this.noDeathChance+this.whiteCapeBonus) ){
+				//Just continue game
+				requestAnimationFrame(this.update.bind(this));
 
-			return;
+				return;
+			}
 		}
 
 		var i;
@@ -4547,7 +4550,8 @@ var SisyphusSheepGame = function(){
 			this.totalGamesPlayed = 0;
 		}
 
-		//HIDE HERO
+		//HIDE HERO AND TREADMILL
+		this.treadmill.visible = false;
 		this.hero.visible = false;
 		this.heroShield.alpha = 0;
 
@@ -4633,7 +4637,7 @@ var SisyphusSheepGame = function(){
 
 		//Reset Hero Position
 		this.hero.visible = true;
-		this.hero.x = this.canvasWidth/2;
+		this.hero.x = this.canvasWidth*(1/3)
 		//this.hero.y = this.canvasHeight/2;
 
 		this.heroShield.position = this.hero.position;
