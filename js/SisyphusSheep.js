@@ -2671,6 +2671,10 @@ var SisyphusSheepGame = function(){
 		console.log(this.hero.running);
 	};
 
+	this.heroSprint = function(e){
+		console.log(e);
+	}
+
 	this.update = function(){
 		var i;
 
