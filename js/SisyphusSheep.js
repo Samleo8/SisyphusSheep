@@ -115,6 +115,9 @@ var SisyphusSheepGame = function(){
 	this.treadmillMaxSpeed = 10;
 	this.treadmillIncSpeed = 1.2;
 
+	//Playing buttons
+	this.playButtons = null;
+
 	//Animations and sprites
 	this.animations = {
 		"treadmill":{
@@ -2441,8 +2444,8 @@ var SisyphusSheepGame = function(){
 		this.scoreText =  new PIXI.Text(this.score.toString(), Object.assign(textOpt, { fontSize: 120 }));
 
 		this.scoreText.alpha = 0.7;
-		this.scoreText.anchor.set(0.5,0.5);
-		this.scoreText.x = this.canvasWidth/2;
+		this.scoreText.anchor.set(1, 0.5);
+		this.scoreText.x = this.canvasWidth/2 + 30;
 		this.scoreText.y = this.canvasHeight/2;
 
 		stage.addChild(this.scoreText);
@@ -2451,9 +2454,9 @@ var SisyphusSheepGame = function(){
 		this.highscoreText = new PIXI.Text(this.highscore.toString(), Object.assign(textOpt, { fontSize:40 }));
 
 		this.highscoreText.alpha = 0.7;
-		this.highscoreText.anchor.set(0.5,0.5);
-		this.highscoreText.x = this.canvasWidth/2+89;
-		this.highscoreText.y = this.canvasHeight/2+70;
+		this.highscoreText.anchor.set(0,0.5);
+		this.highscoreText.x = this.canvasWidth/2 + 70;
+		this.highscoreText.y = this.canvasHeight/2 + 80;
 		stage.addChild(this.highscoreText);
 
 		//-"/"-symbol
@@ -2461,9 +2464,14 @@ var SisyphusSheepGame = function(){
 
 		this.overSym.alpha = 0.7;
 		this.overSym.anchor.set(0.5,0.5);
-		this.overSym.x = this.canvasWidth/2+49;
-		this.overSym.y = this.canvasHeight/2+50;
+		this.overSym.x = this.canvasWidth/2 + 50;
+		this.overSym.y = this.canvasHeight/2 + 50;
 		stage.addChild(this.overSym);
+
+		//CREATE OBSTACLE CONTAINER
+		this.obstacles = new PIXI.Container();
+
+		stage.addChild(this.obstacles);
 
 		//CREATE TREADMILL CONTAINER AND SET SPECS
 		this.treadmill = new PIXI.Container();
@@ -2494,11 +2502,6 @@ var SisyphusSheepGame = function(){
 
 		this.treadmill.addChild(this.treadmill.gears);
 		this.treadmill.addChild(this.treadmill.flag);
-
-		//CREATE OBSTACLE CONTAINER
-		this.obstacles = new PIXI.Container();
-
-		stage.addChild(this.obstacles);
 
 		//CREATE POWERUP CONTAINER
 		this.powerups = new PIXI.Container();
