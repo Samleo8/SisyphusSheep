@@ -89,12 +89,12 @@ var SisyphusSheepGame = function(){
 	this.overSym = null;
 	this.highscoreText = null;
 
-	this.sprintLevel = 100;
-	this.sprintMultiplier = 1.8;
-	this.sprintReload = { //in milliseconds
-		"time":100,
-		"add":0.1
-	}
+	this.sprint = {
+		"level": 100,
+		"inc": 0.1,
+		"dec": 1,
+		"multiplier": 1.8
+	};
 
 	this._paused = false;
 	this._musicMuted = false;
@@ -2727,12 +2727,12 @@ var SisyphusSheepGame = function(){
 			case "keydown":
 			case "mousedown":
 			case "touchstart":
-				sprinting = true;
+				this.hero.sprinting = true;
 				break;
 			case "keyup":
 			case "mouseup":
 			case "touchend":
-				sprinting = false;
+				this.hero.sprinting = false;
 				break;
 			default: return;
 		}
@@ -2752,9 +2752,9 @@ var SisyphusSheepGame = function(){
 		this.hero.visible = true;
 		if(this.hero.running){
 			if(this.hero.sprinting){
-	            if(this.sprintLevel>0){
-	                overallSpd += this.heroSpeed*this.sprintMultiplier;
-	                this.sprintLevel--;
+	            if(this.sprint.level>0){
+	                overallSpd += this.heroSpeed*this.sprint.multiplier;
+	                this.sprint.level -= this.sprint.dec;
 	            }
 				else {
 					overallSpd += this.heroSpeed;
@@ -2767,10 +2767,10 @@ var SisyphusSheepGame = function(){
 			}
         }
         else{
-            this.sprintLevel += 0.1;
+            this.sprint.level += this.sprint.inc;
         }
 
-        this.sprintLevel = Math.max(Math.min(100,this.sprintLevel),0);
+        this.sprint.level = Math.max(Math.min(100,this.sprint.level),0);
 
 		this.hero.vx = overallSpd;
 
