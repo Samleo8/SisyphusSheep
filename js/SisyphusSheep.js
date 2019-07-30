@@ -76,6 +76,9 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.portalsPassed = 0;
+	this.portalsScore = 10;
+	this.portalsScoreMultiplier = 1.1;
+
 	this.score = 0;
 	this.highscore = 0;
 
@@ -2664,8 +2667,9 @@ var SisyphusSheepGame = function(){
 
 		//TODO: Remove all obstacles, reset obstacle timers
 
-		//TODO: Increment Score Accordingly
+		//Increment Score Accordingly
 		this.portalsPassed++;
+		this.incScore(this.portalsPassed*this.portalsScore*this.portalsScoreMultiplier);
 
 		//"Continue" the Game
 		requestAnimationFrame(this.update.bind(this));
@@ -2716,14 +2720,22 @@ var SisyphusSheepGame = function(){
 			this.hero.running = true;
 			this.hero.sheep.gotoAndPlay(1);
 		}
-
-		console.log(this.hero.running);
 	};
 
 	this.heroSprint = function(e){
-		this.hero.sprinting = (e.type == "keydown");
-
-		console.log(e.type, this.hero.sprinting);
+		switch(e.type){
+			case "keydown":
+			case "mousedown":
+			case "touchstart":
+				sprinting = true;
+				break;
+			case "keyup":
+			case "mouseup":
+			case "touchend":
+				sprinting = false;
+				break;
+			default: return;
+		}
 	}
 
 	this.update = function(){
