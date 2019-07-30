@@ -80,6 +80,7 @@ var SisyphusSheepGame = function(){
 	this.highscore = 0;
 
 	this.scoreTimer = null;
+	this.scorePerSecond = 1;
 
 	this.scoreText = null;
 	this.overSym = null;
@@ -2575,6 +2576,7 @@ var SisyphusSheepGame = function(){
 
 		//RESET VARIABLES AND OBJECT POSITIONS
 		//-Score
+		this.scoreTimer = new Date().getTime();
 		this.score = 0;
 		this.scoreText.text = "0";
 
@@ -2636,6 +2638,7 @@ var SisyphusSheepGame = function(){
 
 			//TIMERS
 			this.pauseTime = {
+				"global": 0,
 				"obstacle": 0,
 				"shield": 0,
 				"freeze": 0
@@ -2852,7 +2855,16 @@ var SisyphusSheepGame = function(){
 
 		//TIMERS
 		var t = new Date().getTime();
+
 		//TODO: Global Score timer
+		//SCORING
+		var timePassed = t - this.scoreTimer - this.pauseTime["global"];
+		this.scoreTimer = t;
+		this.pauseTime["global"] = 0;
+
+		this.score += timePassed/1000*this.scorePerSecond;
+
+		console.log(timePassed, this.score);
 
 		//OBSTACLE SPAWN
 		if(t-this.obstacleTimer>=this.obstacleSpawnTime+this.pauseTime["obstacle"]){
@@ -4722,6 +4734,7 @@ var SisyphusSheepGame = function(){
 
 		//Reset Timers
 		this.pauseTime = {
+			"global": 0,
 			"obstacle": 0,
 			"shield": 0,
 			"freeze": 0
