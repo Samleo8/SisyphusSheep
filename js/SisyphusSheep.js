@@ -93,6 +93,7 @@ var SisyphusSheepGame = function(){
 		"level": 100,
 		"inc": 0.1,
 		"dec": 1,
+		"portalInc":10,
 		"multiplier": 1.8
 	};
 
@@ -2658,6 +2659,11 @@ var SisyphusSheepGame = function(){
 
 		this.heroShield.position = this.hero.position;
 		this.setAccessoriesPositions(1);
+
+		//--Increase Hero Sprint Level
+		this.sprint.level += Math.max(25*Math.pow(0.9,this.portalsPassed), 10);
+
+		this.sprint.level = Math.min(Math.max(this.sprint.level, 0), 100);
 
 		//Treadmill
 		//--Increment Treadmill Speed
