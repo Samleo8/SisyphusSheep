@@ -2506,9 +2506,12 @@ var SisyphusSheepGame = function(){
 		//CREATE PLAY BUTTONS CONTAINER AND RESPECTIVE BUTTONS INSIDE
 		this.playButtons = new PIXI.Container();
 
-		this.playButtons.bottomMargin = 30;
-		this.playButtons.sideMargin = 20;
-		this.playButtons.btnWidth = 50;
+		this.playButtons.styles = {
+			"bottomMargin": 30,
+			"sideMargin": 20,
+			"width": 150,
+			"color": 0xf1c40f
+		};
 
 		this.playButtons.childButtons = {
 			"sprint":{
@@ -2516,23 +2519,37 @@ var SisyphusSheepGame = function(){
 			}
 		};
 
-		this.playButtons.anchor.set(0, 0.5);
+		//this.playButtons.anchor.set(0, 0.5);
 		this.playButtons.x = 0;
-		this.playButtons.y = this.canvasHeight - this.playButtons.bottomMargin;
+		this.playButtons.y = this.canvasHeight - this.playButtons.styles.bottomMargin;
 
 		//--Button setup and positioning
+		var cnt = 0;
 		for(i in this.playButtons.childButtons){
 			var nm = i.toString();
 
 			this.playButtons[nm] = new PIXI.Container();
-			this.playButtons[nm].anchor.set(0.5, 0.5);
+			this.playButtons[nm].x = this.playButtons.styles.sideMargin + cnt*(this.playButtons.styles.sideMargin + this.playButtons.styles.width);
 
 			//-Circle
+			this.playButtons[nm].circle = new PIXI.Graphics();
+			this.playButtons[nm].circle.beginFill(this.playButtons.styles.color);
+			this.playButtons[nm].circle.drawCircle(0, 0, this.playButtons.styles.width/2);
 
 			//-Icon
+			this.playButtons[nm].icon = this.playButtons.childButtons[i].icon;
+
+			//-Add the graphics and icons and texts into the button container
+			this.playButtons[nm].addChild(this.playButtons[nm].circle);
+			this.playButtons[nm].addChild(this.playButtons[nm].icon);
 
 			this.playButtons.addChild(this.playButtons[nm]);
+
+			cnt++;
 		}
+
+		stage.addChild(this.playButtons);
+
 		//CREATE POWERUP CONTAINER
 		this.powerups = new PIXI.Container();
 		stage.addChild(this.powerups);
