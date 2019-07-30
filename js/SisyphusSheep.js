@@ -108,7 +108,7 @@ var SisyphusSheepGame = function(){
 	this.treadmill = null;
 	this.treadmillMinSpeed = 5;
 	this.treadmillMaxSpeed = 10;
-	this.treadmillIncSpeed = 1.1;
+	this.treadmillIncSpeed = 1.2;
 
 	//Animations and sprites
 	this.animations = {
@@ -2647,26 +2647,17 @@ var SisyphusSheepGame = function(){
 
 	this.nextLevel = function(){
 		//Hero
-		//--Reset positions of hero
+		//--Reset positions of hero, shield and accessories
 		this.hero.x = this.canvasWidth*(1/3);
+
+		this.heroShield.position = this.hero.position;
 		this.setAccessoriesPositions(1);
 
+		//Treadmill
 		//--Increment Treadmill Speed
 		this.treadmill.speed *= this.treadmillIncSpeed;
 		this.treadmill.speed = Math.min(this.treadmill.speed, this.treadmillMaxSpeed);
 		//TODO: Treadmill animation speed is in proportion with actual speed of treadmill
-
-		//--Hero's shield
-		this.heroShield.position = this.hero.position;
-		if(this.startingShield){
-			this.collectPowerup("shield");
-		}
-		else{
-			this.heroShield.alpha = 0;
-
-			this.shieldTimer = null;
-		}
-		this.preventHeroMovement = 0;
 
 		//TODO: Remove all obstacles, reset obstacle timers
 
@@ -3205,7 +3196,7 @@ var SisyphusSheepGame = function(){
 
 		width = (this.canvasWidth)/Math.min(totalUpgrades,5);
 		height = contentHeight/2;
-		
+
 		var textOpt = {
 			fontFamily: 'TimeBurner',
 			fill: "#cfd8dc",
