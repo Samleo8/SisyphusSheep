@@ -310,7 +310,7 @@ var SisyphusSheepGame = function(){
 		},
 		"crown":{
 			"title":"Crown",
-			"desc":"Who's the king?\nI'm the king!\n\nBonus: +1 to final score",
+			"desc":"Who's the king?\nI'm the king!\n\nBonus: +10% to final score",
 			"type":"hat",
 			"currency":"coin",
 			"cost":300,
@@ -364,8 +364,8 @@ var SisyphusSheepGame = function(){
 		}
 	}
 
-	this.goldenSheepBonus = 10;
-	this.crownBonus = 1;
+	this.goldenSheepBonus = 10; //10 extra coins
+	this.crownBonus = 0.1; //10% to final score
 	this.whiteCapeBonus = 0.1;
 	this.royalCapeBonus = 0.1;
 
@@ -4574,7 +4574,7 @@ var SisyphusSheepGame = function(){
 
 		//Crown Special Bonus
 		if(this.hero.hat.name == "crown"){
-			this.score += this.crownBonus;
+			this.score *= (1+this.crownBonus);
 		}
 
 		//SEND HIGHSCORE IF PLAY GAMES AVAILABLE
