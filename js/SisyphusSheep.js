@@ -2862,9 +2862,7 @@ var SisyphusSheepGame = function(){
 		this.scoreTimer = t;
 		this.pauseTime["global"] = 0;
 
-		this.score += timePassed/1000*this.scorePerSecond;
-
-		console.log(timePassed, this.score);
+		this.incScore(timePassed/1000*this.scorePerSecond);
 
 		//OBSTACLE SPAWN
 		if(t-this.obstacleTimer>=this.obstacleSpawnTime+this.pauseTime["obstacle"]){
@@ -2919,9 +2917,9 @@ var SisyphusSheepGame = function(){
 		if(renderer) renderer.render(stage);
 	}
 
-	this.incScore = function(){
-		this.score++;
-		this.scoreText.text = this.score;
+	this.incScore = function(sc){
+		this.score += sc;
+		this.scoreText.text = Math.floor(this.score);
 
 		//Gradually increase the number of obstacle sections in the game to max of 3
 		/*
@@ -4930,7 +4928,7 @@ var SisyphusSheepGame = function(){
 		}
 
 		if(window.localStorage){
-			this.highscore = Math.max(this.score,this.highscore);
+			this.highscore = Math.max(Math.floor(this.score), this.highscore);
 
 			if(opt=="all" || opt=="score" || opt=="highscore")
 				window.localStorage["highscore"] = this.highscore;
