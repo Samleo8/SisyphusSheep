@@ -142,7 +142,7 @@ var SisyphusSheepGame = function(){
 	this.audio = {};
 
 	//Icons and Buttons
-	this.iconNames = [ "pause","play","music_on","music_off","fx_on","fx_off","games","info","web","logout","leaderboard","achievements","restart","ad","shop","coin","dollar","post","back","left_arrow","right_arrow","shirt","tick","restore" ];
+	this.iconNames = [ "pause","play","music_on","music_off","fx_on","fx_off","games","info","web","logout","leaderboard","achievements","restart","ad","shop","coin","dollar","post","back","left_arrow","right_arrow","shirt","tick","restore", "sprint" ];
 
 	this.pauseButton = null;
 	this.muteMusicButton = null;
@@ -2503,6 +2503,36 @@ var SisyphusSheepGame = function(){
 		this.treadmill.addChild(this.treadmill.gears);
 		this.treadmill.addChild(this.treadmill.flag);
 
+		//CREATE PLAY BUTTONS CONTAINER AND RESPECTIVE BUTTONS INSIDE
+		this.playButtons = new PIXI.Container();
+
+		this.playButtons.bottomMargin = 30;
+		this.playButtons.sideMargin = 20;
+		this.playButtons.btnWidth = 50;
+
+		this.playButtons.childButtons = {
+			"sprint":{
+				"icon": this.sprites.icons["sprint"]
+			}
+		};
+
+		this.playButtons.anchor.set(0, 0.5);
+		this.playButtons.x = 0;
+		this.playButtons.y = this.canvasHeight - this.playButtons.bottomMargin;
+
+		//--Button setup and positioning
+		for(i in this.playButtons.childButtons){
+			var nm = i.toString();
+
+			this.playButtons[nm] = new PIXI.Container();
+			this.playButtons[nm].anchor.set(0.5, 0.5);
+
+			//-Circle
+
+			//-Icon
+
+			this.playButtons.addChild(this.playButtons[nm]);
+		}
 		//CREATE POWERUP CONTAINER
 		this.powerups = new PIXI.Container();
 		stage.addChild(this.powerups);
