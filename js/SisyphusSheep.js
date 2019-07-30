@@ -76,7 +76,7 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.portalsPassed = 0;
-	this.portalsScore = 10;
+	this.portalsScore = 5;
 	this.portalsScoreMultiplier = 1.1;
 
 	this.score = 0;
@@ -4576,6 +4576,9 @@ var SisyphusSheepGame = function(){
 		if(this.hero.hat.name == "crown"){
 			this.score *= (1+this.crownBonus);
 		}
+
+		//Need to make sure score is an integer!
+		this.score = Math.floor(this.score);
 
 		//SEND HIGHSCORE IF PLAY GAMES AVAILABLE
 		if(this.isLoggedIn){
