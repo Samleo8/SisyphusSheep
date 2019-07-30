@@ -167,10 +167,6 @@ var SisyphusSheepGame = function(){
 	this.freezeTimer = null;
 	this.obstaclesFreezeTime = 3000; //in ms
 
-	this.obstacleSections = null;
-	this.obstacleSectionActive = [];
-	this.nObstacleSections = 1;
-
 	//Coins and Shop
 	this.coins = 500;
 	this.coinIncAmt = 60;
@@ -246,7 +242,7 @@ var SisyphusSheepGame = function(){
 			"cost":100,
 			"value":10
 		}
-	}
+	};
 	this.upgradesSection = {};
 
 	//--Powerups
@@ -362,7 +358,7 @@ var SisyphusSheepGame = function(){
 			"purchased":false,
 			"activated":false
 		}
-	}
+	};
 
 	this.goldenSheepBonus = 10; //10 extra coins
 	this.crownBonus = 0.1; //10% to final score
@@ -433,7 +429,7 @@ var SisyphusSheepGame = function(){
 			"score":{}
 		},
 		"others":[]
-	}
+	};
 
 	//For generating achievements object:
 	/*
@@ -684,7 +680,7 @@ var SisyphusSheepGame = function(){
 			}]
 		},
 		"totalSteps":{} //Dynamically generated based on this.achievements data
-	}
+	};
 
 	this.achievements.totalSteps["score"] = [];
 
@@ -1162,7 +1158,7 @@ var SisyphusSheepGame = function(){
 		//LOAD IMAGES, FONTS AND MUSIC
 		this.loadFonts(); //(load fonts first to make sure start screen has proper fonts)
 		//--> this.initPreload();
-	}
+	};
 
 	this.initPreload = function(){
 		var i, j;
@@ -1588,7 +1584,7 @@ var SisyphusSheepGame = function(){
 		this.startScreen.addChild(this.loadingBar);
 
 		stage.addChild(this.startScreen);
-	}
+	};
 
 	//GENERATE OVERLAYS
 	this.generateOverlays = function(){
@@ -2348,7 +2344,7 @@ var SisyphusSheepGame = function(){
 			//WARNING: DO NOT USE SET INTERVAL
 			//--After animation is complete, user can now "jump" to start the game.
 			requestAnimationFrame(this.fadeInAnimation.bind(this,_fadeTimeInc));
-	}
+	};
 
 	this.fadeInAnimation = function(timeInc){
 		/*
@@ -2501,10 +2497,7 @@ var SisyphusSheepGame = function(){
 
 		//CREATE OBSTACLE CONTAINER
 		this.obstacles = new PIXI.Container();
-		//this.obstacleSections = new PIXI.Container();
-		//this.showObstacleSections();
 
-		//stage.addChild(this.obstacleSections);
 		stage.addChild(this.obstacles);
 
 		//CREATE POWERUP CONTAINER
@@ -2573,7 +2566,7 @@ var SisyphusSheepGame = function(){
 		this.totalGamesPlayed = 0;
 
 		this.newGame();
-	}
+	};
 
 	this.newGame = function(){
 		renderer.view.focus();
@@ -2742,7 +2735,7 @@ var SisyphusSheepGame = function(){
 				break;
 			default: return;
 		}
-	}
+	};
 
 	this.update = function(){
 		var i;
@@ -2933,7 +2926,7 @@ var SisyphusSheepGame = function(){
 		}
 
 		if(renderer) renderer.render(stage);
-	}
+	};
 
 	this.incScore = function(sc){
 		this.score += sc;
@@ -2969,44 +2962,7 @@ var SisyphusSheepGame = function(){
 		//this.audio["bounce"].play();
 
 		renderer.render(stage);
-	}
-
-	/*
-	this.showObstacleSections = function(){
-		this.clearObstacleSections();
-
-		var i;
-		var tempSprite = new PIXI.Sprite(this.sprites.spike.texture);
-		tempSprite.scale.set(0.2,0.2);
-		var padd = 5;
-		var obsSecWidth = tempSprite.width;
-		var startX;
-
-		for(i=1;i<=this.nObstacleSections;i++){
-			//Draw opacity rectangle to show where the obstacles will fall from
-			var rect = new PIXI.Graphics();
-			rect.beginFill(0xd3d8dc,0.3);
-			startX = i*(this.canvasWidth/(this.nObstacleSections+1))-obsSecWidth/2-padd/2;
-
-			rect.drawRect(startX,0,obsSecWidth+padd,this.canvasHeight);
-			rect.endFill();
-
-			this.obstacleSections.addChild(rect);
-		}
 	};
-
-	this.clearObstacleSections = function(){
-		var i;
-		var ch = this.obstacleSections.children;
-
-		for(i=ch.length-1;i>=0;i--){
-			//this.obstacleSectionActive[i] = false;
-			this.obstacleSections.removeChild(ch[i]);
-		}
-
-		renderer.render(stage);
-	}
-	*/
 
 	this.spawnObstacle = function(){
 		if(this.obstaclesFrozen) return;
@@ -3130,7 +3086,7 @@ var SisyphusSheepGame = function(){
 					this.GooglePlayServices.incrementAchievement("shield",i,1);
 				}
 			}
-	}
+	};
 
 	this.appBlur = function(){
 		//Turn off music otherwise it will play in the background
@@ -3138,7 +3094,7 @@ var SisyphusSheepGame = function(){
 			this.audio["main_music"].pause();
 
 		this.togglePause(true);
-	}
+	};
 
 	this.appFocus = function(){
 		//Turn back on music, checking if it was playing originally
@@ -3146,7 +3102,7 @@ var SisyphusSheepGame = function(){
 			if(this.audio["main_music"])
 				this.audio["main_music"].play();
 		}
-	}
+	};
 
 	this.showShop = function(e){
 		if(typeof e == "object"){
@@ -3850,7 +3806,7 @@ var SisyphusSheepGame = function(){
 		this.shop.coin_text.text = this.coins;
 
 		renderer.render(stage);
-	}
+	};
 
 	this.checkUpgradeAvailability = function(specific_nm){
 		var needCheck = (specific_nm != null);
@@ -3910,7 +3866,7 @@ var SisyphusSheepGame = function(){
 
 		//Update coin amount
 		this.shop.coin_text.text = this.coins;
-	}
+	};
 
 	this.setAllAccessories = function(){
 		if(window.localStorage && window.localStorage.getItem("accessories")!=null){
@@ -3927,7 +3883,7 @@ var SisyphusSheepGame = function(){
 		}
 
 		renderer.render(stage);
-	}
+	};
 
 	this.setAccessory = function(accessory, type){
 		if(accessory == null) accessory = "sheep_running";
@@ -4041,7 +3997,7 @@ var SisyphusSheepGame = function(){
 
 		this.setAccessoriesPositions();
 		this.updateAccessoriesPage();
-	}
+	};
 
 	this.setAccessoriesPositions = function(dir){
 		if(dir == null) dir = (this.hero.vx<0)?-1:1;
@@ -4073,7 +4029,7 @@ var SisyphusSheepGame = function(){
 		}
 
 		if(renderer) renderer.render(stage);
-	}
+	};
 
 	this.deactivateAccessories = function(type){
 		var i, data;
@@ -4104,7 +4060,7 @@ var SisyphusSheepGame = function(){
 				data.activated = false;
 			}
 		}
-	}
+	};
 
 	this.updateAccessoriesPage = function(){
 		var i, nm, data, btn;
@@ -4179,7 +4135,7 @@ var SisyphusSheepGame = function(){
 		this.shop.navArrows.pageIndicator.text = "PAGE\n"+(this.skinsPages.currPage+1)+" / "+this.skinsPages.totalPages;
 
 		renderer.render(stage);
-	}
+	};
 
 	this.showInfo = function(e){
 
@@ -4317,7 +4273,7 @@ var SisyphusSheepGame = function(){
 
 		//GPlay.init();
 		if(renderer && stage) renderer.render(stage);
-	}
+	};
 
 	this.pressPlayGamesButton = function(button_name){
 
@@ -4360,7 +4316,7 @@ var SisyphusSheepGame = function(){
 				});
 			}
 		}
-	}
+	};
 
 	this.showPlayGamesMenu = function(e){
 
@@ -4556,7 +4512,7 @@ var SisyphusSheepGame = function(){
 
 	this.gameover = function(){
 		//Only allow revive if the guy didn't die by falling off screen
-		if(this.hero.x >= this.hero.width/2){
+		if(this.hero.x >= this.hero.sheep.width/2 - this.hero.leeway){
 			if( (this.noDeathChance || this.hero.cape.name == "royal_cape") && Math.random()<(this.noDeathChance+this.whiteCapeBonus) ){
 				//Just continue game
 				requestAnimationFrame(this.update.bind(this));
@@ -4684,7 +4640,7 @@ var SisyphusSheepGame = function(){
 		this.backButton.visible = false;
 
 		renderer.render(stage);
-	}
+	};
 
 	this.try_revive = function(){
 		//Check to see if player can watch an ad to revive himself
@@ -4745,10 +4701,6 @@ var SisyphusSheepGame = function(){
 		this.shop.visible = false;
 
 		//Reset obstacles activity
-		var i;
-		for(i=0;i<=this.nObstacleSections;i++){
-			this.obstacleSectionActive[i] = false;
-		}
 		this.obstaclesFrozen = false;
 
 		//Reset Timers
@@ -4766,7 +4718,7 @@ var SisyphusSheepGame = function(){
 
 		this._paused = false;
 		this.togglePause(true);
-	}
+	};
 
 	this.share_social = function(){
 		var options = {
@@ -4791,7 +4743,7 @@ var SisyphusSheepGame = function(){
 			}
 
 		}
-	}
+	};
 
 	this.loadOptions = function(){
 		if(window.localStorage){
@@ -5116,7 +5068,7 @@ var SisyphusSheepGame = function(){
 		"showAchievements": function(){
 			window.plugins.playGamesServices.showAchievements();
 		}
-	}
+	};
 
 	this.hitTest = function(obj1, obj2, leewayX, leewayY, setAnchor){
 		if(typeof obj1.anchor!="undefined" && typeof obj2.anchor!="undefined" && setAnchor){
@@ -5184,5 +5136,5 @@ var SisyphusSheepGame = function(){
 		else{
 			window.open(url, '_blank');
 		}
-	}
-}
+	};
+};
