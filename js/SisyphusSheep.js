@@ -2599,8 +2599,7 @@ var SisyphusSheepGame = function(){
 				this.playButtons[nm].on((_isMobile)?"touchstart":"mousedown", this.playButtons.childButtons[nm]["press"].bind(this));
 			}
 
-			console.log(this.playButtons.childButtons[nm]["press"]);
-			if(typeof this.playButtons[nm]["release"] == "function"){
+			if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
 				this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", this.playButtons.childButtons[nm]["press"].bind(this));
 			}
 
@@ -2810,14 +2809,15 @@ var SisyphusSheepGame = function(){
 
 	this.heroSprint = function(e){
 		switch(e.type){
-			case "keydown":
 			case "mousedown":
 			case "touchstart":
+			case "keydown":
 				this.hero.sprinting = true;
 				break;
-			case "keyup":
 			case "mouseup":
 			case "touchend":
+				this.preventHeroMovement++;
+			case "keyup":
 				this.hero.sprinting = false;
 				break;
 			default: return;
