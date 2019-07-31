@@ -94,7 +94,8 @@ var SisyphusSheepGame = function(){
 		"inc": 0.1,
 		"dec": 1,
 		"portalInc":10,
-		"multiplier": 1.8
+		"multiplier": 1.8,
+		"circle": null
 	};
 
 	this._paused = false;
@@ -2579,8 +2580,29 @@ var SisyphusSheepGame = function(){
 
 			//-Circle
 			this.playButtons[nm].circle = new PIXI.Graphics();
-			this.playButtons[nm].circle.beginFill(this.playButtons.styles.color);
-			this.playButtons[nm].circle.drawCircle(0, 0, this.playButtons.styles.width/2);
+			this.playButtons[nm].circle.beginFill(this.playButtons.styles.color)
+				.drawCircle(0, 0, this.playButtons.styles.width/2)
+			.endFill();
+
+			//-Special Sprint Circle
+			if(nm == "sprint"){
+				this.sprint.circle = new PIXI.Container();
+
+				this.sprint.circle.thickness = 15;
+				this.sprint.circle.bg = new PIXI.Graphics();
+				this.sprint.circle.bg.lineStyle(this.sprint.circle.thickness, 0xFFA000)
+					.drawCircle(0, 0, (this.playButtons.styles.width + this.sprint.circle.thickness)/2);
+
+				//TODO: Change colors
+				this.sprint.circle.bar = new PIXI.Graphics();
+				this.sprint.circle.bar.lineStyle(this.sprint.circle.thickness, 0xef6c00)
+					.arc(0, 0, (this.playButtons.styles.width + this.sprint.circle.thickness)/2, -Math.PI/2, -Math.PI/2 + (this.sprint.level/50)*Math.PI);
+
+				this.sprint.circle.addChild(this.sprint.circle.bg);
+				this.sprint.circle.addChild(this.sprint.circle.bar);
+
+				this.playButtons[nm].addChild(this.sprint.circle);
+			}
 
 			//-Icon
 			this.playButtons[nm].icon = new PIXI.Sprite(this.playButtons.childButtons[i].icon.texture);
@@ -2885,7 +2907,9 @@ var SisyphusSheepGame = function(){
         this.sprint.level = Math.max(Math.min(100,this.sprint.level),0);
 
 		//TODO: Sprint level
-		
+		this.sprint.circle.bar.clear();
+		this.sprint.circle.bar.lineStyle(this.sprint.circle.thickness, 0xef6c00)
+			.arc(0, 0, (this.playButtons.styles.width + this.sprint.circle.thickness)/2, -Math.PI/2, -Math.PI/2 + (this.sprint.level/50)*Math.PI);
 
 		this.hero.vx = overallSpd;
 
@@ -2983,7 +3007,6 @@ var SisyphusSheepGame = function(){
 		//TIMERS
 		var t = new Date().getTime();
 
-		//TODO: Global Score timer
 		//SCORING
 		var timePassed = t - this.scoreTimer - this.pauseTime["global"];
 		this.scoreTimer = t;
