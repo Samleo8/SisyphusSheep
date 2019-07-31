@@ -2814,14 +2814,19 @@ var SisyphusSheepGame = function(){
 		//this.audio["jump"].play();
 
 		//Toggle Running
+		//TODO: QUESTION: Toggle visibility of sprint button?
 		if(this.hero.running){
 			this.hero.running = false;
 			this.hero.sprinting = false;
 			this.hero.sheep.gotoAndStop(4);
+
+			//this.playButtons.sprint.visible = false;
 		}
 		else{
 			this.hero.running = true;
 			this.hero.sheep.gotoAndPlay(1);
+
+			//this.playButtons.sprint.visible = true;
 		}
 	};
 
@@ -2878,6 +2883,9 @@ var SisyphusSheepGame = function(){
         }
 
         this.sprint.level = Math.max(Math.min(100,this.sprint.level),0);
+
+		//TODO: Sprint level
+		
 
 		this.hero.vx = overallSpd;
 
