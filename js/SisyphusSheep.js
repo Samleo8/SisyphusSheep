@@ -1280,7 +1280,7 @@ var SisyphusSheepGame = function(){
 				nm = this.iconNames[i].toString();
 				this.sprites.icons[nm] = new PIXI.Sprite(resources["icon_"+nm].texture);
 				this.sprites.icons[nm].anchor.set(0.5);
-				this.sprites.icons[nm].scale.set(0.8,0.8);
+				this.sprites.icons[nm].scale.set(0.8, 0.8);
 				this.sprites.icons[nm].alpha = 0;
 				this.sprites.icons[nm].tint = 0x90a4ae;
 				this.sprites.icons[nm].name = nm;
@@ -1322,7 +1322,7 @@ var SisyphusSheepGame = function(){
 			};
 
 			var text = new PIXI.Text("MUSIC",textOpt);
-			text.anchor.set(0.5,0.5);
+			text.anchor.set(0.5, 0.5);
 			text.alpha = 1;
 			text.y = 55;
 			this.muteMusicButton.addChild(text);
@@ -1342,7 +1342,7 @@ var SisyphusSheepGame = function(){
 
 			//--Text
 			text = new PIXI.Text("FX",textOpt);
-			text.anchor.set(0.5,0.5);
+			text.anchor.set(0.5, 0.5);
 			text.alpha = 1;
 			text.y = 55;
 			this.muteFXButton.addChild(text);
@@ -1362,7 +1362,7 @@ var SisyphusSheepGame = function(){
 
 			//--Text
 			text = new PIXI.Text("PLAY\nGAMES",textOpt);
-			text.anchor.set(0.5,0.5);
+			text.anchor.set(0.5, 0.5);
 			text.alpha = 1;
 			text.y = 67.5;
 			this.gamesButton.addChild(text);
@@ -1382,7 +1382,7 @@ var SisyphusSheepGame = function(){
 
 			//--Text
 			text = new PIXI.Text("INFO",textOpt);
-			text.anchor.set(0.5,0.5);
+			text.anchor.set(0.5, 0.5);
 			text.alpha = 1;
 			text.y = 55;
 			this.infoButton.addChild(text);
@@ -1402,7 +1402,7 @@ var SisyphusSheepGame = function(){
 
 			//--Text
 			text = new PIXI.Text("DEV\nSITE",textOpt);
-			text.anchor.set(0.5,0.5);
+			text.anchor.set(0.5, 0.5);
 			text.alpha = 1;
 			text.y = 67.5;
 			this.webButton.addChild(text);
@@ -1422,7 +1422,7 @@ var SisyphusSheepGame = function(){
 
 			//--Text
 			text = new PIXI.Text("STORE",textOpt);
-			text.anchor.set(0.5,0.5);
+			text.anchor.set(0.5, 0.5);
 			text.alpha = 1;
 			text.y = 55;
 			this.shopButton.addChild(text);
@@ -1530,14 +1530,14 @@ var SisyphusSheepGame = function(){
 		};
 
 		var text = new PIXI.Text("SISYPHUS",Object.assign(textOpt, { fontSize: 110 }));
-		text.anchor.set(0.5,0.5);
+		text.anchor.set(0.5, 0.5);
 		text.x = this.canvasWidth/2;
 		text.y = this.canvasHeight/2-150;
 
 		this.startScreen.addChild(text);
 
 		var text2 = new PIXI.Text("SHEEP",Object.assign(textOpt));
-		text2.anchor.set(0.5,0.5);
+		text2.anchor.set(0.5, 0.5);
 		text2.x = this.canvasWidth/2+90;
 		text2.y = this.canvasHeight/2-20;
 
@@ -1574,7 +1574,7 @@ var SisyphusSheepGame = function(){
 		};
 
 		this.loadingBar.progressText = new PIXI.Text("0%",textOpt);
-		this.loadingBar.progressText.anchor.set(0.5,0.5);
+		this.loadingBar.progressText.anchor.set(0.5, 0.5);
 		this.loadingBar.progressText.y = this.loadingBar.progressBar.maxHeight/2+this.loadingBar.progressBar.strokeWidth/2;
 		this.loadingBar.progressText.x = this.loadingBar.progressBar.width/2+80;
 
@@ -1611,7 +1611,7 @@ var SisyphusSheepGame = function(){
 		};
 
 		var text = new PIXI.Text("PAUSED",Object.assign(textOpt,{fontSize:120}));
-		text.anchor.set(0.5,0.5);
+		text.anchor.set(0.5, 0.5);
 		text.alpha = 0.75;
 		text.x = this.canvasWidth/2;
 		text.y = this.canvasHeight/2-30;
@@ -1631,7 +1631,7 @@ var SisyphusSheepGame = function(){
 			strokeThickness:1,
 			letterSpacing: 8
 		}));
-		text2.anchor.set(0.5,0.5);
+		text2.anchor.set(0.5, 0.5);
 		text2.alpha = 0.75;
 		text2.x = this.canvasWidth/2-8;
 		text2.y = this.canvasHeight/2+70;
@@ -1662,7 +1662,7 @@ var SisyphusSheepGame = function(){
 		};
 
 		var text = new PIXI.Text("INFO",Object.assign(textOpt,{fontSize:75}));
-		text.anchor.set(0.5,0.5);
+		text.anchor.set(0.5, 0.5);
 		text.alpha = 0.98;
 		text.x = this.canvasWidth/2;
 		text.y = this.canvasHeight/8;
@@ -1694,7 +1694,7 @@ var SisyphusSheepGame = function(){
 		var textOpt3 = Object.assign(textOpt,{strokeThickness:7,fontSize:45});
 
 		var text3 = new PIXI.Text("MUSIC",textOpt3);
-		text3.anchor.set(0.5,0.5);
+		text3.anchor.set(0.5, 0.5);
 		text3.alpha = 0.98;
 		text3.x = this.canvasWidth/2;
 		text3.y = this.canvasHeight/2;
@@ -1733,8 +1733,8 @@ var SisyphusSheepGame = function(){
 		this.gameoverScreen = new PIXI.Container();
 
 		this.gameoverScreen.sheep = this.sprites.dead_sheep;
-		this.gameoverScreen.sheep.scale.set(0.6,0.6);
-		this.gameoverScreen.sheep.anchor.set(0.5,0.5);
+		this.gameoverScreen.sheep.scale.set(0.6, 0.6);
+		this.gameoverScreen.sheep.anchor.set(0.5, 0.5);
 		this.gameoverScreen.sheep.position.set(this.canvasWidth/2,this.canvasHeight*0.29);
 
 		this.gameoverScreen.addChild(this.gameoverScreen.sheep);
@@ -1749,14 +1749,14 @@ var SisyphusSheepGame = function(){
 			padding: 10,
 			fontSize: 120
 		};
-		this.gameoverScreen.text1 = new PIXI.Text("GAME",textOpt);
-		this.gameoverScreen.text2 = new PIXI.Text("OVER",textOpt);
+		this.gameoverScreen.text1 = new PIXI.Text("GAME", textOpt);
+		this.gameoverScreen.text2 = new PIXI.Text("OVER", textOpt);
 
-		this.gameoverScreen.text1.anchor.set(0.5,0.5);
-		this.gameoverScreen.text2.anchor.set(0.5,0.5);
+		this.gameoverScreen.text1.anchor.set(0.5, 0.5);
+		this.gameoverScreen.text2.anchor.set(0.5, 0.5);
 
-		this.gameoverScreen.text1.position.set(this.canvasWidth*0.25,this.gameoverScreen.sheep.y);
-		this.gameoverScreen.text2.position.set(this.canvasWidth*0.75,this.gameoverScreen.sheep.y);
+		this.gameoverScreen.text1.position.set(this.canvasWidth*0.25, this.gameoverScreen.sheep.y);
+		this.gameoverScreen.text2.position.set(this.canvasWidth*0.75, this.gameoverScreen.sheep.y);
 
 		this.gameoverScreen.addChild(this.gameoverScreen.text1);
 		this.gameoverScreen.addChild(this.gameoverScreen.text2);
@@ -1770,13 +1770,13 @@ var SisyphusSheepGame = function(){
 			fontSize: 40
 		};
 
-		this.gameoverScreen.scoreText = new PIXI.Text("Score: 0",textOpt3);
-		this.gameoverScreen.highscoreText = new PIXI.Text("Highscore: 0",textOpt3);
-		this.gameoverScreen.scoreText.anchor.set(0.5,0.5);
-		this.gameoverScreen.highscoreText.anchor.set(0.5,0.5);
+		this.gameoverScreen.scoreText = new PIXI.Text("Score: 0", textOpt3);
+		this.gameoverScreen.highscoreText = new PIXI.Text("Highscore: 0", textOpt3);
+		this.gameoverScreen.scoreText.anchor.set(0.5, 0.5);
+		this.gameoverScreen.highscoreText.anchor.set(0.5, 0.5);
 
-		this.gameoverScreen.scoreText.position.set(this.canvasWidth/2,this.canvasHeight*0.5-15);
-		this.gameoverScreen.highscoreText.position.set(this.canvasWidth/2,this.canvasHeight*0.58-15);
+		this.gameoverScreen.scoreText.position.set(this.canvasWidth/2, this.canvasHeight*0.5-15);
+		this.gameoverScreen.highscoreText.position.set(this.canvasWidth/2, this.canvasHeight*0.58-15);
 
 		this.gameoverScreen.addChild(this.gameoverScreen.scoreText);
 		this.gameoverScreen.addChild(this.gameoverScreen.highscoreText);
@@ -1799,8 +1799,8 @@ var SisyphusSheepGame = function(){
 		this.restartButton.position.set(this.canvasWidth/2-buttonWidth-padd,this.canvasHeight*0.65);
 
 		this.restartButton.icon = this.sprites.icons["restart"];
-		this.restartButton.icon.anchor.set(0.5,0.5);
-		this.restartButton.icon.scale.set(0.6,0.6);
+		this.restartButton.icon.anchor.set(0.5, 0.5);
+		this.restartButton.icon.scale.set(0.6, 0.6);
 		this.restartButton.icon.position.set(iconPos,buttonHeight/2);
 		this.restartButton.icon.alpha = 1;
 		this.restartButton.icon.tint = 0xcfd8dc;
@@ -1817,7 +1817,7 @@ var SisyphusSheepGame = function(){
 		this.restartButton.pseudoBg.alpha = 0;
 
 		this.restartButton.text = new PIXI.Text("Retry",textOpt2);
-		this.restartButton.text.anchor.set(0.5,0.5);
+		this.restartButton.text.anchor.set(0.5, 0.5);
 		this.restartButton.text.position.set(buttonWidth/2+iconPos/2-15, buttonHeight/2);
 
 		this.restartButton.interactive = true;
@@ -1864,14 +1864,14 @@ var SisyphusSheepGame = function(){
 		this.reviveButton.pseudoBg.alpha = 0;
 
 		this.reviveButton.icon = this.sprites.icons["ad"];
-		this.reviveButton.icon.anchor.set(0.5,0.5);
-		this.reviveButton.icon.scale.set(0.6,0.6);
+		this.reviveButton.icon.anchor.set(0.5, 0.5);
+		this.reviveButton.icon.scale.set(0.6, 0.6);
 		this.reviveButton.icon.position.set(iconPos,buttonHeight/2);
 		this.reviveButton.icon.alpha = 1;
 		this.reviveButton.icon.tint = 0xcfd8dc;
 
 		this.reviveButton.text = new PIXI.Text("Revive",textOpt2);
-		this.reviveButton.text.anchor.set(0.5,0.5);
+		this.reviveButton.text.anchor.set(0.5, 0.5);
 		this.reviveButton.text.position.set(buttonWidth/2+iconPos/2, buttonHeight/2);
 
 		this.reviveButton.interactive = true;
@@ -1908,8 +1908,8 @@ var SisyphusSheepGame = function(){
 		this.shareButton.pseudoBg.alpha = 0;
 
 		this.shareButton.icon = this.sprites.icons["post"]; //weird bug where icons with names share and social are prevented from loading. possibly by adblocker
-		this.shareButton.icon.anchor.set(0.5,0.5);
-		this.shareButton.icon.scale.set(0.8,0.8);
+		this.shareButton.icon.anchor.set(0.5, 0.5);
+		this.shareButton.icon.scale.set(0.8, 0.8);
 		this.shareButton.icon.tint = 0x263238;
 		this.shareButton.icon.alpha = 1;
 
@@ -1923,7 +1923,7 @@ var SisyphusSheepGame = function(){
 		};
 
 		this.shareButton.text = new PIXI.Text("SHARE",textOpt3);
-		this.shareButton.text.anchor.set(0.5,0.5);
+		this.shareButton.text.anchor.set(0.5, 0.5);
 		this.shareButton.text.position.set(this.shareButton.icon.x, this.shareButton.icon.y+60);
 
 		this.shareButton.addChild(this.shareButton.pseudoBg);
@@ -1948,7 +1948,7 @@ var SisyphusSheepGame = function(){
 
 		this.gameoverScreen.tipText = new PIXI.Text("Tip: ",textOpt4);
 
-		this.gameoverScreen.tipText.anchor.set(0.5,0.5);
+		this.gameoverScreen.tipText.anchor.set(0.5, 0.5);
 		this.gameoverScreen.tipText.position.set(this.canvasWidth/2, this.canvasHeight-80);
 
 		this.gameoverScreen.addChild(this.gameoverScreen.tipText);
@@ -1998,16 +1998,16 @@ var SisyphusSheepGame = function(){
 		this.shop.coin_icon = this.sprites.icons["coin"];
 		this.shop.coin_icon.alpha = 1;
 		this.shop.coin_icon.tint = 0x455a64;
-		this.shop.coin_icon.scale.set(0.6,0.6);
+		this.shop.coin_icon.scale.set(0.6, 0.6);
 		this.shop.coin_icon.position.set(this.canvasWidth/2-this.coins.toString().length*34*2,140);
 		*/
 
 		this.shop.coin_title = new PIXI.Text("Total Coins:",textOpt2);
-		this.shop.coin_title.anchor.set(0.5,0.5);
+		this.shop.coin_title.anchor.set(0.5, 0.5);
 		this.shop.coin_title.position.set(this.canvasWidth/2,58);
 
 		this.shop.coin_text = new PIXI.Text(this.coins,Object.assign(textOpt2,{fontSize:40}));
-		this.shop.coin_text.anchor.set(0.5,0.5);
+		this.shop.coin_text.anchor.set(0.5, 0.5);
 		this.shop.coin_text.position.set(this.canvasWidth/2,118);
 
 		this.shop.addChild(this.shop.coin_title);
@@ -2046,7 +2046,7 @@ var SisyphusSheepGame = function(){
 			.endFill();
 
 			tab.text = new PIXI.Text(this.shopTabNames[i].toTitleCase(),textOpt3);
-			tab.text.anchor.set(0.5,0.5);
+			tab.text.anchor.set(0.5, 0.5);
 			tab.text.position.set(tab._width/2, tab._height/2);
 
 			tab.line = new PIXI.Graphics();
@@ -2159,8 +2159,8 @@ var SisyphusSheepGame = function(){
 		profile.welcome_text = new PIXI.Text("Welcome,",textOpt2);
 		profile.player_text = new PIXI.Text("PLAYER",Object.assign(textOpt2,{fontSize:48}));
 
-		profile.welcome_text.anchor.set(0.5,0.5);
-		profile.player_text.anchor.set(0.5,0.5);
+		profile.welcome_text.anchor.set(0.5, 0.5);
+		profile.player_text.anchor.set(0.5, 0.5);
 
 		profile.welcome_text.y -= 55;
 
@@ -2208,11 +2208,11 @@ var SisyphusSheepGame = function(){
 			.endFill();
 
 			tab.text = new PIXI.Text(tabsNamesArr[i],textOpt3);
-			tab.text.anchor.set(0.5,0.5);
+			tab.text.anchor.set(0.5, 0.5);
 			tab.text.position.set(tab._width/2, tab._height-60);
 
 			tab.icon = this.sprites.icons[_nm];
-			tab.icon.anchor.set(0.5,0.5);
+			tab.icon.anchor.set(0.5, 0.5);
 			tab.icon.scale.set(1.3,1.3);
 			tab.icon.tint = 0x455A64;
 			tab.icon.alpha = 1;
@@ -2261,7 +2261,7 @@ var SisyphusSheepGame = function(){
 		this.backButton.icon.position.set(0,0);
 
 		this.backButton.text = new PIXI.Text("BACK",textOpt4);
-		this.backButton.text.anchor.set(0.5,0.5);
+		this.backButton.text.anchor.set(0.5, 0.5);
 		this.backButton.text.position.set(-0.5,62);
 
 		this.backButton.addChild(this.backButton.pseudoBg);
@@ -2288,7 +2288,7 @@ var SisyphusSheepGame = function(){
 
 			//Sheep
 			sheep = new PIXI.Sprite(this.animations.sheep_running.frames[1]);
-			sheep.anchor.set(0.5,0.5);
+			sheep.anchor.set(0.5, 0.5);
 			sheep.scale.set(0.35,0.35);
 			sheep.rotation = -Math.PI/50;
 			sheep.position.set(this.canvasWidth/2-190,this.canvasHeight/2-120);
@@ -2318,7 +2318,7 @@ var SisyphusSheepGame = function(){
 			};
 
 			var text = new PIXI.Text("Run to the End of the Treadmill. \nAvoid the Spikes. Repeat. \n"+((_isMobile)?"Tap anywhere":"Click/[DOWN]")+" to START/STOP RUNNING\n[RIGHT] to SPRINT\n\n- RUN/SPRINT to Start! -",textOpt);
-			text.anchor.set(0.5,0.5);
+			text.anchor.set(0.5, 0.5);
 
 			speech_bubble.addChild(bubble);
 			speech_bubble.addChild(text);
@@ -2463,7 +2463,7 @@ var SisyphusSheepGame = function(){
 		this.overSym = new PIXI.Text("/",Object.assign(textOpt,{fontSize:50}));
 
 		this.overSym.alpha = 0.7;
-		this.overSym.anchor.set(0.5,0.5);
+		this.overSym.anchor.set(0.5, 0.5);
 		this.overSym.x = this.canvasWidth/2 + 50;
 		this.overSym.y = this.canvasHeight/2 + 50;
 		stage.addChild(this.overSym);
@@ -2472,6 +2472,10 @@ var SisyphusSheepGame = function(){
 		this.obstacles = new PIXI.Container();
 
 		stage.addChild(this.obstacles);
+
+		//CREATE POWERUP CONTAINER
+		this.powerups = new PIXI.Container();
+		stage.addChild(this.powerups);
 
 		//CREATE TREADMILL CONTAINER AND SET SPECS
 		this.treadmill = new PIXI.Container();
@@ -2503,6 +2507,32 @@ var SisyphusSheepGame = function(){
 		this.treadmill.addChild(this.treadmill.gears);
 		this.treadmill.addChild(this.treadmill.flag);
 
+		//HERO INITIALIZE
+		this.hero.x = this.canvasWidth*(1/3);
+		this.hero.y = this.canvasHeight - this.hero.height/2 - this.treadmill.gears.height;
+		this.portalsPassed = 0;
+
+		//--Speed and jump strength
+		this.hero.vx = 0;//this.maxSpeed;
+		this.hero.ax = 0;
+		this.hero.vy = 0;
+		this.hero.ay = 0;
+
+		this.hero.running = false;
+		this.hero.sprinting = false;
+
+		this.preventHeroMovement = 0;
+
+		//-Hero Shield
+		this.heroShield = new PIXI.Graphics();
+		this.heroShield.beginFill(0xffecb3,0.6)
+			.drawCircle(0,0,this.hero.sheep.width/2+30)
+		.endFill();
+		this.heroShield.position = this.hero.position;
+
+		stage.addChild(this.heroShield);
+		stage.addChild(this.hero);
+
 		//CREATE PLAY BUTTONS CONTAINER AND RESPECTIVE BUTTONS INSIDE
 		this.playButtons = new PIXI.Container();
 
@@ -2510,10 +2540,10 @@ var SisyphusSheepGame = function(){
 			"bottomMargin": 35,
 			"sideMargin": 50,
 			"width": 160,
-			"color": 0xf1c40f,
-			"alpha": 0.5,
+			"color": 0xffd54f, //0xFFA000,
+			"alpha": 0.7,
 			"icon": {
-				"tint": 0x000,
+				"tint": 0x212121,
 				"alpha": 1,
 				"scale": new PIXI.Point(1.1, 1.1),
 				"anchor": new PIXI.Point(0.5, 0.5),
@@ -2569,37 +2599,6 @@ var SisyphusSheepGame = function(){
 		}
 
 		stage.addChild(this.playButtons);
-
-		//CREATE POWERUP CONTAINER
-		this.powerups = new PIXI.Container();
-		stage.addChild(this.powerups);
-
-		//HERO INITIALIZE
-		this.hero.x = this.canvasWidth*(1/3);
-		this.hero.y = this.canvasHeight - this.hero.height/2 - this.treadmill.gears.height;
-		this.portalsPassed = 0;
-
-		//--Speed and jump strength
-		this.hero.vx = 0;//this.maxSpeed;
-		this.hero.ax = 0;
-		this.hero.vy = 0;
-		this.hero.ay = 0;
-
-		this.hero.running = false;
-		this.hero.sprinting = false;
-		//this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.toggleHeroMovementStrength:this.toggleHeroMovementStrength_lamb;
-
-		this.preventHeroMovement = 0;
-
-		//-Hero Shield
-		this.heroShield = new PIXI.Graphics();
-		this.heroShield.beginFill(0xffecb3,0.6)
-			.drawCircle(0,0,this.hero.sheep.width/2+30)
-		.endFill();
-		this.heroShield.position = this.hero.position;
-
-		stage.addChild(this.heroShield);
-		stage.addChild(this.hero);
 
 		//ADD OVERLAYS TO STAGE
 		//..GRAPHICS FOR PAUSE OVERLAY IS DONE IN INITIALISATION FOR PERFORMANCE
@@ -2657,6 +2656,7 @@ var SisyphusSheepGame = function(){
 		this._revived = false;
 
 		//-Hero
+		this.playButtons.visible = true;
 		this.treadmill.visible = true;
 		this.hero.visible = true;
 		this.hero.x = this.canvasWidth*(1/3);
@@ -2669,7 +2669,9 @@ var SisyphusSheepGame = function(){
 		this.hero.ax = 0;
 		this.hero.vy = 0;
 		this.hero.ay = 0;
-		this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.toggleHeroMovementStrength:this.toggleHeroMovementStrength_lamb;
+		//this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.toggleHeroMovementStrength:this.toggleHeroMovementStrength_lamb;
+
+		this.sprint.level = 100;
 
 		//--Hero's shield
 		this.heroShield.position = this.hero.position;
@@ -2817,12 +2819,15 @@ var SisyphusSheepGame = function(){
 
 		//HERO MOVEMENT
 		var overallSpd = -this.treadmill.speed;
+
+		this.playButtons.visible = true;
 		this.treadmill.visible = true;
 		this.hero.visible = true;
+
 		if(this.hero.running){
 			if(this.hero.sprinting){
 	            if(this.sprint.level>0){
-	                overallSpd += this.heroSpeed*this.sprint.multiplier;
+	                overallSpd += this.heroSpeed * this.sprint.multiplier;
 	                this.sprint.level -= this.sprint.dec;
 	            }
 				else {
@@ -3094,7 +3099,7 @@ var SisyphusSheepGame = function(){
 			//console.log(this.powerupNames[type].split("_").join(" ").toUpperCase()+" powerup attached to spike!");
 			powerup = new PIXI.Sprite(this.sprites.powerups[this.powerupNames[type]].texture);
 
-			powerup.scale.set(0.3,0.3);
+			powerup.scale.set(0.3, 0.3);
 			powerup.anchor.set(0.5);
 
 			powerup.x = obs.x;
@@ -3310,12 +3315,12 @@ var SisyphusSheepGame = function(){
 
 				//-Title
 			this.upgradesSection[nm].title = new PIXI.Text(data["title"],textOpt3);
-			this.upgradesSection[nm].title.anchor.set(0.5,0.5);
+			this.upgradesSection[nm].title.anchor.set(0.5, 0.5);
 			this.upgradesSection[nm].title.position.set(width/2,60);
 
 				//-Desc
 			this.upgradesSection[nm].desc = new PIXI.Text(data["desc"],textOpt4);
-			this.upgradesSection[nm].desc.anchor.set(0.5,0.5);
+			this.upgradesSection[nm].desc.anchor.set(0.5, 0.5);
 			this.upgradesSection[nm].desc.position.set(width/2,130);
 
 				//-Button
@@ -3324,8 +3329,8 @@ var SisyphusSheepGame = function(){
 			this.upgradesSection[nm].button.position.set(width/2-buttonWidth/2, height-buttonHeight-62);
 
 			this.upgradesSection[nm].button.icon = new PIXI.Sprite(this.sprites.icons["coin"].texture);
-			this.upgradesSection[nm].button.icon.anchor.set(0.5,0.5);
-			this.upgradesSection[nm].button.icon.scale.set(0.5,0.5);
+			this.upgradesSection[nm].button.icon.anchor.set(0.5, 0.5);
+			this.upgradesSection[nm].button.icon.scale.set(0.5, 0.5);
 			this.upgradesSection[nm].button.icon.position.set(iconPos,buttonHeight/2-2.5);
 			this.upgradesSection[nm].button.icon.alpha = 1;
 			this.upgradesSection[nm].button.icon.tint = 0xcfd8dc;
@@ -3341,7 +3346,7 @@ var SisyphusSheepGame = function(){
 			.endFill();
 
 			this.upgradesSection[nm].button.text = new PIXI.Text(data["cost"]*(data["increment_count"]+1),textOpt);
-			this.upgradesSection[nm].button.text.anchor.set(0.5,0.5);
+			this.upgradesSection[nm].button.text.anchor.set(0.5, 0.5);
 			this.upgradesSection[nm].button.text.position.set(buttonWidth/2+iconPos/2-15, buttonHeight/2);
 
 			this.upgradesSection[nm].button.interactive = true;
@@ -3501,7 +3506,7 @@ var SisyphusSheepGame = function(){
 
 				//-Preview Image
 			this.skinsSection[nm].img = new PIXI.Sprite();
-			this.skinsSection[nm].img.anchor.set(0.5,0.5);
+			this.skinsSection[nm].img.anchor.set(0.5, 0.5);
 			this.skinsSection[nm].img.position.set(width/2,200);
 
 			switch(data["type"]){
@@ -3521,7 +3526,7 @@ var SisyphusSheepGame = function(){
 						this.skinsSection[nm].img.texture = this.sprites.hats[nm].texture;
 					}
 					else if(this.sprites.capes[nm]){
-						this.skinsSection[nm].img.scale.set(0.5,0.5);
+						this.skinsSection[nm].img.scale.set(0.5, 0.5);
 						this.skinsSection[nm].img.texture = this.sprites.capes[nm].texture;
 					}
 					else if(nm=="no_hat" || nm=="no_cape"){
@@ -3541,8 +3546,8 @@ var SisyphusSheepGame = function(){
 			this.skinsSection[nm].button.position.set(width/2-buttonWidth/2, height-buttonHeight-90);
 
 			this.skinsSection[nm].button.icon = new PIXI.Sprite(this.sprites.icons[data["currency"].toString()].texture);
-			this.skinsSection[nm].button.icon.anchor.set(0.5,0.5);
-			this.skinsSection[nm].button.icon.scale.set(0.5,0.5);
+			this.skinsSection[nm].button.icon.anchor.set(0.5, 0.5);
+			this.skinsSection[nm].button.icon.scale.set(0.5, 0.5);
 			this.skinsSection[nm].button.icon.position.set(iconPos,buttonHeight/2-2.5);
 			this.skinsSection[nm].button.icon.alpha = 1;
 			this.skinsSection[nm].button.icon.tint = 0xcfd8dc;
@@ -3558,7 +3563,7 @@ var SisyphusSheepGame = function(){
 			.endFill();
 
 			this.skinsSection[nm].button.text = new PIXI.Text(data["cost"],textOpt);
-			this.skinsSection[nm].button.text.anchor.set(0.5,0.5);
+			this.skinsSection[nm].button.text.anchor.set(0.5, 0.5);
 			this.skinsSection[nm].button.text.position.set(buttonWidth/2+iconPos/2-15, buttonHeight/2);
 
 			this.skinsSection[nm].button.interactive = true;
@@ -3628,14 +3633,14 @@ var SisyphusSheepGame = function(){
 		this.coinAdButton.pseudoBg.alpha = 0;
 
 		this.coinAdButton.icon = new PIXI.Sprite(this.sprites.icons["ad"].texture);
-		this.coinAdButton.icon.anchor.set(0.5,0.5);
-		this.coinAdButton.icon.scale.set(0.6,0.6);
+		this.coinAdButton.icon.anchor.set(0.5, 0.5);
+		this.coinAdButton.icon.scale.set(0.6, 0.6);
 		this.coinAdButton.icon.position.set(iconPos,buttonHeight/2);
 		this.coinAdButton.icon.alpha = 1;
 		this.coinAdButton.icon.tint = 0xcfd8dc;
 
 		this.coinAdButton.text = new PIXI.Text("Watch ads",textOpt2);
-		this.coinAdButton.text.anchor.set(0.5,0.5);
+		this.coinAdButton.text.anchor.set(0.5, 0.5);
 		this.coinAdButton.text.position.set(buttonWidth/2+iconPos/2, buttonHeight/2);
 
 		this.coinAdButton.interactive = true;
@@ -3678,14 +3683,14 @@ var SisyphusSheepGame = function(){
 		this.coinBuyButton.pseudoBg.alpha = 0;
 
 		this.coinBuyButton.icon = new PIXI.Sprite(this.sprites.icons["coin"].texture);
-		this.coinBuyButton.icon.anchor.set(0.5,0.5);
-		this.coinBuyButton.icon.scale.set(0.6,0.6);
+		this.coinBuyButton.icon.anchor.set(0.5, 0.5);
+		this.coinBuyButton.icon.scale.set(0.6, 0.6);
 		this.coinBuyButton.icon.position.set(iconPos,buttonHeight/2);
 		this.coinBuyButton.icon.alpha = 1;
 		this.coinBuyButton.icon.tint = 0xcfd8dc;
 
 		this.coinBuyButton.text = new PIXI.Text("Buy coins",textOpt2);
-		this.coinBuyButton.text.anchor.set(0.5,0.5);
+		this.coinBuyButton.text.anchor.set(0.5, 0.5);
 		this.coinBuyButton.text.position.set(buttonWidth/2+iconPos/2, buttonHeight/2);
 
 		this.coinBuyButton.interactive = true;
@@ -3729,14 +3734,14 @@ var SisyphusSheepGame = function(){
 		.endFill();
 
 		this.restorePurchasesButton.icon = this.sprites.icons["restore"];
-		this.restorePurchasesButton.icon.anchor.set(0.5,0.5);
-		this.restorePurchasesButton.icon.scale.set(0.6,0.6);
+		this.restorePurchasesButton.icon.anchor.set(0.5, 0.5);
+		this.restorePurchasesButton.icon.scale.set(0.6, 0.6);
 		this.restorePurchasesButton.icon.position.set(iconPos,buttonHeight/2);
 		this.restorePurchasesButton.icon.alpha = 1;
 		this.restorePurchasesButton.icon.tint = 0xcfd8dc;
 
 		this.restorePurchasesButton.text = new PIXI.Text("Restore Purchases",textOpt2);
-		this.restorePurchasesButton.text.anchor.set(0.5,0.5);
+		this.restorePurchasesButton.text.anchor.set(0.5, 0.5);
 		this.restorePurchasesButton.text.position.set(buttonWidth/2+iconPos/2, buttonHeight/2);
 
 		this.restorePurchasesButton.interactive = true;
@@ -4028,7 +4033,7 @@ var SisyphusSheepGame = function(){
 					this.hero.cape.displacement = -0.75;
 					this.hero.cape.angular_displacement = 0;
 
-					this.hero.cape.anchor.set(0.5,0.5);
+					this.hero.cape.anchor.set(0.5, 0.5);
 				}
 				else if(accessory=="no_cape"){
 					this.hero.cape.texture = PIXI.Texture.EMPTY;
@@ -4049,7 +4054,7 @@ var SisyphusSheepGame = function(){
 					this.hero.hat.displacement = -0.275;
 					this.hero.hat.angular_displacement = -0.05;
 
-					this.hero.hat.anchor.set(0.5,0.5);
+					this.hero.hat.anchor.set(0.5, 0.5);
 				}
 				else if(accessory=="no_hat"){
 					this.hero.hat.texture = PIXI.Texture.EMPTY;
@@ -4663,8 +4668,9 @@ var SisyphusSheepGame = function(){
 			this.totalGamesPlayed = 0;
 		}
 
-		//HIDE HERO AND TREADMILL
+		//HIDE HERO, TREADMILL AND BUTTONS
 		this.treadmill.visible = false;
+		this.playButtons.visible = false;
 		this.hero.visible = false;
 		this.heroShield.alpha = 0;
 
@@ -4749,6 +4755,7 @@ var SisyphusSheepGame = function(){
 		this.gameoverScreen.visible = false;
 
 		//Reset Hero Position
+		this.playButtons.visible = true;
 		this.treadmill.visible = true;
 		this.hero.visible = true;
 		this.hero.x = this.canvasWidth*(1/3);
