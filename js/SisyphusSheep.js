@@ -2541,7 +2541,8 @@ var SisyphusSheepGame = function(){
 			"sideMargin": 50,
 			"width": 160,
 			"color": 0xffd54f, //0xFFA000,
-			"alpha": 0.7,
+			"alpha": 0.6,
+			"activeOffset": 10,
 			"icon": {
 				"tint": 0x212121,
 				"alpha": 1,
@@ -2594,14 +2595,31 @@ var SisyphusSheepGame = function(){
 			this.playButtons[nm].interactive = true;
 			this.playButtons[nm].buttonMode = true;
 
-			console.log(this.playButtons.childButtons[nm]["press"]);
+			//--Press event listener; also by default have button move downwards by activeOffset
 			if(typeof this.playButtons.childButtons[nm]["press"] == "function"){
 				this.playButtons[nm].on((_isMobile)?"touchstart":"mousedown", this.playButtons.childButtons[nm]["press"].bind(this));
 			}
+			this.playButtons[nm].on((_isMobile)?"touchstart":"mousedown", function(){
+				this.playButtons[nm].y = this.playButtons.styles.activeOffset;
+			}.bind(this));
 
+			//--Release event listener; also by default have button move downwards by activeOffset
 			if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
-				this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", this.playButtons.childButtons[nm]["press"].bind(this));
+				this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", this.playButtons.childButtons[nm]["release"].bind(this));
 			}
+
+			this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", function(){
+				this.playButtons[nm].y = 0;
+			}.bind(this));
+
+			//--Mouseover event listeners for alpha change
+			this.playButtons[nm].on("mouseover", function(){
+				this.playButtons[nm].alpha = Math.min(this.playButtons[nm].alpha + 0.2, 1);
+			}.bind(this));
+
+			this.playButtons[nm].on("mouseout", function(){
+				this.playButtons[nm].alpha = this.playButtons.styles.alpha;
+			}.bind(this));
 
 			//-Add the graphics and icons and texts into the button container
 			this.playButtons[nm].addChild(this.playButtons[nm].circle);
