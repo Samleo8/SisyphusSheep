@@ -2400,7 +2400,7 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.startGame = function(){
-		var i;
+		var i, j;
 
 		console.log("Let the games begin!");
 
@@ -2507,10 +2507,19 @@ var SisyphusSheepGame = function(){
 		this.playButtons = new PIXI.Container();
 
 		this.playButtons.styles = {
-			"bottomMargin": 30,
-			"sideMargin": 20,
-			"width": 150,
-			"color": 0xf1c40f
+			"bottomMargin": 35,
+			"sideMargin": 50,
+			"width": 160,
+			"color": 0xf1c40f,
+			"alpha": 0.5,
+			"icon": {
+				"tint": 0x000,
+				"alpha": 1,
+				"scale": new PIXI.Point(1.1, 1.1),
+				"anchor": new PIXI.Point(0.5, 0.5),
+				"y": 5,
+				"rotation": 5/(180/Math.PI) //in radians
+			}
 		};
 
 		this.playButtons.childButtons = {
@@ -2521,15 +2530,19 @@ var SisyphusSheepGame = function(){
 
 		//this.playButtons.anchor.set(0, 0.5);
 		this.playButtons.x = 0;
-		this.playButtons.y = this.canvasHeight - this.playButtons.styles.bottomMargin;
+		this.playButtons.y = this.canvasHeight - this.playButtons.styles.bottomMargin - this.playButtons.styles.width/2;
 
 		//--Button setup and positioning
 		var cnt = 0;
 		for(i in this.playButtons.childButtons){
+			if(!this.playButtons.childButtons.hasOwnProperty(i)) continue;
+
 			var nm = i.toString();
 
 			this.playButtons[nm] = new PIXI.Container();
-			this.playButtons[nm].x = this.playButtons.styles.sideMargin + cnt*(this.playButtons.styles.sideMargin + this.playButtons.styles.width);
+			this.playButtons[nm].x = this.playButtons.styles.sideMargin + this.playButtons.styles.width/2 + cnt*(this.playButtons.styles.sideMargin + this.playButtons.styles.width);
+			this.playButtons[nm].y = 0;
+			this.playButtons[nm].alpha = this.playButtons.styles.alpha;
 
 			//-Circle
 			this.playButtons[nm].circle = new PIXI.Graphics();
@@ -2537,7 +2550,14 @@ var SisyphusSheepGame = function(){
 			this.playButtons[nm].circle.drawCircle(0, 0, this.playButtons.styles.width/2);
 
 			//-Icon
-			this.playButtons[nm].icon = this.playButtons.childButtons[i].icon;
+			this.playButtons[nm].icon = new PIXI.Sprite(this.playButtons.childButtons[i].icon.texture);
+			for(j in this.playButtons.styles.icon){
+				var _style = j.toString();
+				if(!this.playButtons.childButtons.hasOwnProperty(i)) continue;
+
+				this.playButtons[nm].icon[_style] = this.playButtons.styles.icon[_style];
+			}
+			//this.playButtons[nm].icon.anchor.set(0.5, 0.5);
 
 			//-Add the graphics and icons and texts into the button container
 			this.playButtons[nm].addChild(this.playButtons[nm].circle);
