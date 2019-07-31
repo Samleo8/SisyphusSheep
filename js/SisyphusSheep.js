@@ -2554,7 +2554,9 @@ var SisyphusSheepGame = function(){
 
 		this.playButtons.childButtons = {
 			"sprint":{
-				"icon": this.sprites.icons["sprint"]
+				"icon": this.sprites.icons["sprint"],
+				"press": this.heroSprint,
+				"release": this.heroSprint
 			}
 		};
 
@@ -2587,7 +2589,20 @@ var SisyphusSheepGame = function(){
 
 				this.playButtons[nm].icon[_style] = this.playButtons.styles.icon[_style];
 			}
-			//this.playButtons[nm].icon.anchor.set(0.5, 0.5);
+
+			//-Add Clickability and Event Listeners
+			this.playButtons[nm].interactive = true;
+			this.playButtons[nm].buttonMode = true;
+
+			console.log(this.playButtons.childButtons[nm]["press"]);
+			if(typeof this.playButtons.childButtons[nm]["press"] == "function"){
+				this.playButtons[nm].on((_isMobile)?"touchstart":"mousedown", this.playButtons.childButtons[nm]["press"].bind(this));
+			}
+
+			console.log(this.playButtons.childButtons[nm]["press"]);
+			if(typeof this.playButtons[nm]["release"] == "function"){
+				this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", this.playButtons.childButtons[nm]["press"].bind(this));
+			}
 
 			//-Add the graphics and icons and texts into the button container
 			this.playButtons[nm].addChild(this.playButtons[nm].circle);
