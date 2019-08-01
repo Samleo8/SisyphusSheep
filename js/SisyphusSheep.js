@@ -2906,7 +2906,7 @@ var SisyphusSheepGame = function(){
 
         this.sprint.level = Math.max(Math.min(100,this.sprint.level),0);
 
-		//TODO: Sprint level
+		//CIRCULAR SPRINT LEVEL
 		this.sprint.circle.bar.clear();
 		this.sprint.circle.bar.lineStyle(this.sprint.circle.thickness, 0xef6c00)
 			.arc(0, 0, (this.playButtons.styles.width + this.sprint.circle.thickness)/2, -Math.PI/2, -Math.PI/2 + (this.sprint.level/50)*Math.PI);
@@ -2933,7 +2933,7 @@ var SisyphusSheepGame = function(){
 				obs.tint = 0xb3e5fc;//0x81d4fa;
 			}
 
-			if(obs.y>=this.canvasHeight+obs.height+this.powerupOffset){
+			if(obs.y>=this.canvasHeight + obs.height){
 				this.obstacles.removeChild(obs);
 			}
 		};
@@ -2942,7 +2942,8 @@ var SisyphusSheepGame = function(){
 		for(i=0;i<this.powerups.children.length;i++){
 			var pwr = this.powerups.children[i];
 
-			pwr.y = pwr.attachedObs.y-this.powerupOffset;
+			pwr.vy += pwr.ay;
+			pwr.y += pwr.vy;
 
 			if(pwr.y>=this.canvasHeight+pwr.height){
 				this.powerups.removeChild(pwr);
@@ -2972,22 +2973,14 @@ var SisyphusSheepGame = function(){
 		for(i=0;i<this.obstacles.children.length;i++){
 			var obs = this.obstacles.children[i];
 
-			if(this.hitTest(this.hero,obs,this.hero.sheep.width*0.25,this.hero.sheep.height*0.15)){
+			if(this.hitTest(this.hero, obs, this.hero.sheep.width * 0.25, this.hero.sheep.height * 0.15)){
 				this.obstacles.removeChild(obs);
 
 				if(this.heroShield.alpha){
 					this.heroShield.alpha = 0;
 					this.shieldTimer = 0;
-
-					if(typeof obs.attachedPowerup != "undefined" && obs.attachedPowerup != null){
-						this.collectPowerup(obs.attachedPowerup.typeName);
-					}
-
-					this.powerups.removeChild(obs.attachedPowerup);
 				}
 				else{
-					this.powerups.removeChild(obs.attachedPowerup);
-
 					this.gameover();
 					return;
 				}
@@ -2998,7 +2991,7 @@ var SisyphusSheepGame = function(){
 			var pwr = this.powerups.children[i];
 
 			//Check for hero and powerup hitTest
-			if(this.hitTest(this.hero,pwr,5,5)){
+			if(this.hitTest(this.hero, pwr, 5, 5)){
 				this.collectPowerup(this.powerupNames[pwr.type]);
 				this.powerups.removeChild(pwr);
 			}
@@ -3107,77 +3100,75 @@ var SisyphusSheepGame = function(){
 		if(this.obstaclesFrozen) return;
 
 		var i;
-		var obs = new PIXI.Sprite(this.sprites.spike.texture);
-
-		obs.anchor.set(0.5);
-		obs.scale.set(0.2,-0.2);
-
-		//Ensure obstacle does not appear twice in the section at one time.
-		/*
-		var hasEmptySection = false;
-		for(i=1;i<=this.nObstacleSections;i++){
-			if(!this.obstacleSectionActive[i]){
-				hasEmptySection = true;
-				break;
-			}
-		}
-		if(!hasEmptySection) return;
-		*/
 
 		//RESET TIMERS
 		this.pauseTime["obstacle"] = 0;
 		this.obstacleTimer = new Date().getTime();
 
-		//"Algo" to generate startX position of the obstacle. Very Evil.
-		var _dir;
-		var _range = this.width*this.obstacleRange; //maximum range away from center of player
+		//SPAWN POWERUP OR OBSTACLE?
+		//TODO: Make it mutually exclusive or possible to spawn both (separate speeds/positions ofc)?
+		var isObstacle = (Math.random()>=this.powerupChance); //is it a powerup or obstacle?
 
-		if(Math.random()<0.3) _dir=-1; else _dir = 1; //choose whether spike is behind or in front of player
-	    var startX = _dir*getRandomFloat(0, _range) + this.hero.x; //make it such that it's near to the player positon (muhaha)
-        startX = Math.min(this.canvasWidth-obs.width/2, Math.max(obs.width/2, startX)); //ensure still within range
+		//SET SIZES FOR OBSTACLE OR POWERUP
+		//-Need these sizes for calculation of X/Y positions
+		if(isObstacle){
+			var obs = new PIXI.Sprite(this.sprites.spike.texture);
 
-		var startY = obs.height/2;
+			obs.anchor.set(0.5);
+			obs.scale.set(0.2,-0.2);
 
-		obs.x = startX;
-		obs.y = startY;
-		obs.vy = 0;
+			this.setObstaclePosition(obs);
 
-		//Ramp up acceleration as number of portals passed increases
-		var _startG = 0.03;
-		var _maxG = 0.15;
-		obs.ay = getRandomFloat(_startG,Math.min(_startG+this.portalsPassed*0.01,_maxG));
+			this.obstacles.addChild(obs);
+		}
+		else{
+			/* --POWERUPS--
+			0: Coin
+			1: Shield
+			2: Freeze
+			*/
 
-		//Spawn powerup a few pixels above the spike. It'll fall at the same speed as the spike. Not easy to attain tho...
-		/* --POWERUPS--
-		0: Coin
-		1: Shield
-		2: Freeze
-		*/
-		var powerup;
-		obs.attachedPowerup = null;
-
-		if(Math.random()<=this.powerupChance){
 			//Add powerup
 			var type = getRandomInt(0,this.powerupNames.length-1);
-
-			//console.log(this.powerupNames[type].split("_").join(" ").toUpperCase()+" powerup attached to spike!");
-			powerup = new PIXI.Sprite(this.sprites.powerups[this.powerupNames[type]].texture);
+			var powerup = new PIXI.Sprite(this.sprites.powerups[this.powerupNames[type]].texture);
 
 			powerup.scale.set(0.3, 0.3);
 			powerup.anchor.set(0.5);
 
-			powerup.x = obs.x;
-			powerup.y = obs.y-this.powerupOffset;
+			this.setObstaclePosition(powerup);
 
 			powerup.type = type;
 			powerup.typeName = this.powerupNames[type];
-			powerup.attachedObs = obs;
-			obs.attachedPowerup = powerup;
 
 			this.powerups.addChild(powerup);
 		}
+	};
 
-		this.obstacles.addChild(obs);
+	//-"Algo" to generate positions of the obstacle or powerup. Very Evil.
+	this.setObstaclePosition = function(obj){
+		console.log(obj);
+
+		var _dir = (Math.random() < 0.3) ? -1 : 1; //choose whether spike is behind or in front of player
+		var _range = this.width*this.obstacleRange; //maximum range away from center of player
+
+		//--Set X positions somewhere around the player
+	    var startX = _dir*getRandomFloat(0, _range) + this.hero.x; //make it such that it's near to the player positon (muhaha)
+        startX = Math.min(this.canvasWidth-obj.width/2, Math.max(obj.width/2, startX)); //ensure still within range
+		var startY = obj.height/2;
+
+		//--Ramp up acceleration as number of portals passed increases
+		var _startG = 0.03;
+		var _maxG = 0.15;
+		var accY = getRandomFloat(_startG, Math.min(_startG + this.portalsPassed * 0.01, _maxG))
+
+		obj.x = startX;
+		obj.y = startY;
+		obj.vy = 0;
+		obj.ay = accY;
+
+		console.log("Spawn obstacle!", startX, startY);
+
+		return;
 	};
 
 	this.collectPowerup = function(type_name){
