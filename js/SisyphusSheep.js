@@ -3107,7 +3107,7 @@ var SisyphusSheepGame = function(){
 
 		//SPAWN POWERUP OR OBSTACLE?
 		//TODO: Make it mutually exclusive or possible to spawn both (separate speeds/positions ofc)?
-		var isObstacle = (Math.random()>=this.powerupChance); //is it a powerup or obstacle?
+		var isObstacle = (Math.random()<=this.powerupChance); //is it a powerup or obstacle?
 
 		//SET SIZES FOR OBSTACLE OR POWERUP
 		//-Need these sizes for calculation of X/Y positions
@@ -3132,8 +3132,10 @@ var SisyphusSheepGame = function(){
 			var type = getRandomInt(0,this.powerupNames.length-1);
 			var powerup = new PIXI.Sprite(this.sprites.powerups[this.powerupNames[type]].texture);
 
-			powerup.scale.set(0.3, 0.3);
+			//powerup.scale.set(0.3, 0.3);
 			powerup.anchor.set(0.5);
+
+			console.log(powerup.width, powerup.height);
 
 			this.setObstaclePosition(powerup);
 
