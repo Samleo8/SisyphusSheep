@@ -3146,14 +3146,12 @@ var SisyphusSheepGame = function(){
 
 	//-"Algo" to generate positions of the obstacle or powerup. Very Evil.
 	this.setObstaclePosition = function(obj){
-		console.log(obj);
-
 		var _dir = (Math.random() < 0.3) ? -1 : 1; //choose whether spike is behind or in front of player
-		var _range = this.width*this.obstacleRange; //maximum range away from center of player
+		var _range = obj.width*this.obstacleRange; //maximum range away from center of player
 
 		//--Set X positions somewhere around the player
 	    var startX = _dir*getRandomFloat(0, _range) + this.hero.x; //make it such that it's near to the player positon (muhaha)
-        startX = Math.min(this.canvasWidth-obj.width/2, Math.max(obj.width/2, startX)); //ensure still within range
+        startX = Math.min(this.canvasWidth - obj.width/2, Math.max(obj.width/2, startX)); //ensure still within range
 		var startY = obj.height/2;
 
 		//--Ramp up acceleration as number of portals passed increases
