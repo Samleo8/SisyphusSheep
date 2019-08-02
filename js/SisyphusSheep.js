@@ -2627,20 +2627,29 @@ var SisyphusSheepGame = function(){
 
 			//--Press event listener; also by default have button move downwards by activeOffset
 			if(typeof this.playButtons.childButtons[nm]["press"] == "function"){
-				this.playButtons[nm].on((_isMobile)?"touchstart":"mousedown", this.playButtons.childButtons[nm]["press"].bind(this));
+				this.playButtons[nm].on((_isMobile)?"touchstart":"mousedown", function(e){
+					this.playButtons[nm].y = this.playButtons.styles.activeOffset;
+					this.playButtons.childButtons[nm]["press"].bind(this, e);
+				}.bind(this));
 			}
-			this.playButtons[nm].on((_isMobile)?"touchstart":"mousedown", function(){
-				this.playButtons[nm].y = this.playButtons.styles.activeOffset;
-			}.bind(this));
+			else {
+				this.playButtons[nm].on((_isMobile)?"touchstart":"mousedown", function(){
+					this.playButtons[nm].y = this.playButtons.styles.activeOffset;
+				}.bind(this));
+			}
 
 			//--Release event listener; also by default have button move downwards by activeOffset
 			if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
-				this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", this.playButtons.childButtons[nm]["release"].bind(this));
+				this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", function(e){
+					this.playButtons[nm].y = 0;
+					this.playButtons.childButtons[nm]["release"].bind(this, e);
+				});
 			}
-
-			this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", function(){
-				this.playButtons[nm].y = 0;
-			}.bind(this));
+			else{
+				this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", function(){
+					this.playButtons[nm].y = 0;
+				}.bind(this));
+			}
 
 			//--Mouseover event listeners for alpha change
 			this.playButtons[nm].on("mouseover", function(){
