@@ -2596,6 +2596,9 @@ var SisyphusSheepGame = function(){
 			this.playButtons[nm] = new PIXI.Container();
 			this.playButtons[nm].x = this.playButtons.styles.sideMargin + this.playButtons.styles.width/2 + cnt*(this.playButtons.styles.sideMargin + this.playButtons.styles.width);
 			this.playButtons[nm].y = 0;
+			this.playButtons[nm].width = this.playButtons.styles.width;
+			this.playButtons[nm].height = this.playButtons.styles.width;
+
 			this.playButtons[nm].alpha = this.playButtons.styles.alpha;
 
 			//-Circle
@@ -2641,6 +2644,7 @@ var SisyphusSheepGame = function(){
 
 			//--Press event listener; also by default have button move downwards by activeOffset
 			if(typeof this.playButtons.childButtons[nm]["press"] == "function"){
+				console.log(nm, this.playButtons.childButtons[nm]["press"]);
 				this.playButtons[nm].on((_isMobile)?"touchstart":"mousedown", function(e){
 					this.playButtons[nm].y = this.playButtons.styles.activeOffset;
 					this.playButtons.childButtons[nm]["press"].bind(this, e);
@@ -2651,6 +2655,10 @@ var SisyphusSheepGame = function(){
 					this.playButtons[nm].y = this.playButtons.styles.activeOffset;
 				}.bind(this));
 			}
+
+			//-Add the graphics and icons and texts into the button container
+			this.playButtons[nm].addChild(this.playButtons[nm].circle);
+			this.playButtons[nm].addChild(this.playButtons[nm].icon);
 
 			//--Release event listener; also by default have button move downwards by activeOffset
 			if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
@@ -2673,10 +2681,6 @@ var SisyphusSheepGame = function(){
 			this.playButtons[nm].on("mouseout", function(){
 				this.playButtons[nm].alpha = this.playButtons.styles.alpha;
 			}.bind(this));
-
-			//-Add the graphics and icons and texts into the button container
-			this.playButtons[nm].addChild(this.playButtons[nm].circle);
-			this.playButtons[nm].addChild(this.playButtons[nm].icon);
 
 			this.playButtons.addChild(this.playButtons[nm]);
 
