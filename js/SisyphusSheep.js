@@ -2792,6 +2792,16 @@ var SisyphusSheepGame = function(){
 
 		//TODO: Remove all obstacles, reset obstacle timers
 
+//CLEAR OBSTACLES
+		for(i=this.obstacles.children.length-1;i>=0;i--){
+			this.obstacles.removeChild(this.obstacles.children[i]);
+		}
+
+		//CLEAR POWERUPS
+		for(i=this.powerups.children.length-1;i>=0;i--){
+			this.powerups.removeChild(this.powerups.children[i]);
+		}
+
 		//Increment Score Accordingly
 		this.portalsPassed++;
 		this.incScore(this.portalsPassed*this.portalsScore*this.portalsScoreMultiplier);
