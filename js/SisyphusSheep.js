@@ -15,7 +15,7 @@ var SisyphusSheepGame = function(){
 	this.controls = {
 		"movement": {
 			"keys": [40, "S".charCodeAt()], //Down-Arrow, S
-			"callback": "toggleHeroMovement",
+			"callback": "heroRun",
 			"keyup": true,
 			"keydown": false
 		},
@@ -129,8 +129,8 @@ var SisyphusSheepGame = function(){
 	//Hero
 	this.hero = null;
 	this.heroShield = null;
-	this.toggleHeroMovementStrength = 5.5;
-	this.toggleHeroMovementStrength_lamb = 7.5;
+	this.heroRunStrength = 5.5;
+	this.heroRunStrength_lamb = 7.5;
 
 	this.startingShield = this.upgrades.shieldTimeInc.value;
 	this.shieldTimer = null;
@@ -1156,8 +1156,8 @@ var SisyphusSheepGame = function(){
 			window.addEventListener("blur", this.appBlur.bind(this), false);
 		}
 
-		//renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.toggleHeroMovement.bind(this), false);
-		renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.toggleHeroMovement.bind(this), false);
+		renderer.view.addEventListener((_isMobile)?"touchstart":"mousedown", this.heroRun.bind(this), false);
+		renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.heroRun.bind(this), false);
 
 		//LOAD IMAGES, FONTS AND MUSIC
 		this.loadFonts(); //(load fonts first to make sure start screen has proper fonts)
@@ -2319,7 +2319,7 @@ var SisyphusSheepGame = function(){
 				fontSize: 38
 			};
 
-			var text = new PIXI.Text("Run to the End of the Treadmill. \nAvoid the Spikes. Repeat. \n"+((_isMobile)?"Tap anywhere":"Click/[DOWN]")+" to START/STOP RUNNING\n[RIGHT] to SPRINT\n\n- RUN/SPRINT to Start! -",textOpt);
+			var text = new PIXI.Text("Run to the End of the Treadmill. \nAvoid the Spikes. Repeat. \n"+((_isMobile)?"Hold":"[DOWN]")+" to RUN\n[RIGHT] to SPRINT\n\n- RUN to Start! -",textOpt);
 			text.anchor.set(0.5, 0.5);
 
 			speech_bubble.addChild(bubble);
@@ -2724,7 +2724,7 @@ var SisyphusSheepGame = function(){
 		this.hero.ax = 0;
 		this.hero.vy = 0;
 		this.hero.ay = 0;
-		//this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.toggleHeroMovementStrength:this.toggleHeroMovementStrength_lamb;
+		//this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.heroRunStrength:this.heroRunStrength_lamb;
 
 		this.sprint.level = 100;
 
@@ -2828,18 +2828,20 @@ var SisyphusSheepGame = function(){
 		}
 	};
 
-	this.toggleHeroMovement = function(event){
-		if(this.preventHeroMovement){
-			this.preventHeroMovement--; //makes sure that all false clicks which have been triggered are accounted for
-			//console.log("False click prevented: "+this.preventHeroMovement);
-			return;
-		}
+	this.heroRun = function(e){
+		if(e.type == "touchend" || e.type == "mouseup"){
+			if(this.preventHeroMovement){
+				this.preventHeroMovement--; //makes sure that all false clicks which have been triggered are accounted for
+				//console.log("False click prevented: "+this.preventHeroMovement);
+				return;
+			}
 
-		if(this._jumpToStartGame){
-			this._jumpToStartGame = false;
-			//console.log("User started game by clicking. "+this._jumpToStartGame);
-			this.startGame();
-			return;
+			if(this._jumpToStartGame){
+				this._jumpToStartGame = false;
+				//console.log("User started game by clicking. "+this._jumpToStartGame);
+				this.startGame();
+				return;
+			}
 		}
 
 		if(!this._gameStarted) return;
@@ -2850,18 +2852,25 @@ var SisyphusSheepGame = function(){
 
 		//Toggle Running
 		//TODO: QUESTION: Toggle visibility of sprint button?
-		if(this.hero.running){
-			this.hero.running = false;
-			this.hero.sprinting = false;
-			this.hero.sheep.gotoAndStop(4);
+		switch(e.type){
+			case "mousedown":
+			case "touchstart":
+			case "keydown":
+				this.hero.running = true;
+				this.hero.sheep.gotoAndPlay(1);
 
-			//this.playButtons.sprint.visible = false;
-		}
-		else{
-			this.hero.running = true;
-			this.hero.sheep.gotoAndPlay(1);
+				//this.playButtons.sprint.visible = true;
+				break;
+			case "mouseup":
+			case "touchend":
+			case "keyup":
+				this.hero.running = false;
+				this.hero.sprinting = false;
+				this.hero.sheep.gotoAndStop(4);
 
-			//this.playButtons.sprint.visible = true;
+				//this.playButtons.sprint.visible = false;
+				break;
+			default: return;
 		}
 	};
 
@@ -4064,10 +4073,10 @@ var SisyphusSheepGame = function(){
 
 					if(accessory == "little_lamb"){
 						this.hero.sheep.scale.set(0.25,0.25);
-						this.hero.jumpStrength = this.toggleHeroMovementStrength_lamb;
+						this.hero.jumpStrength = this.heroRunStrength_lamb;
 					} else{
 						this.hero.sheep.scale.set(0.35,0.35);
-						this.hero.jumpStrength = this.toggleHeroMovementStrength;
+						this.hero.jumpStrength = this.heroRunStrength;
 					}
 				}
 				else{
@@ -4079,10 +4088,10 @@ var SisyphusSheepGame = function(){
 
 					if(accessory == "little_lamb"){
 						this.hero.sheep.scale.set(0.25*scaleDir,0.25);
-						this.hero.jumpStrength = this.toggleHeroMovementStrength_lamb;
+						this.hero.jumpStrength = this.heroRunStrength_lamb;
 					} else{
 						this.hero.sheep.scale.set(0.35*scaleDir,0.35);
-						this.hero.jumpStrength = this.toggleHeroMovementStrength;
+						this.hero.jumpStrength = this.heroRunStrength;
 					}
 				}
 
