@@ -63,9 +63,9 @@ var SisyphusSheepGame = function(){
 	this.toggleHeroMovementStrength = 5.5;
 	this.toggleHeroMovementStrength_lamb = 7.5;
 
-	this.startingShield = false;
+	this.startingShield = this.upgrades.shieldTimeInc.value;
 	this.shieldTimer = null;
-	this.shieldTimeInc = 500; //ms
+	this.shieldTimeInc = this.upgrades.shieldTimeInc.value; //ms
 	this.shieldFadeInc = 0.1;
 
 	this.preventHeroMovement = 0;
@@ -161,6 +161,75 @@ var SisyphusSheepGame = function(){
 	this.totalFontsFailed = 0;
 	this.totalFontsLoaded = 0;
 
+	//-Upgrades
+	/* NOTE:
+		- The name in this.upgrades refers to the variable name that will be incremented
+		- Chances
+	*/
+	this.upgrades = {
+		"powerupChance": {
+			"title": "Power Boost",
+			"desc": "Increases chance that a powerup will spawn",
+			"increment_value": 0.05,
+			"max_increments": 5,
+			"increment_count": 0,
+			"type": "chance",
+			"cost": 100,
+			"value": 0.2
+		},
+		"noDeathChance": {
+			"title": "Adrenaline",
+			"desc": "Increases chance that you won't die from a spike",
+			"increment_value": 0.025,
+			"max_increments": 5,
+			"increment_count": 0,
+			"type": "chance",
+			"cost": 250,
+			"value": 0
+		},
+		"shieldTimeInc": {
+			"title": "Protection",
+			"desc": "Increases time shield powerup is active",
+			"increment_value": 20,
+			"max_increments": 10,
+			"increment_count": 0,
+			"type": "time",
+			"cost": 200,
+			"value": 500
+		},
+		"obstaclesFreezeTime": {
+			"title": "Sub-Zero",
+			"desc": "Increases time freeze powerup is active",
+			"increment_value": 200,
+			"max_increments": 10,
+			"increment_count": 0,
+			"type": "time",
+			"cost": 200,
+			"value": 3000
+		},
+		"startingShield": {
+			"title": "Armour",
+			"desc": "Gives a starting shield on every new game",
+			"increment_value": 1,
+			"max_increments": 1,
+			"increment_count": 0,
+			"type": "one-off",
+			"cost": 5000,
+			"value": false
+		},
+		"coinIncAmt": {
+			"title": "Merchant",
+			"desc": "Increases the amount of coins earned per powerup",
+			"increment_value": 10,
+			"max_increments": 9,
+			"increment_count": 0,
+			"type": "value",
+			"cost": 100,
+			"value": 20
+		}
+	};
+	this.upgradesSection = {};
+
 	//Obstacles
 	this.obstacles = null;
 	this.obstacleTimer = null;
@@ -169,92 +238,23 @@ var SisyphusSheepGame = function(){
 
 	this.obstaclesFrozen = false;
 	this.freezeTimer = null;
-	this.obstaclesFreezeTime = 3000; //in ms
+	this.obstaclesFreezeTime = this.upgrades.obstaclesFreezeTime.value; //in ms
 
 	//Coins and Shop
 	this.coins = 500;
-	this.coinIncAmt = 60;
+	this.coinIncAmt = this.upgrades.coinIncAmt.value;
 
 	this.shop = null;
 
 	this.shopButton = null;
 	this.shopTabNames = ["upgrades","accessories","coins"];
 
-	//-Upgrades
-	/* NOTE:
-		- The name in this.upgrades refers to the variable name that will be incremented
-		- Chances
-	*/
-	this.upgrades = {
-		"powerupChance":{
-			"title":"Power Boost",
-			"desc":"Increases chance that a powerup will spawn",
-			"increment_value":0.05,
-			"max_increments":5,
-			"increment_count":0,
-			"type":"chance",
-			"cost":100,
-			"value":0.3
-		},
-		"noDeathChance":{
-			"title":"Adrenaline",
-			"desc":"Increases chance that you won't die from a spike",
-			"increment_value":0.025,
-			"max_increments":5,
-			"increment_count":0,
-			"type":"chance",
-			"cost":250,
-			"value":0
-		},
-		"shieldTimeInc":{
-			"title":"Protection",
-			"desc":"Increases time shield powerup is active",
-			"increment_value":20,
-			"max_increments":10,
-			"increment_count":0,
-			"type":"time",
-			"cost":200,
-			"value":500
-		},
-		"obstaclesFreezeTime":{
-			"title":"Sub-Zero",
-			"desc":"Increases time freeze powerup is active",
-			"increment_value":200,
-			"max_increments":10,
-			"increment_count":0,
-			"type":"time",
-			"cost":200,
-			"value":3000
-		},
-		"startingShield":{
-			"title":"Armour",
-			"desc":"Gives a starting shield on every new game",
-			"increment_value":1,
-			"max_increments":1,
-			"increment_count":0,
-			"type":"one-off",
-			"cost":5000,
-			"value":false
-		},
-		"coinIncAmt":{
-			"title":"Merchant",
-			"desc":"Increases the amount of coins earned per powerup",
-			"increment_value":10,
-			"max_increments":9,
-			"increment_count":0,
-			"type":"value",
-			"cost":100,
-			"value":10
-		}
-	};
-	this.upgradesSection = {};
-
 	//--Powerups
 	this.powerupNames = ["coin","freeze","shield"];
 	this.powerups = null;
-	this.powerupChance = 0.3;
+	this.powerupChance = this.upgrades.powerupChance.value;
 
-	this.noDeathChance = 0;
+	this.noDeathChance = this.upgrades.noDeathChance.value;
 
 	//-Skins and Accessories
 	/* NOTE:
@@ -2772,7 +2772,7 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.nextLevel = function(){
-		//Hero
+		//HERO
 		//--Reset positions of hero, shield and accessories
 		this.hero.x = this.canvasWidth*(1/3);
 
@@ -2784,15 +2784,17 @@ var SisyphusSheepGame = function(){
 
 		this.sprint.level = Math.min(Math.max(this.sprint.level, 0), 100);
 
-		//Treadmill
+		//TREADMILL
 		//--Increment Treadmill Speed
 		this.treadmill.speed *= this.treadmillIncSpeed;
 		this.treadmill.speed = Math.min(this.treadmill.speed, this.treadmillMaxSpeed);
 		//TODO: Treadmill animation speed is in proportion with actual speed of treadmill
 
-		//TODO: Remove all obstacles, reset obstacle timers
+		//RESET TIMERS
+		this.pauseTime["obstacle"] = 0;
+		this.obstacleTimer = new Date().getTime();
 
-//CLEAR OBSTACLES
+		//CLEAR OBSTACLES
 		for(i=this.obstacles.children.length-1;i>=0;i--){
 			this.obstacles.removeChild(this.obstacles.children[i]);
 		}
@@ -2802,11 +2804,11 @@ var SisyphusSheepGame = function(){
 			this.powerups.removeChild(this.powerups.children[i]);
 		}
 
-		//Increment Score Accordingly
+		//INCREMENT SCORE
 		this.portalsPassed++;
 		this.incScore(this.portalsPassed*this.portalsScore*this.portalsScoreMultiplier);
 
-		//"Continue" the Game
+		//CONTINUE GAME
 		requestAnimationFrame(this.update.bind(this));
 	};
 
@@ -3117,7 +3119,7 @@ var SisyphusSheepGame = function(){
 
 		//SPAWN POWERUP OR OBSTACLE?
 		//TODO: Make it mutually exclusive or possible to spawn both (separate speeds/positions ofc)?
-		var isObstacle = (Math.random()<=this.powerupChance); //is it a powerup or obstacle?
+		var isObstacle = (Math.random()>=this.powerupChance); //is it a powerup or obstacle?
 
 		//SET SIZES FOR OBSTACLE OR POWERUP
 		//-Need these sizes for calculation of X/Y positions
