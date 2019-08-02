@@ -1156,8 +1156,10 @@ var SisyphusSheepGame = function(){
 			window.addEventListener("blur", this.appBlur.bind(this), false);
 		}
 
-		renderer.view.addEventListener((_isMobile)?"touchstart":"mousedown", this.heroRun.bind(this), false);
-		renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.heroRun.bind(this), false);
+		//renderer.view.addEventListener((_isMobile)?"touchstart":"mousedown", this.heroRun.bind(this), false);
+		//renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.heroRun.bind(this), false);
+
+		renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.startGame.bind(this));
 
 		//LOAD IMAGES, FONTS AND MUSIC
 		this.loadFonts(); //(load fonts first to make sure start screen has proper fonts)
@@ -2845,21 +2847,6 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.heroRun = function(e){
-		if(e.type == "touchend" || e.type == "mouseup"){
-			if(this.preventHeroMovement){
-				this.preventHeroMovement--; //makes sure that all false clicks which have been triggered are accounted for
-				//console.log("False click prevented: "+this.preventHeroMovement);
-				return;
-			}
-
-			if(this._jumpToStartGame){
-				this._jumpToStartGame = false;
-				//console.log("User started game by clicking. "+this._jumpToStartGame);
-				this.startGame();
-				return;
-			}
-		}
-
 		if(!this._gameStarted) return;
 
 		if(this._paused) return;
@@ -2899,7 +2886,6 @@ var SisyphusSheepGame = function(){
 				break;
 			case "mouseup":
 			case "touchend":
-				this.preventHeroMovement++;
 			case "keyup":
 				this.hero.sprinting = false;
 				break;
