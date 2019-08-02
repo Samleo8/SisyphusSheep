@@ -5,7 +5,7 @@ var SisyphusSheepGame = function(){
 	this.isOnline = navigator.onLine;
 
 	this._gameStarted = false;
-	this._jumpToStartGame = false;
+	this._runToStartGame = false;
 
 	//Canvas and Controls
 	this.hwratio = 9/16; //most screens are of game resolution
@@ -1158,8 +1158,6 @@ var SisyphusSheepGame = function(){
 
 		//renderer.view.addEventListener((_isMobile)?"touchstart":"mousedown", this.heroRun.bind(this), false);
 		//renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.heroRun.bind(this), false);
-
-		renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.startGame.bind(this));
 
 		//LOAD IMAGES, FONTS AND MUSIC
 		this.loadFonts(); //(load fonts first to make sure start screen has proper fonts)
@@ -2398,7 +2396,9 @@ var SisyphusSheepGame = function(){
 			this.startScreen.interactive = true;
 			this.startScreen.buttonMode = true;
 
-			this._jumpToStartGame = true;
+			this._runToStartGame = true;
+
+			renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.startGame.bind(this));
 
 			renderer.render(stage);
 
@@ -2419,7 +2419,10 @@ var SisyphusSheepGame = function(){
 
 		if(this._gameStarted) return;
 
-		this._jumpToStartGame = false;
+		//Remove unnecessary tap/click event listener used for starting the game
+		renderer.view.removeEventListener((_isMobile)?"touchend":"mouseup", this.startGame.bind(this));
+
+		this._runToStartGame = false;
 		this._gameStarted = true;
 
 		//Remove start screen items
@@ -2856,6 +2859,11 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.heroRun = function(e){
+		if(e.type == "keyup" && this._runToStartGame){
+			this.startGame();
+			return;
+		}
+
 		if(!this._gameStarted) return;
 
 		if(this._paused) return;
@@ -2887,6 +2895,11 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.heroSprint = function(e){
+		if(e.type == "keyup" && this._runToStartGame){
+			this.startGame();
+			return;
+		}
+
 		switch(e.type){
 			case "mousedown":
 			case "touchstart":
