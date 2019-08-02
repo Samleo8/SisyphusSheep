@@ -2859,8 +2859,6 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.heroRun = function(e){
-		console.log("run 1");
-
 		if(e.type == "keyup" && this._runToStartGame){
 			this._runToStartGame = false;
 			this.startGame();
@@ -2870,8 +2868,6 @@ var SisyphusSheepGame = function(){
 		if(!this._gameStarted) return;
 
 		if(this._paused) return;
-
-		console.log("run 2");
 
 		//this.audio["jump"].play();
 
@@ -2884,8 +2880,6 @@ var SisyphusSheepGame = function(){
 				this.hero.running = true;
 				this.hero.sheep.gotoAndPlay(1);
 
-				console.log("run 3.down");
-
 				//this.playButtons.sprint.visible = true;
 				break;
 			case "mouseup":
@@ -2894,8 +2888,6 @@ var SisyphusSheepGame = function(){
 				this.hero.running = false;
 				this.hero.sprinting = false;
 				this.hero.sheep.gotoAndStop(4);
-
-				console.log("run 3.up");
 
 				//this.playButtons.sprint.visible = false;
 				break;
