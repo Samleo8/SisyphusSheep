@@ -1446,6 +1446,7 @@ var SisyphusSheepGame = function(){
 				this.audio[nm].volume = this.audioVol[i];
 				this.audio[nm].defaultVolume = this.audioVol[i];
 			}
+
 			this.audio["main_music"].play({loop:true});
 			this.audio["main_music"].loop = true;
 
@@ -3176,8 +3177,6 @@ var SisyphusSheepGame = function(){
 		obj.vy = 0;
 		obj.ay = accY;
 
-		console.log("Spawn obstacle!", startX, startY);
-
 		return;
 	};
 
@@ -4626,7 +4625,9 @@ var SisyphusSheepGame = function(){
 			this.pauseButton.getChildByName("pause").alpha=1;
 			this.pauseButton.getChildByName("play").alpha=0;
 
-			for(i=0;i<this.pauseTime.length;i++){
+			for(i in this.pauseTime){
+				if(!this.pauseTime.hasOwnProperty(i)) continue;
+
 				this.pauseTime[i] += (new Date().getTime())-this.pauseTimer;
 			}
 			this._paused = false;
