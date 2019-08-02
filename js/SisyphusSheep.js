@@ -212,7 +212,7 @@ var SisyphusSheepGame = function(){
 	this.audio = {};
 
 	//Icons and Buttons
-	this.iconNames = [ "pause","play","music_on","music_off","fx_on","fx_off","games","info","web","logout","leaderboard","achievements","restart","ad","shop","coin","dollar","post","back","left_arrow","right_arrow","shirt","tick","restore", "sprint" ];
+	this.iconNames = [ "pause","play","music_on","music_off","fx_on","fx_off","games","info","web","logout","leaderboard","achievements","restart","ad","shop","coin","dollar","post","back","left_arrow","right_arrow","shirt","tick","restore", "sprint", "run" ];
 
 	this.pauseButton = null;
 	this.muteMusicButton = null;
@@ -2556,6 +2556,11 @@ var SisyphusSheepGame = function(){
 		};
 
 		this.playButtons.childButtons = {
+			"run":{
+				"icon": this.sprites.icons["run"],
+				"press": this.heroRun,
+				"release": this.heroRun
+			},
 			"sprint":{
 				"icon": this.sprites.icons["sprint"],
 				"press": this.heroSprint,
@@ -2587,6 +2592,8 @@ var SisyphusSheepGame = function(){
 
 			//-Special Sprint Circle
 			if(nm == "sprint"){
+				this.playButtons[nm].x = this.canvasWidth - (this.playButtons.styles.sideMargin + this.playButtons.styles.width/2);
+
 				this.sprint.circle = new PIXI.Container();
 
 				this.sprint.circle.thickness = 15;
