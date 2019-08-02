@@ -1,6 +1,7 @@
 var SisyphusSheepGame = function(){
 	var self = this;
 	var sheep;
+	var startGameFn;
 
 	this.isOnline = navigator.onLine;
 
@@ -1155,9 +1156,6 @@ var SisyphusSheepGame = function(){
 			window.addEventListener("focus", this.appFocus.bind(this), false);
 			window.addEventListener("blur", this.appBlur.bind(this), false);
 		}
-
-		//renderer.view.addEventListener((_isMobile)?"touchstart":"mousedown", this.heroRun.bind(this), false);
-		//renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.heroRun.bind(this), false);
 
 		//LOAD IMAGES, FONTS AND MUSIC
 		this.loadFonts(); //(load fonts first to make sure start screen has proper fonts)
@@ -2398,7 +2396,9 @@ var SisyphusSheepGame = function(){
 
 			this._runToStartGame = true;
 
-			renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.startGame.bind(this));
+			//Need to do it like this as .bind() changes the signature of the function
+			startGameFn = this.startGame.bind(this);
+			renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", startGameFn);
 
 			renderer.render(stage);
 
@@ -2420,7 +2420,7 @@ var SisyphusSheepGame = function(){
 		if(this._gameStarted) return;
 
 		//Remove unnecessary tap/click event listener used for starting the game
-		renderer.view.removeEventListener((_isMobile)?"touchend":"mouseup", this.startGame.bind(this));
+		renderer.view.removeEventListener((_isMobile)?"touchend":"mouseup", startGameFn);
 
 		this._runToStartGame = false;
 		this._gameStarted = true;
