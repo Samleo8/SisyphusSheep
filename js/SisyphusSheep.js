@@ -2657,7 +2657,7 @@ var SisyphusSheepGame = function(){
 				this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", function(e){
 					this.playButtons[nm].y = 0;
 					this.playButtons.childButtons[nm]["release"].bind(this, e);
-				});
+				}.bind(this));
 			}
 			else{
 				this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", function(){
@@ -2860,6 +2860,7 @@ var SisyphusSheepGame = function(){
 
 	this.heroRun = function(e){
 		if(e.type == "keyup" && this._runToStartGame){
+			this._runToStartGame = false;
 			this.startGame();
 			return;
 		}
@@ -2896,6 +2897,7 @@ var SisyphusSheepGame = function(){
 
 	this.heroSprint = function(e){
 		if(e.type == "keyup" && this._runToStartGame){
+			this._runToStartGame = false;
 			this.startGame();
 			return;
 		}
