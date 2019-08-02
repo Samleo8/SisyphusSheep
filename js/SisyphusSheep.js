@@ -57,6 +57,75 @@ var SisyphusSheepGame = function(){
 		}
 	};
 
+	//-Upgrades
+	/* NOTE:
+		- The name in this.upgrades refers to the variable name that will be incremented
+		- Chances
+	*/
+	this.upgrades = {
+		"powerupChance": {
+			"title": "Power Boost",
+			"desc": "Increases chance that a powerup will spawn",
+			"increment_value": 0.05,
+			"max_increments": 5,
+			"increment_count": 0,
+			"type": "chance",
+			"cost": 100,
+			"value": 0.2
+		},
+		"noDeathChance": {
+			"title": "Adrenaline",
+			"desc": "Increases chance that you won't die from a spike",
+			"increment_value": 0.025,
+			"max_increments": 5,
+			"increment_count": 0,
+			"type": "chance",
+			"cost": 250,
+			"value": 0
+		},
+		"shieldTimeInc": {
+			"title": "Protection",
+			"desc": "Increases time shield powerup is active",
+			"increment_value": 20,
+			"max_increments": 10,
+			"increment_count": 0,
+			"type": "time",
+			"cost": 200,
+			"value": 500
+		},
+		"obstaclesFreezeTime": {
+			"title": "Sub-Zero",
+			"desc": "Increases time freeze powerup is active",
+			"increment_value": 200,
+			"max_increments": 10,
+			"increment_count": 0,
+			"type": "time",
+			"cost": 200,
+			"value": 3000
+		},
+		"startingShield": {
+			"title": "Armour",
+			"desc": "Gives a starting shield on every new game",
+			"increment_value": 1,
+			"max_increments": 1,
+			"increment_count": 0,
+			"type": "one-off",
+			"cost": 5000,
+			"value": false
+		},
+		"coinIncAmt": {
+			"title": "Merchant",
+			"desc": "Increases the amount of coins earned per powerup",
+			"increment_value": 10,
+			"max_increments": 9,
+			"increment_count": 0,
+			"type": "value",
+			"cost": 100,
+			"value": 20
+		}
+	};
+	this.upgradesSection = {};
+
 	//Hero
 	this.hero = null;
 	this.heroShield = null;
@@ -160,75 +229,6 @@ var SisyphusSheepGame = function(){
 	this.totalFonts = 0;
 	this.totalFontsFailed = 0;
 	this.totalFontsLoaded = 0;
-
-	//-Upgrades
-	/* NOTE:
-		- The name in this.upgrades refers to the variable name that will be incremented
-		- Chances
-	*/
-	this.upgrades = {
-		"powerupChance": {
-			"title": "Power Boost",
-			"desc": "Increases chance that a powerup will spawn",
-			"increment_value": 0.05,
-			"max_increments": 5,
-			"increment_count": 0,
-			"type": "chance",
-			"cost": 100,
-			"value": 0.2
-		},
-		"noDeathChance": {
-			"title": "Adrenaline",
-			"desc": "Increases chance that you won't die from a spike",
-			"increment_value": 0.025,
-			"max_increments": 5,
-			"increment_count": 0,
-			"type": "chance",
-			"cost": 250,
-			"value": 0
-		},
-		"shieldTimeInc": {
-			"title": "Protection",
-			"desc": "Increases time shield powerup is active",
-			"increment_value": 20,
-			"max_increments": 10,
-			"increment_count": 0,
-			"type": "time",
-			"cost": 200,
-			"value": 500
-		},
-		"obstaclesFreezeTime": {
-			"title": "Sub-Zero",
-			"desc": "Increases time freeze powerup is active",
-			"increment_value": 200,
-			"max_increments": 10,
-			"increment_count": 0,
-			"type": "time",
-			"cost": 200,
-			"value": 3000
-		},
-		"startingShield": {
-			"title": "Armour",
-			"desc": "Gives a starting shield on every new game",
-			"increment_value": 1,
-			"max_increments": 1,
-			"increment_count": 0,
-			"type": "one-off",
-			"cost": 5000,
-			"value": false
-		},
-		"coinIncAmt": {
-			"title": "Merchant",
-			"desc": "Increases the amount of coins earned per powerup",
-			"increment_value": 10,
-			"max_increments": 9,
-			"increment_count": 0,
-			"type": "value",
-			"cost": 100,
-			"value": 20
-		}
-	};
-	this.upgradesSection = {};
 
 	//Obstacles
 	this.obstacles = null;
