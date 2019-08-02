@@ -2303,7 +2303,7 @@ var SisyphusSheepGame = function(){
 
 			//-Bubble
 			var bubble = new PIXI.Graphics();
-			bubble._width = 800+20;
+			bubble._width = 750+20;
 			bubble._height = 300+30;
 			bubble._radius = 40;
 			bubble.beginFill(0xcfd8dc)
@@ -2321,7 +2321,16 @@ var SisyphusSheepGame = function(){
 				fontSize: 38
 			};
 
-			var text = new PIXI.Text("Run to the End of the Treadmill. \nAvoid the Spikes. Repeat. \n"+((_isMobile)?"Hold":"[DOWN]")+" to RUN\n[RIGHT] to SPRINT\n\n- RUN to Start! -",textOpt);
+			var text = new PIXI.Text(
+				"Run to the End of the Treadmill. \nAvoid the Spikes. Repeat. \n"+
+				((_isMobile)?"Left button":"[DOWN]")+
+				" to RUN\n"+
+				((_isMobile)?"Right button":"[RIGHT]")+
+				" to SPRINT\n\n- "+
+				((_isMobile)?"TAP":"Click/RUN")+
+				" to Start! -",
+				textOpt
+			);
 			text.anchor.set(0.5, 0.5);
 
 			speech_bubble.addChild(bubble);
