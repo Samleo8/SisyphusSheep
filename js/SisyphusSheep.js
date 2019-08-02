@@ -2592,24 +2592,25 @@ var SisyphusSheepGame = function(){
 			if(!this.playButtons.childButtons.hasOwnProperty(i)) continue;
 
 			var nm = i.toString();
+			var playButton = this.playButtons[nm];
 
-			this.playButtons[nm] = new PIXI.Container();
-			this.playButtons[nm].x = this.playButtons.styles.sideMargin + this.playButtons.styles.width/2 + cnt*(this.playButtons.styles.sideMargin + this.playButtons.styles.width);
-			this.playButtons[nm].y = 0;
-			this.playButtons[nm].width = this.playButtons.styles.width;
-			this.playButtons[nm].height = this.playButtons.styles.width;
+			playButton = new PIXI.Container();
+			playButton.x = this.playButtons.styles.sideMargin + this.playButtons.styles.width/2 + cnt*(this.playButtons.styles.sideMargin + this.playButtons.styles.width);
+			playButton.y = 0;
+			playButton.width = this.playButtons.styles.width;
+			playButton.height = this.playButtons.styles.width;
 
-			this.playButtons[nm].alpha = this.playButtons.styles.alpha;
+			playButton.alpha = this.playButtons.styles.alpha;
 
 			//-Circle
-			this.playButtons[nm].circle = new PIXI.Graphics();
-			this.playButtons[nm].circle.beginFill(this.playButtons.styles.color)
+			playButton.circle = new PIXI.Graphics();
+			playButton.circle.beginFill(this.playButtons.styles.color)
 				.drawCircle(0, 0, this.playButtons.styles.width/2)
 			.endFill();
 
 			//-Special Sprint Circle
 			if(nm == "sprint"){
-				this.playButtons[nm].x = this.canvasWidth - (this.playButtons.styles.sideMargin + this.playButtons.styles.width/2);
+				playButton.x = this.canvasWidth - (this.playButtons.styles.sideMargin + this.playButtons.styles.width/2);
 
 				this.sprint.circle = new PIXI.Container();
 
@@ -2626,63 +2627,66 @@ var SisyphusSheepGame = function(){
 				this.sprint.circle.addChild(this.sprint.circle.bg);
 				this.sprint.circle.addChild(this.sprint.circle.bar);
 
-				this.playButtons[nm].addChild(this.sprint.circle);
+				playButton.addChild(this.sprint.circle);
 			}
 
 			//-Icon
-			this.playButtons[nm].icon = new PIXI.Sprite(this.playButtons.childButtons[i].icon.texture);
+			playButton.icon = new PIXI.Sprite(this.playButtons.childButtons[i].icon.texture);
 			for(j in this.playButtons.styles.icon){
 				var _style = j.toString();
 				if(!this.playButtons.childButtons.hasOwnProperty(i)) continue;
 
-				this.playButtons[nm].icon[_style] = this.playButtons.styles.icon[_style];
+				playButton.icon[_style] = this.playButtons.styles.icon[_style];
 			}
 
 			//-Add Clickability and Event Listeners
-			this.playButtons[nm].interactive = true;
-			this.playButtons[nm].buttonMode = true;
+			playButton.interactive = true;
+			playButton.buttonMode = true;
 
 			//--Press event listener; also by default have button move downwards by activeOffset
-			if(typeof this.playButtons.childButtons[nm]["press"] == "function"){
-				console.log(nm, this.playButtons.childButtons[nm]["press"]);
-				this.playButtons[nm].on((_isMobile)?"touchstart":"mousedown", function(e){
-					this.playButtons[nm].y = this.playButtons.styles.activeOffset;
-					this.playButtons.childButtons[nm]["press"].bind(this, e);
+			var _fn = this.playButtons.childButtons[i]["press"];
+			if(typeof this.playButtons.childButtons[i]["press"] == "function"){
+				playButton.on((_isMobile)?"touchstart":"mousedown", function(e){
+					console.log(_fn);
+
+					playButton.y = this.playButtons.styles.activeOffset;
+					_fn.bind(this, e);
 				}.bind(this));
 			}
 			else {
-				this.playButtons[nm].on((_isMobile)?"touchstart":"mousedown", function(){
-					this.playButtons[nm].y = this.playButtons.styles.activeOffset;
+				playButton.on((_isMobile)?"touchstart":"mousedown", function(){
+					playButton.y = this.playButtons.styles.activeOffset;
 				}.bind(this));
 			}
 
-			//-Add the graphics and icons and texts into the button container
-			this.playButtons[nm].addChild(this.playButtons[nm].circle);
-			this.playButtons[nm].addChild(this.playButtons[nm].icon);
-
+			_fn = this.playButtons.childButtons[i]["release"];
 			//--Release event listener; also by default have button move downwards by activeOffset
-			if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
-				this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", function(e){
-					this.playButtons[nm].y = 0;
-					this.playButtons.childButtons[nm]["release"].bind(this, e);
+			if(typeof this.playButtons.childButtons[i]["release"] == "function"){
+				playButton.on((_isMobile)?"touchend":"mouseup", function(e){
+					playButton.y = 0;
+					_fn.bind(this, e);
 				}.bind(this));
 			}
 			else{
-				this.playButtons[nm].on((_isMobile)?"touchend":"mouseup", function(){
-					this.playButtons[nm].y = 0;
+				playButton.on((_isMobile)?"touchend":"mouseup", function(){
+					playButton.y = 0;
 				}.bind(this));
 			}
 
 			//--Mouseover event listeners for alpha change
-			this.playButtons[nm].on("mouseover", function(){
-				this.playButtons[nm].alpha = Math.min(this.playButtons[nm].alpha + 0.2, 1);
+			playButton.on("mouseover", function(){
+				playButton.alpha = Math.min(playButton.alpha + 0.2, 1);
 			}.bind(this));
 
-			this.playButtons[nm].on("mouseout", function(){
-				this.playButtons[nm].alpha = this.playButtons.styles.alpha;
+			playButton.on("mouseout", function(){
+				playButton.alpha = this.playButtons.styles.alpha;
 			}.bind(this));
 
-			this.playButtons.addChild(this.playButtons[nm]);
+			//-Add the graphics and icons and texts into the button container
+			playButton.addChild(playButton.circle);
+			playButton.addChild(playButton.icon);
+
+			this.playButtons.addChild(playButton);
 
 			cnt++;
 		}
