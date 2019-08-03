@@ -2497,7 +2497,7 @@ var SisyphusSheepGame = function(){
 		this.treadmill = new PIXI.Container();
 
 		//--Treadmill Gear Animation
-		this.treadmill.gears = new PIXI.extras.AnimatedSprite(this.animations["treadmill"].frames);
+		this.treadmill.gears = new PIXI.AnimatedSprite(this.animations["treadmill"].frames);
 		this.treadmill.gears.animationSpeed = 0.25;
 		this.treadmill.gears.loop = true;
 		this.treadmill.gears.gotoAndPlay(1);
@@ -4145,7 +4145,7 @@ var SisyphusSheepGame = function(){
 				if(this.hero.sheep == null || typeof this.hero.sheep == "undefined"){
 					//Initializing of the sheep
 
-					this.hero.sheep = new PIXI.extras.AnimatedSprite(this.animations["sheep_running"].frames); //new PIXI.extras.AnimatedSprite(this.animations[((accessory=="little_lamb")?"sheep_running":accessory)].frames);
+					this.hero.sheep = new PIXI.AnimatedSprite(this.animations["sheep_running"].frames); //new PIXI.extras.AnimatedSprite(this.animations[((accessory=="little_lamb")?"sheep_running":accessory)].frames);
 					this.hero.sheep.animationSpeed = 0.15;
 					this.hero.sheep.loop = true;
 					this.hero.sheep.anchor.set(0.5);
