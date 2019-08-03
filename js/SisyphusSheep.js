@@ -1166,7 +1166,7 @@ var SisyphusSheepGame = function(){
 		var i, j;
 
 		//PRELOADING OF IMAGES INTO PIXI LOADER
-		this.loader = new PIXI.loaders.Loader();
+		this.loader = new PIXI.Loader();
 		this.loader.add("sprite_background","img/background.png");
 		this.loader.add("sprite_spike","img/spike.png");
 		this.loader.add("sprite_flag","img/flag.png");
@@ -1223,7 +1223,7 @@ var SisyphusSheepGame = function(){
 
 			//SPRITES
 			//-Background
-			this.sprites.background = new PIXI.extras.TilingSprite(
+			this.sprites.background = new PIXI.TilingSprite(
 				resources["sprite_background"].texture,
 				this.canvasWidth+1, //FIX: fixes weird pixel bug
 				this.canvasHeight
@@ -4145,7 +4145,7 @@ var SisyphusSheepGame = function(){
 				if(this.hero.sheep == null || typeof this.hero.sheep == "undefined"){
 					//Initializing of the sheep
 
-					this.hero.sheep = new PIXI.AnimatedSprite(this.animations["sheep_running"].frames); //new PIXI.extras.AnimatedSprite(this.animations[((accessory=="little_lamb")?"sheep_running":accessory)].frames);
+					this.hero.sheep = new PIXI.AnimatedSprite(this.animations[((accessory=="little_lamb")?"sheep_running":accessory)].frames);
 					this.hero.sheep.animationSpeed = 0.15;
 					this.hero.sheep.loop = true;
 					this.hero.sheep.anchor.set(0.5);
