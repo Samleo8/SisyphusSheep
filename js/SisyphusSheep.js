@@ -4979,7 +4979,7 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.loadOptions = function(){
-		window.localStorage.clear();
+		//window.localStorage.clear();
 
 		if(window.localStorage){
 			if(window.localStorage.getItem("muteFX") != null){
