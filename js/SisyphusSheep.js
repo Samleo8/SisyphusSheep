@@ -2994,11 +2994,15 @@ var SisyphusSheepGame = function(){
 				else {
 					overallSpd += this.heroSpeed;
 				}
-				this.hero.animationSpeed = 0.35;
+
+				this.hero.sheep.loop = true;
+				this.hero.sheep.animationSpeed = 0.35;
 	        }
 			else{
 				overallSpd += this.heroSpeed;
-				this.hero.animationSpeed = 0.15;
+
+				this.hero.sheep.loop = true;
+				this.hero.sheep.animationSpeed = 0.15;
 			}
         }
         else{
