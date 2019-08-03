@@ -2798,7 +2798,7 @@ var SisyphusSheepGame = function(){
 		this.treadmill.visible = true;
 		this.hero.visible = true;
 		this.hero.x = this.canvasWidth*(1/3);
-		
+
 		this.hero.running = false;
 		this.hero.sprinting = false;
 		this.hero.sheep.gotoAndStop(4);
