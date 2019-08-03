@@ -2995,13 +2995,13 @@ var SisyphusSheepGame = function(){
 					overallSpd += this.heroSpeed;
 				}
 
-				this.hero.sheep.loop = true;
+				//this.hero.sheep.loop = true;
 				this.hero.sheep.animationSpeed = 0.35;
 	        }
 			else{
 				overallSpd += this.heroSpeed;
 
-				this.hero.sheep.loop = true;
+				//this.hero.sheep.loop = true;
 				this.hero.sheep.animationSpeed = 0.15;
 			}
         }
@@ -4153,6 +4153,10 @@ var SisyphusSheepGame = function(){
 					this.hero.sheep.animationSpeed = 0.15;
 					this.hero.sheep.loop = true;
 					this.hero.sheep.anchor.set(0.5);
+
+					this.hero.sheep.onLoop = function(){
+						console.log("loop!");
+					}
 
 					if(accessory == "little_lamb"){
 						this.hero.sheep.scale.set(0.25,0.25);
