@@ -2592,9 +2592,9 @@ var SisyphusSheepGame = function(){
 			if(!this.playButtons.childButtons.hasOwnProperty(i)) continue;
 
 			var nm = i.toString();
-			var playButton = this.playButtons[nm];
+			this.playButtons[nm] = new PIXI.Container();
 
-			playButton = new PIXI.Container();
+			playButton = this.playButtons[nm];
 			playButton.x = this.playButtons.styles.sideMargin + this.playButtons.styles.width/2 + cnt*(this.playButtons.styles.sideMargin + this.playButtons.styles.width);
 			playButton.y = 0;
 			playButton.width = this.playButtons.styles.width;
@@ -2634,18 +2634,26 @@ var SisyphusSheepGame = function(){
 			playButton.icon = new PIXI.Sprite(this.playButtons.childButtons[i].icon.texture);
 			for(j in this.playButtons.styles.icon){
 				var _style = j.toString();
-				if(!this.playButtons.childButtons.hasOwnProperty(j)) continue;
+				if(!this.playButtons.styles.icon.hasOwnProperty(j)) continue;
 
 				playButton.icon[_style] = this.playButtons.styles.icon[_style];
 			}
+
+			//-Add the graphics and icons and texts into the button container
+			playButton.addChild(playButton.circle);
+			playButton.addChild(playButton.icon);
+
+			this.playButtons[nm] = playButton;
+
+			this.playButtons.addChild(playButton);
 
 			//-Add Clickability and Event Listeners
 			playButton.interactive = true;
 			playButton.buttonMode = true;
 
 			//--Press event listener; also by default have button move downwards by activeOffset
-			var _fn = this.playButtons.childButtons[i]["press"];
-			if(typeof this.playButtons.childButtons[i]["press"] == "function"){
+			var _fn = this.playButtons.childButtons[nm]["press"];
+			if(typeof this.playButtons.childButtons[nm]["press"] == "function"){
 				playButton.on((_isMobile)?"touchstart":"mousedown", function(e){
 					console.log(_fn);
 
@@ -2659,9 +2667,9 @@ var SisyphusSheepGame = function(){
 				}.bind(this));
 			}
 
-			_fn = this.playButtons.childButtons[i]["release"];
+			_fn = this.playButtons.childButtons[nm]["release"];
 			//--Release event listener; also by default have button move downwards by activeOffset
-			if(typeof this.playButtons.childButtons[i]["release"] == "function"){
+			if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
 				playButton.on((_isMobile)?"touchend":"mouseup", function(e){
 					playButton.y = 0;
 					_fn.bind(this, e);
@@ -2681,12 +2689,6 @@ var SisyphusSheepGame = function(){
 			playButton.on("mouseout", function(){
 				playButton.alpha = this.playButtons.styles.alpha;
 			}.bind(this));
-
-			//-Add the graphics and icons and texts into the button container
-			playButton.addChild(playButton.circle);
-			playButton.addChild(playButton.icon);
-
-			this.playButtons.addChild(playButton);
 
 			cnt++;
 		}
