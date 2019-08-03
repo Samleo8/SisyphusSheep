@@ -198,11 +198,11 @@ var SisyphusSheepGame = function(){
 		"sheep_running":{
 			"frames":[],
 			"totalFrames": 6
-		}/*,
+		},
 		"sheep_gold":{
 			"frames":[],
-			"totalFrames":7
-		}*/
+			"totalFrames": 6
+		}
 	};
 
 	this.sprites = {};
