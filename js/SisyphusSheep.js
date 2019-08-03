@@ -5004,22 +5004,18 @@ var SisyphusSheepGame = function(){
 				this.accessories = JSON.parse(window.localStorage["accessories"]);
 			}
 
-			if(window.localStorage.getItem("upgrades_fix")!=null && parseBoolean(window.localStorage["upgrades_fix"]) ){
-				if(window.localStorage["upgrades"] != null){
-					this.upgrades = JSON.parse(window.localStorage["upgrades"]);
+			if(window.localStorage["upgrades"] != null){
+				this.upgrades = JSON.parse(window.localStorage["upgrades"]);
 
-					var i, nm;
-					for(i in this.upgrades){
-						if(!this.upgrades.hasOwnProperty(i)) continue;
+				var i, nm;
+				for(i in this.upgrades){
+					if(!this.upgrades.hasOwnProperty(i)) continue;
 
-						nm = i.toString();
-						this[nm] = this.upgrades[nm].value;
-					}
+					nm = i.toString();
+					this[nm] = this.upgrades[nm].value;
 				}
 			}
 			else{
-				window.localStorage["upgrades_fix"] = true;
-				//this.incCoins(5000,false);
 				this.saveOptions("upgrades");
 				var i, nm;
 				for(i in this.upgrades){
