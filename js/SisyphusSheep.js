@@ -2754,7 +2754,6 @@ var SisyphusSheepGame = function(){
 			case "touchstart":
 				playButton.y = this.playButtons.styles.activeOffset;
 				if(typeof this.playButtons.childButtons[nm]["press"] == "function"){
-					console.log("active?");
 					this.playButtons.childButtons[nm]["press"].bind(this, e)();
 				}
 				break;
@@ -2913,8 +2912,6 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.heroRun = function(e){
-		console.log(e);
-
 		if(e.type == "keyup" && this._runToStartGame){
 			this._runToStartGame = false;
 			this.startGame();
