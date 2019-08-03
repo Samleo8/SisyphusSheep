@@ -2592,15 +2592,20 @@ var SisyphusSheepGame = function(){
 			if(!this.playButtons.childButtons.hasOwnProperty(i)) continue;
 
 			var nm = i.toString();
+
 			this.playButtons[nm] = new PIXI.Container();
 
 			playButton = this.playButtons[nm];
+
 			playButton.x = this.playButtons.styles.sideMargin + this.playButtons.styles.width/2 + cnt*(this.playButtons.styles.sideMargin + this.playButtons.styles.width);
 			playButton.y = 0;
+
 			playButton.width = this.playButtons.styles.width;
 			playButton.height = this.playButtons.styles.width;
 
 			playButton.alpha = this.playButtons.styles.alpha;
+
+			playButton.name = nm;
 
 			//-Circle
 			playButton.circle = new PIXI.Graphics();
@@ -2651,7 +2656,14 @@ var SisyphusSheepGame = function(){
 			playButton.interactive = true;
 			playButton.buttonMode = true;
 
+			playButton.on((_isMobile)?"touchstart":"mousedown", this.playButtonHandler.bind(this, nm));
+			playButton.on((_isMobile)?"touchend":"mouseup", this.playButtonHandler.bind(this, nm));
+			playButton.on("mouseover", this.playButtonHandler.bind(this, nm));
+			playButton.on("mouseout", this.playButtonHandler.bind(this, nm));
+
+
 			//--Press event listener; also by default have button move downwards by activeOffset
+			/*
 			var _fn = this.playButtons.childButtons[nm]["press"];
 			if(typeof this.playButtons.childButtons[nm]["press"] == "function"){
 				playButton.on((_isMobile)?"touchstart":"mousedown", function(e){
@@ -2689,6 +2701,8 @@ var SisyphusSheepGame = function(){
 			playButton.on("mouseout", function(){
 				playButton.alpha = this.playButtons.styles.alpha;
 			}.bind(this));
+
+			*/
 
 			cnt++;
 		}
@@ -2730,6 +2744,36 @@ var SisyphusSheepGame = function(){
 		this.totalGamesPlayed = 0;
 
 		this.newGame();
+	};
+
+	this.playButtonHandler = function(nm, e){
+		var playButton = this.playButtons[nm];
+
+		switch(e.type){
+			case "mousedown":
+			case "touchstart":
+				playButton.y = this.playButtons.styles.activeOffset;
+				if(typeof this.playButtons.childButtons[nm]["press"] == "function"){
+					console.log("active?");
+					this.playButtons.childButtons[nm]["press"].bind(this, e)();
+				}
+				break;
+			case "mouseup":
+			case "touchstart":
+				playButton.y = 0;
+				if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
+					this.playButtons.childButtons[nm]["release"].bind(this, e)();
+				}
+				break;
+			case "mouseover":
+				playButton.alpha = Math.min(playButton.alpha + 0.2, 1);
+				break;
+			case "mouseout":
+				playButton.alpha = this.playButtons.styles.alpha;
+				break;
+		}
+
+		return;
 	};
 
 	this.newGame = function(){
@@ -2869,6 +2913,8 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.heroRun = function(e){
+		console.log(e);
+
 		if(e.type == "keyup" && this._runToStartGame){
 			this._runToStartGame = false;
 			this.startGame();
