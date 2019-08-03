@@ -15,13 +15,13 @@ var SisyphusSheepGame = function(){
 
 	this.controls = {
 		"movement": {
-			"keys": [40, "S".charCodeAt()], //Down-Arrow, S
+			"keys": [39], //Down-Arrow, S
 			"callback": "heroRun",
 			"keyup": true,
 			"keydown": true
 		},
 		"sprint": {
-			"keys": [39, "D".charCodeAt(), 32], //Right Arrow, D, Space
+			"keys": [32], //Right Arrow, D, Space
 			"callback": "heroSprint",
 			"keyup": true,
 			"keydown": true
@@ -2319,9 +2319,9 @@ var SisyphusSheepGame = function(){
 
 			var text = new PIXI.Text(
 				"Run to the End of the Treadmill. \nAvoid the Spikes. Repeat. \n"+
-				((_isMobile)?"Left button":"[DOWN]")+
+				((_isMobile)?"Left button":"[RIGHT]")+
 				" to RUN\n"+
-				((_isMobile)?"Right button":"[RIGHT]")+
+				((_isMobile)?"Right button":"[SPACE]+RUN")+
 				" to SPRINT\n\n- "+
 				((_isMobile)?"TAP":"Click/RUN")+
 				" to Start! -",
