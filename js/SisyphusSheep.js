@@ -2758,7 +2758,7 @@ var SisyphusSheepGame = function(){
 				}
 				break;
 			case "mouseup":
-			case "touchstart":
+			case "touchend":
 				playButton.y = 0;
 				if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
 					this.playButtons.childButtons[nm]["release"].bind(this, e)();
