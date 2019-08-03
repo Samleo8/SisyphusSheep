@@ -2798,6 +2798,10 @@ var SisyphusSheepGame = function(){
 		this.treadmill.visible = true;
 		this.hero.visible = true;
 		this.hero.x = this.canvasWidth*(1/3);
+		
+		this.hero.running = false;
+		this.hero.sprinting = false;
+		this.hero.sheep.gotoAndStop(4);
 
 		//--Reset positions of hats and capes
 		this.setAccessoriesPositions(1);
@@ -4829,6 +4833,11 @@ var SisyphusSheepGame = function(){
 		this.playButtons.visible = false;
 		this.hero.visible = false;
 		this.heroShield.alpha = 0;
+
+		//STOP HERO FROM RUNNING
+		this.hero.running = false;
+		this.hero.sprinting = false;
+		this.hero.sheep.gotoAndStop(4);
 
 		//HIDE SCORE
 		this.scoreText.visible = false;
