@@ -5028,95 +5028,10 @@ var SisyphusSheepGame = function(){
 				}
 			}
 
-		if(!window.localStorage.getItem("coins_reward1") || !parseBoolean(window.localStorage["coins_reward1"]) ){
+			if(!window.localStorage.getItem("coins_reward1") || !parseBoolean(window.localStorage["coins_reward1"]) ){
 				window.localStorage["coins_reward1"] = true;
-					this.incCoins(1000);
-		}
-
-			if(!window.localStorage.getItem("achievements_coins_fix2") || !parseBoolean(window.localStorage["achievements_coins_fix2"]) ){
-				window.localStorage["achievements_coins_fix2"] = true;
-
-				//Time to fix
-				if(window.localStorage["achievements"] != null){
-					alert("In this latest update, all completed achievements earns you coins to use in the shop!");
-
-					var i, j;
-					//Achievement obj exists, therefore need to give the coins accordingly
-					for(i in this.achievements.single){
-						if(!this.achievements.single.hasOwnProperty(i)) continue;
-
-						for(j=0;j<this.achievements.single[i].length;j++){
-							if(this.achievements.single[i][j].complete){
-								if(this.achievements.single[i][j].synced || !isApp()){
-									//NOTE: if the achievement isn't synced, the coins inc will take care of itself in the auto-sync function, unless it's web-based, then it'll never be synced
-									this.incCoins(this.achievements.single[i][j].points,false);
-								}
-							}
-						}
-
-					}
-
-					for(i in this.achievements.incremental){
-						if(!this.achievements.incremental.hasOwnProperty(i)) continue;
-
-						for(j=0;j<this.achievements.incremental[i].length;j++){
-							if(this.achievements.incremental[i][j].complete){
-								if(this.achievements.incremental[i][j].synced || !isApp()){
-									//NOTE: if the achievement isn't synced, the coins inc will take care of itself in the auto-sync function
-									this.incCoins(this.achievements.incremental[i][j].points,false);
-								}
-							}
-						}
-					}
-
-					this.saveOptions("achievements");
-				}
+				this.incCoins(1000);
 			}
-
-			//Updates
-			/*
-			var i, j, nm;
-			for(i in this.updates){
-				if(!this.updates.hasOwnProperty(i)) continue;
-
-				for(j=0;j<this.updates[i].length;j++){
-					nm =this.updates[i][j];
-
-					switch(i){
-						case "achievements_single":
-							if(this.achievements["single"][nm]==null || typeof this.achievements["single"][nm] == "undefined")
-								this.achievements["single"][nm] = this.partsForUpdate[i][nm];
-							break;
-						case "achievements_increment":
-							if(this.achievements["incremental"][nm]==null || typeof this.achievements["incremental"][nm] == "undefined")
-								this.achievements["incremental"][nm] = this.partsForUpdate[i][nm];
-							break;
-						default:
-							if(this[i][nm]==null || typeof this[i][nm] == "undefined"){
-								//Doesn't exist; create it
-								this[i][nm] = this.partsForUpdate[i][nm];
-							}
-							else{
-								//It exists, now check if desc and title needs an update
-								if(i=="accessories" || i=="upgrades"){
-									if(this[i][nm].title != this.partsForUpdate[i][nm].title){
-										this[i][nm].title = this.partsForUpdate[i][nm].title;
-									}
-
-									if(this[i][nm].desc != this.partsForUpdate[i][nm].desc){
-										this[i][nm].desc = this.partsForUpdate[i][nm].desc;
-									}
-
-									if(this[i][nm].cost != this.partsForUpdate[i][nm].cost){
-										this[i][nm].cost = this.partsForUpdate[i][nm].cost;
-									}
-								}
-							}
-							break;
-					}
-				}
-			}
-			*/
 		}
 		else{
 			console.log("WARNING: Browser does not support localStorage! Highscores, achievements and options will not be saved.");
