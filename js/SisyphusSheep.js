@@ -2634,7 +2634,7 @@ var SisyphusSheepGame = function(){
 			playButton.icon = new PIXI.Sprite(this.playButtons.childButtons[i].icon.texture);
 			for(j in this.playButtons.styles.icon){
 				var _style = j.toString();
-				if(!this.playButtons.childButtons.hasOwnProperty(i)) continue;
+				if(!this.playButtons.childButtons.hasOwnProperty(j)) continue;
 
 				playButton.icon[_style] = this.playButtons.styles.icon[_style];
 			}
