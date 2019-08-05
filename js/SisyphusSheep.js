@@ -3269,8 +3269,8 @@ var SisyphusSheepGame = function(){
 		var startY = obj.height/2;
 
 		//--Ramp up acceleration as number of portals passed increases
-		var _startG = 0.03;
-		var _maxG = 0.15;
+		var _startG = 0.08;
+		var _maxG = 0.2;
 		var accY = getRandomFloat(_startG, Math.min(_startG + this.portalsPassed * 0.01, _maxG))
 
 		obj.x = startX;
