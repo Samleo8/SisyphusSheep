@@ -195,7 +195,7 @@ var SisyphusSheepGame = function(){
 			"frames":[],
 			"totalFrames": 4
 		},
-		"sheep_running":{
+		"sheep_base":{
 			"frames":[],
 			"totalFrames": 6
 		},
@@ -264,7 +264,7 @@ var SisyphusSheepGame = function(){
 		- "type" is either: skin, hat or cape (necklaces are under capes)
 	*/
 	this.accessories = {
-		"sheep_running":{
+		"sheep_base":{
 			"title":"Base Sheep",
 			"desc":"Back to basics",
 			"type":"skin",
@@ -2287,7 +2287,7 @@ var SisyphusSheepGame = function(){
 			this.sprites.background.alpha = 0;
 
 			//Sheep
-			sheep = new PIXI.Sprite(this.animations.sheep_running.frames[1]);
+			sheep = new PIXI.Sprite(this.animations.sheep_base.frames[1]);
 			sheep.anchor.set(0.5, 0.5);
 			sheep.scale.set(0.35,0.35);
 			sheep.rotation = -Math.PI/50;
@@ -3674,7 +3674,7 @@ var SisyphusSheepGame = function(){
 						this.skinsSection[nm].img.scale.set(0.45,0.45);
 					}
 					else if(nm=="little_lamb"){
-						this.skinsSection[nm].img.texture = this.animations["sheep_running"].frames[0];
+						this.skinsSection[nm].img.texture = this.animations["sheep_base"].frames[0];
 						this.skinsSection[nm].img.scale.set(0.28,0.28);
 					}
 					break;
@@ -4119,7 +4119,7 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.setAccessory = function(accessory, type){
-		if(accessory == null) accessory = "sheep_running";
+		if(accessory == null) accessory = "sheep_base";
 		if(type == null) return;
 
 		var data, currFrame, scaleDir;
@@ -4151,7 +4151,7 @@ var SisyphusSheepGame = function(){
 				if(this.hero.sheep == null || typeof this.hero.sheep == "undefined"){
 					//Initializing of the sheep
 
-					this.hero.sheep = new PIXI.AnimatedSprite(this.animations[((accessory=="little_lamb")?"sheep_running":accessory)].frames);
+					this.hero.sheep = new PIXI.AnimatedSprite(this.animations[((accessory=="little_lamb" || accessory == "sheep_running")?"sheep_base":accessory)].frames);
 					this.hero.sheep.animationSpeed = 0.15;
 					this.hero.sheep.loop = true;
 					this.hero.sheep.anchor.set(0.5);
@@ -4166,7 +4166,7 @@ var SisyphusSheepGame = function(){
 				}
 				else{
 					currFrame = this.hero.sheep.currentFrame;
-					this.hero.sheep.textures = this.animations["sheep_running"]; //this.animations[((accessory=="little_lamb")?"sheep_running":accessory)].frames;
+					this.hero.sheep.textures = this.animations[((accessory=="little_lamb" || accessory == "sheep_running")?"sheep_base":accessory)];
 					this.hero.sheep.gotoAndPlay(currFrame);
 
 					scaleDir = (this.hero.sheep.scale.x<0)?-1:1;
@@ -4233,7 +4233,7 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.setAccessoriesPositions = function(dir){
-		if(dir == null) dir = (this.hero.vx<0)?-1:1;
+		if(dir == null) dir = 1; //Hero is always facing right
 
 		//Hats
 		if(this.hero.hat){
@@ -5015,6 +5015,11 @@ var SisyphusSheepGame = function(){
 
 			if(window.localStorage.getItem("accessories") != null){
 				this.accessories = JSON.parse(window.localStorage["accessories"]);
+				if(this.accessories.hasOwnProperty("sheep_running")){ //weird issue with sheep_running
+					this.accessories["sheep_base"] = this.accessories["sheep_running"];
+					delete this.accessories["sheep_running"];
+					this.saveOptions("accessories");
+				}
 			}
 
 			if(window.localStorage["upgrades"] != null){
