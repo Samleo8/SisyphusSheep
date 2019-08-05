@@ -3221,22 +3221,21 @@ var SisyphusSheepGame = function(){
 		this.obstacleTimer = new Date().getTime();
 
 		//SPAWN POWERUP OR OBSTACLE?
-		//TODO: Make it mutually exclusive or possible to spawn both (separate speeds/positions ofc)?
-		var isObstacle = (Math.random()>=this.powerupChance); //is it a powerup or obstacle?
+		//Make it mutually exclusive or possible to spawn both (separate speeds/positions ofc)?
+		var hasPowerup = (Math.random()<=this.powerupChance); //is it a powerup or obstacle?
 
 		//SET SIZES FOR OBSTACLE OR POWERUP
 		//-Need these sizes for calculation of X/Y positions
-		if(isObstacle){
-			var obs = new PIXI.Sprite(this.sprites.spike.texture);
+		var obs = new PIXI.Sprite(this.sprites.spike.texture);
 
-			obs.anchor.set(0.5);
-			obs.scale.set(0.2,-0.2);
+		obs.anchor.set(0.5);
+		obs.scale.set(0.2,-0.2);
 
-			this.setObstaclePosition(obs);
+		this.setObstaclePosition(obs);
 
-			this.obstacles.addChild(obs);
-		}
-		else{
+		this.obstacles.addChild(obs);
+
+		if(hasPowerup){
 			/* --POWERUPS--
 			0: Coin
 			1: Shield
