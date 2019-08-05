@@ -2533,7 +2533,7 @@ var SisyphusSheepGame = function(){
 
 		//HERO INITIALIZE
 		this.hero.x = this.canvasWidth*(1/3);
-		this.hero.y = this.canvasHeight - this.hero.height/2 - this.treadmill.gears.height;
+		this.hero.y = this.canvasHeight - this.hero.sheep.height/2 - this.treadmill.gears.height;
 		this.portalsPassed = 0;
 
 		//--Speed and jump strength
@@ -4112,6 +4112,12 @@ var SisyphusSheepGame = function(){
 	this.setAllAccessories = function(){
 		if(window.localStorage && window.localStorage.getItem("accessories")!=null){
 			this.accessories = JSON.parse(localStorage["accessories"]);
+
+			if(this.accessories.hasOwnProperty("sheep_running")){ //weird issue with sheep_running
+				this.accessories["sheep_base"] = this.accessories["sheep_running"];
+				delete this.accessories["sheep_running"];
+				this.saveOptions("accessories");
+			}
 		}
 
 		var i, nm;
@@ -4128,8 +4134,6 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.setAccessory = function(accessory, type){
-		console.log(accessory);
-
 		if(accessory == null) accessory = "sheep_base";
 		if(type == null) return;
 
@@ -5072,10 +5076,10 @@ var SisyphusSheepGame = function(){
 		}
 
 		if(window.localStorage){
-			this.highscore = Math.max(Math.floor(this.score), this.highscore);
-
-			if(opt=="all" || opt=="score" || opt=="highscore")
+			if(opt=="all" || opt=="score" || opt=="highscore"){
+				this.highscore = Math.max(Math.floor(this.score), this.highscore);
 				window.localStorage["highscore"] = this.highscore;
+			}
 
 			if(opt=="all" || opt=="muteFX")
 				window.localStorage["muteFX"] = this._FXMuted;
