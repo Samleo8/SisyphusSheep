@@ -182,9 +182,9 @@ var SisyphusSheepGame = function(){
 	this.heroSpeed = 13; //cannot be below treadmillMaxSpeed
 
 	this.treadmill = null;
-	this.treadmillMinSpeed = 5;
-	this.treadmillMaxSpeed = 10;
-	this.treadmillIncSpeed = 1.2;
+	this.treadmillMinSpeed = 6;
+	this.treadmillMaxSpeed = 11;
+	this.treadmillIncSpeed = 1.25;
 
 	//Playing buttons
 	this.playButtons = null;
@@ -3270,7 +3270,7 @@ var SisyphusSheepGame = function(){
 
 		//--Ramp up acceleration as number of portals passed increases
 		var _startG = 0.08;
-		var _maxG = 0.2;
+		var _maxG = 0.25;
 		var accY = getRandomFloat(_startG, Math.min(_startG + this.portalsPassed * 0.01, _maxG))
 
 		obj.x = startX;
