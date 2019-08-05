@@ -376,7 +376,15 @@ var SisyphusSheepGame = function(){
 
 	for(var ii in this.accessories){
 		if(!this.accessories.hasOwnProperty(ii)) continue;
-		this.accessoriesNames.push(ii.toString());
+
+		//To avoid issues where sheep base is not initialised first, place skins at the front, so that they will be handled first
+		//Inefficient, but it works
+		if(this.accessories[ii].type == "skin"){
+			this.accessoriesNames.unshift(ii.toString());
+		}
+		else{
+			this.accessoriesNames.push(ii.toString());
+		}
 
 		if(ii == "no_cape" || ii=="no_hat") continue;
 
@@ -4106,12 +4114,13 @@ var SisyphusSheepGame = function(){
 			this.accessories = JSON.parse(localStorage["accessories"]);
 		}
 
-		var i;
-		for(i in this.accessories){
-			if(!this.accessories.hasOwnProperty(i)) continue;
+		var i, nm;
+		for(i=0;i<this.accessoriesNames.length;i++){
+			//if(!this.accessories.hasOwnProperty(i)) continue;
+			nm = this.accessoriesNames[i];
 
-			if(this.accessories[i].activated){
-				this.setAccessory(i.toString(), this.accessories[i].type);
+			if(this.accessories[nm].activated){
+				this.setAccessory(nm, this.accessories[nm].type);
 			}
 		}
 
