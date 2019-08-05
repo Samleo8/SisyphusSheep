@@ -3726,7 +3726,7 @@ var SisyphusSheepGame = function(){
 
 			this.skinsSection[nm].button.interactive = true;
 			this.skinsSection[nm].button.buttonMode = true;
-			this.skinsSection[nm].button.on((_isMobile)?"touchend":"mouseup",this.setAccessory.bind(this,nm,data["type"]));
+			this.skinsSection[nm].button.on((_isMobile)?"touchend":"mouseup",this.setAccessory.bind(this, nm, data["type"]));
 
 			this.skinsSection[nm].button.footnote = new PIXI.Text("",textOpt2);
 			this.skinsSection[nm].button.footnote.anchor.set(0.5,0);
@@ -4119,6 +4119,8 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.setAccessory = function(accessory, type){
+		console.log(accessory);
+
 		if(accessory == null) accessory = "sheep_base";
 		if(type == null) return;
 
