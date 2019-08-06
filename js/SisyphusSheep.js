@@ -2539,7 +2539,7 @@ var SisyphusSheepGame = function(){
 		this.treadmill.addChild(this.treadmill.flag);
 
 		//HERO INITIALIZE
-		this.hero.x = this.canvasWidth*(1/3);
+		this.hero.x = this.canvasWidth*(1/5);
 		this.hero.y = this.canvasHeight - this.hero.sheep.height/2 - this.treadmill.gears.height;
 		this.portalsPassed = 0;
 
@@ -2780,7 +2780,7 @@ var SisyphusSheepGame = function(){
 		this.playButtons.visible = true;
 		this.treadmill.visible = true;
 		this.hero.visible = true;
-		this.hero.x = this.canvasWidth*(1/3);
+		this.hero.x = this.canvasWidth*(1/5);
 
 		this.hero.running = false;
 		this.hero.sprinting = false;
@@ -2851,7 +2851,7 @@ var SisyphusSheepGame = function(){
 	this.nextLevel = function(){
 		//HERO
 		//--Reset positions of hero, shield and accessories
-		this.hero.x = this.canvasWidth*(1/3);
+		this.hero.x = this.canvasWidth*(1/5);
 
 		this.heroShield.position = this.hero.position;
 		this.setAccessoriesPositions(1);
@@ -4931,7 +4931,7 @@ var SisyphusSheepGame = function(){
 		this.playButtons.visible = true;
 		this.treadmill.visible = true;
 		this.hero.visible = true;
-		this.hero.x = this.canvasWidth*(1/3);
+		this.hero.x = this.canvasWidth*(1/5);
 
 		this.heroShield.position = this.hero.position;
 		if(this.startingShield){
