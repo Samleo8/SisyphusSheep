@@ -2738,20 +2738,9 @@ var SisyphusSheepGame = function(){
 				}
 				break;
 			case "mouseup":
-			case "mouseupoutside":
 			case "touchend":
+			case "mouseupoutside":
 			case "touchendoutside":
-				/*
-				for(i in this.playButtons.childButtons){
-					if(!this.playButtons.childButtons.hasOwnProperty(i)) continue;
-
-					var nm = i.toString();
-					this.playButtons[nm].y = 0;
-					if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
-						this.playButtons.childButtons[nm]["release"].bind(this, e)();
-					}
-				}
-				*/
 				if(playButton) playButton.y = 0;
 				if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
 					this.playButtons.childButtons[nm]["release"].bind(this, e)();
@@ -2946,6 +2935,8 @@ var SisyphusSheepGame = function(){
 				break;
 			case "mouseup":
 			case "touchend":
+			case "mouseupoutside":
+			case "touchendoutside":
 			case "keyup":
 				this.hero.running = false;
 				this.hero.sprinting = false;
@@ -2977,6 +2968,8 @@ var SisyphusSheepGame = function(){
 				break;
 			case "mouseup":
 			case "touchend":
+			case "mouseupoutside":
+			case "touchendoutside":
 			case "keyup":
 				this.hero.sprinting = false;
 				break;
