@@ -751,7 +751,7 @@ var SisyphusSheepGame = function(){
 		"reward_type": "revive",
 		"types":{
 			"banner":{
-				"id": "ca-app-pub-1626473425552959/6430092502",
+				"id": "ca-app-pub-1626473425552959/7703260898",
 				"autoShow": true,
 				"loaded": false
 			},
@@ -761,7 +761,7 @@ var SisyphusSheepGame = function(){
 				"loaded": false
 			},
 			"rewardvideo":{
-				"id": "ca-app-pub-1626473425552959/5937948547",
+				"id": "ca-app-pub-1626473425552959/3263600230",
 				"autoShow": false,
 				"loaded": false
 			}
@@ -1055,7 +1055,7 @@ var SisyphusSheepGame = function(){
 				.then(function(data){
 					console.log(JSON.stringify(data));
 
-					success = Game.purchases.giveReward(id,data);
+					success = Game.purchases.giveReward(id, data);
 				})
 				.catch(function(err){
 					console.log(err);
@@ -1086,7 +1086,7 @@ var SisyphusSheepGame = function(){
 
 						id = data.productId.split("."+self.appId)[0];
 
-						self.giveReward(id,data2);
+						self.giveReward(id, data2);
 					}
 				}
 			}.bind(self))
@@ -1094,7 +1094,7 @@ var SisyphusSheepGame = function(){
 				console.log(err);
 			});
 		},
-		"giveReward":function(id,data){
+		"giveReward":function(id, data){
 			//Use this function to handle the rewarding of user with whatever item he made purchase for.
 
 			if(id==null) return;
