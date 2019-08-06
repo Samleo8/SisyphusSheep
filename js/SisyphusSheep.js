@@ -2404,6 +2404,7 @@ var SisyphusSheepGame = function(){
 
 			this._runToStartGame = true;
 
+			this.preventHeroMovement = 0;
 			//Need to do it like this as .bind() changes the signature of the function
 			startGameFn = this.startGame.bind(this);
 			renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", startGameFn);
@@ -2423,14 +2424,15 @@ var SisyphusSheepGame = function(){
 	this.startGame = function(){
 		var i, j;
 
-		console.log("Let the games begin!");
-
 		if(this.preventHeroMovement){
+			console.log(this.preventHeroMovement);
 			this.preventHeroMovement--;
 			return;
 		}
 
 		if(this._gameStarted) return;
+
+		console.log("Let the games begin!");
 
 		//Remove unnecessary tap/click event listener used for starting the game
 		renderer.view.removeEventListener((_isMobile)?"touchend":"mouseup", startGameFn);
@@ -2570,6 +2572,7 @@ var SisyphusSheepGame = function(){
 			"sideMargin": 50,
 			"width": 160,
 			"color": 0xffd54f, //0xFFA000,
+			"disabledTint": 0x9e9e9e,
 			"alpha": 0.6,
 			"activeOffset": 10,
 			"icon": {
@@ -2680,7 +2683,6 @@ var SisyphusSheepGame = function(){
 		//Because of issue where releasing outside the button will fire the event handler, we now need a more universal event handler to handle the problem with clicks
 		renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.playButtonHandler.bind(this, null));
 
-
 		stage.addChild(this.playButtons);
 
 		//ADD OVERLAYS TO STAGE
@@ -2721,8 +2723,6 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.playButtonHandler = function(nm, e){
-		console.log(nm, e);
-
 		var playButton = this.playButtons[nm];
 
 		switch(e.type){
@@ -2798,6 +2798,11 @@ var SisyphusSheepGame = function(){
 
 		this.treadmill.speed = this.treadmillMinSpeed;
 		this.sprint.level = 100;
+
+		for(var i=0;i<this.sprint.circle.children.length;i++){
+			this.sprint.circle.children[i].tint = this.playButtons.styles.disabledTint;
+		}
+		this.playButtons.sprint.circle.tint = this.playButtons.styles.disabledTint;
 
 		//--Hero's shield
 		this.heroShield.position = this.hero.position;
@@ -2921,6 +2926,10 @@ var SisyphusSheepGame = function(){
 				this.hero.running = true;
 				this.hero.sheep.play();
 
+				for(var i=0;i<this.sprint.circle.children.length;i++){
+					this.sprint.circle.children[i].tint = 0xFFFFFF;
+				}
+				this.playButtons.sprint.circle.tint = 0xFFFFFF;
 				//this.playButtons.sprint.visible = true;
 				break;
 			case "mouseup":
@@ -2929,6 +2938,11 @@ var SisyphusSheepGame = function(){
 				this.hero.running = false;
 				this.hero.sprinting = false;
 				this.hero.sheep.gotoAndStop(4);
+
+				for(var i=0;i<this.sprint.circle.children.length;i++){
+					this.sprint.circle.children[i].tint = this.playButtons.styles.disabledTint;
+				}
+				this.playButtons.sprint.circle.tint = this.playButtons.styles.disabledTint;
 
 				//this.playButtons.sprint.visible = false;
 				break;
@@ -2978,12 +2992,13 @@ var SisyphusSheepGame = function(){
 	            if(this.sprint.level>0){
 	                overallSpd += this.heroSpeed * this.sprint.multiplier;
 	                this.sprint.level -= this.sprint.dec;
+
+					this.hero.sheep.animationSpeed = 0.35;
 	            }
 				else {
 					overallSpd += this.heroSpeed;
+					this.hero.sheep.animationSpeed = 0.15;
 				}
-
-				this.hero.sheep.animationSpeed = 0.35;
 	        }
 			else{
 				overallSpd += this.heroSpeed;
