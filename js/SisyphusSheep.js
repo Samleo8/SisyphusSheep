@@ -756,7 +756,7 @@ var SisyphusSheepGame = function(){
 				"loaded": false
 			},
 			"interstitial":{
-				"id": "ca-app-pub-1626473425552959/1365129742",
+				"id": "ca-app-pub-1626473425552959/8569620006",
 				"autoShow": false,
 				"loaded": false
 			},
@@ -4824,14 +4824,11 @@ var SisyphusSheepGame = function(){
 		}
 
 		//ADS
-		if(this.score>=10){
-			this.incCoins(Math.floor(1.5*this.score), true);
-		}
-
-		if(this.score>=15){
+		if(this.score>=80){
+			this.incCoins(Math.floor(1.1*this.score), true);
 			this.ads.showAd("rewardvideo","coins",10*getRandomInt(5,20));
 		}
-		else if(this.totalGamesPlayed>=10){
+		else if(this.totalGamesPlayed>=5){
 			this.ads.showAd("interstitial");
 			this.totalGamesPlayed = 0;
 		}
