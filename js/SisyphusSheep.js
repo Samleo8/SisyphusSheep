@@ -2675,6 +2675,7 @@ var SisyphusSheepGame = function(){
 			playButton.on((_isMobile)?"touchstart":"mousedown", this.playButtonHandler.bind(this, nm));
 			playButton.on((_isMobile)?"touchend":"mouseup", this.playButtonHandler.bind(this, nm));
 			playButton.on((_isMobile)?"touchendoutside":"mouseupoutside", this.playButtonHandler.bind(this, nm));
+
 			playButton.on("mouseover", this.playButtonHandler.bind(this, nm));
 			playButton.on("mouseout", this.playButtonHandler.bind(this, nm));
 
@@ -2725,6 +2726,8 @@ var SisyphusSheepGame = function(){
 
 	this.playButtonHandler = function(nm, e){
 		var playButton = this.playButtons[nm];
+
+		console.log(nm, e.type, e.target);
 
 		switch(e.type){
 			case "mousedown":
