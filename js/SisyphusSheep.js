@@ -2670,55 +2670,16 @@ var SisyphusSheepGame = function(){
 			playButton.buttonMode = true;
 
 			playButton.on((_isMobile)?"touchstart":"mousedown", this.playButtonHandler.bind(this, nm));
-			playButton.on((_isMobile)?"touchend":"mouseup", this.playButtonHandler.bind(this, nm));
+			//playButton.on((_isMobile)?"touchend":"mouseup", this.playButtonHandler.bind(this, nm));
 			playButton.on("mouseover", this.playButtonHandler.bind(this, nm));
 			playButton.on("mouseout", this.playButtonHandler.bind(this, nm));
 
-
-			//--Press event listener; also by default have button move downwards by activeOffset
-			/*
-			var _fn = this.playButtons.childButtons[nm]["press"];
-			if(typeof this.playButtons.childButtons[nm]["press"] == "function"){
-				playButton.on((_isMobile)?"touchstart":"mousedown", function(e){
-					console.log(_fn);
-
-					playButton.y = this.playButtons.styles.activeOffset;
-					_fn.bind(this, e);
-				}.bind(this));
-			}
-			else {
-				playButton.on((_isMobile)?"touchstart":"mousedown", function(){
-					playButton.y = this.playButtons.styles.activeOffset;
-				}.bind(this));
-			}
-
-			_fn = this.playButtons.childButtons[nm]["release"];
-			//--Release event listener; also by default have button move downwards by activeOffset
-			if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
-				playButton.on((_isMobile)?"touchend":"mouseup", function(e){
-					playButton.y = 0;
-					_fn.bind(this, e);
-				}.bind(this));
-			}
-			else{
-				playButton.on((_isMobile)?"touchend":"mouseup", function(){
-					playButton.y = 0;
-				}.bind(this));
-			}
-
-			//--Mouseover event listeners for alpha change
-			playButton.on("mouseover", function(){
-				playButton.alpha = Math.min(playButton.alpha + 0.2, 1);
-			}.bind(this));
-
-			playButton.on("mouseout", function(){
-				playButton.alpha = this.playButtons.styles.alpha;
-			}.bind(this));
-
-			*/
-
 			cnt++;
 		}
+
+		//Because of issue where releasing outside the button will fire the event handler, we now need a more universal event handler to handle the problem with clicks
+		renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.playButtonHandler.bind(this, null));
+
 
 		stage.addChild(this.playButtons);
 
@@ -2760,29 +2721,38 @@ var SisyphusSheepGame = function(){
 	};
 
 	this.playButtonHandler = function(nm, e){
+		console.log(nm, e);
+
 		var playButton = this.playButtons[nm];
 
 		switch(e.type){
 			case "mousedown":
 			case "touchstart":
-				playButton.y = this.playButtons.styles.activeOffset;
+				if(playButton) playButton.y = this.playButtons.styles.activeOffset;
 				if(typeof this.playButtons.childButtons[nm]["press"] == "function"){
 					this.playButtons.childButtons[nm]["press"].bind(this, e)();
 				}
 				break;
 			case "mouseup":
 			case "touchend":
-				playButton.y = 0;
-				if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
-					this.playButtons.childButtons[nm]["release"].bind(this, e)();
+				for(i in this.playButtons.childButtons){
+					if(!this.playButtons.childButtons.hasOwnProperty(i)) continue;
+
+					var nm = i.toString();
+					this.playButtons[nm].y = 0;
+					if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
+						this.playButtons.childButtons[nm]["release"].bind(this, e)();
+					}
 				}
 				break;
 			case "mouseover":
-				playButton.alpha = Math.min(playButton.alpha + 0.2, 1);
+				if(playButton) playButton.alpha = Math.min(playButton.alpha + 0.2, 1);
 				break;
 			case "mouseout":
-				playButton.alpha = this.playButtons.styles.alpha;
+				if(playButton) playButton.alpha = this.playButtons.styles.alpha;
 				break;
+			default:
+				return;
 		}
 
 		return;
