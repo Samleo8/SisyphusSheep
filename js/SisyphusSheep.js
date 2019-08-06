@@ -2821,6 +2821,7 @@ var SisyphusSheepGame = function(){
 		this.hero.ay = 0;
 		//this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.heroRunStrength:this.heroRunStrength_lamb;
 
+		this.treadmill.speed = this.treadmillMinSpeed;
 		this.sprint.level = 100;
 
 		//--Hero's shield
