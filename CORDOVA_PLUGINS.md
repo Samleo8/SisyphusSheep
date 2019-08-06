@@ -2,3 +2,4 @@
 
 cordova-plugin-play-games-services
 cordova-plugin-x-socialsharing
+cordova-plugin-admob-free
