@@ -3242,6 +3242,9 @@ var SisyphusSheepGame = function(){
 
 			this.setObstaclePosition(powerup);
 
+			//Allow powerup to fall from higher height
+			powerup.y -= getRandomFloat(0, powerup.height/2);
+
 			powerup.type = type;
 			powerup.typeName = this.powerupNames[type];
 
