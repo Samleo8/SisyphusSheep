@@ -2682,9 +2682,6 @@ var SisyphusSheepGame = function(){
 			cnt++;
 		}
 
-		//Because of issue where releasing outside the button will fire the event handler, we now need a more universal event handler to handle the problem with clicks
-		//renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.playButtonHandler.bind(this, null));
-
 		stage.addChild(this.playButtons);
 
 		//ADD OVERLAYS TO STAGE
@@ -2726,8 +2723,6 @@ var SisyphusSheepGame = function(){
 
 	this.playButtonHandler = function(nm, e){
 		var playButton = this.playButtons[nm];
-
-		console.log(nm, e.type, e.target);
 
 		switch(e.type){
 			case "mousedown":
