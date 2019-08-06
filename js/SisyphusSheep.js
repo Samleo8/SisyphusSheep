@@ -2425,6 +2425,11 @@ var SisyphusSheepGame = function(){
 
 		console.log("Let the games begin!");
 
+		if(this.preventHeroMovement){
+			this.preventHeroMovement--;
+			return;
+		}
+
 		if(this._gameStarted) return;
 
 		//Remove unnecessary tap/click event listener used for starting the game
@@ -4651,7 +4656,7 @@ var SisyphusSheepGame = function(){
 		var i,nm;
 
 		if(typeof forcedVal == "object"){
-			if(forcedVal.type=="mouseup" || forcedVal.type=="touchend"){
+			if(forcedVal.type == "mouseup" || forcedVal.type == "touchend"){
 				this.preventHeroMovement++;
 			}
 		}
