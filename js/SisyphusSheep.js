@@ -2673,7 +2673,8 @@ var SisyphusSheepGame = function(){
 			playButton.buttonMode = true;
 
 			playButton.on((_isMobile)?"touchstart":"mousedown", this.playButtonHandler.bind(this, nm));
-			//playButton.on((_isMobile)?"touchend":"mouseup", this.playButtonHandler.bind(this, nm));
+			playButton.on((_isMobile)?"touchend":"mouseup", this.playButtonHandler.bind(this, nm));
+			playButton.on((_isMobile)?"touchendoutside":"mouseupoutside", this.playButtonHandler.bind(this, nm));
 			playButton.on("mouseover", this.playButtonHandler.bind(this, nm));
 			playButton.on("mouseout", this.playButtonHandler.bind(this, nm));
 
@@ -2681,7 +2682,7 @@ var SisyphusSheepGame = function(){
 		}
 
 		//Because of issue where releasing outside the button will fire the event handler, we now need a more universal event handler to handle the problem with clicks
-		renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.playButtonHandler.bind(this, null));
+		//renderer.view.addEventListener((_isMobile)?"touchend":"mouseup", this.playButtonHandler.bind(this, null));
 
 		stage.addChild(this.playButtons);
 
@@ -2734,9 +2735,10 @@ var SisyphusSheepGame = function(){
 				}
 				break;
 			case "mouseup":
+			case "mouseupoutside":
 			case "touchend":
-				console.log(nm, e.target);
-
+			case "touchendoutside":
+				/*
 				for(i in this.playButtons.childButtons){
 					if(!this.playButtons.childButtons.hasOwnProperty(i)) continue;
 
@@ -2745,6 +2747,11 @@ var SisyphusSheepGame = function(){
 					if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
 						this.playButtons.childButtons[nm]["release"].bind(this, e)();
 					}
+				}
+				*/
+				if(playButton) playButton.y = 0;
+				if(typeof this.playButtons.childButtons[nm]["release"] == "function"){
+					this.playButtons.childButtons[nm]["release"].bind(this, e)();
 				}
 				break;
 			case "mouseover":
