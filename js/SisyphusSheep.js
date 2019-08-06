@@ -2725,9 +2725,13 @@ var SisyphusSheepGame = function(){
 	this.playButtonHandler = function(nm, e){
 		var playButton = this.playButtons[nm];
 
+		console.log("Touch!");
+
 		switch(e.type){
 			case "mousedown":
 			case "touchstart":
+				console.log(nm, e.touches, e.changedTouches);
+
 				if(playButton) playButton.y = this.playButtons.styles.activeOffset;
 				if(typeof this.playButtons.childButtons[nm]["press"] == "function"){
 					this.playButtons.childButtons[nm]["press"].bind(this, e)();
@@ -2735,6 +2739,8 @@ var SisyphusSheepGame = function(){
 				break;
 			case "mouseup":
 			case "touchend":
+				console.log(nm, e.touches, e.changedTouches);
+
 				for(i in this.playButtons.childButtons){
 					if(!this.playButtons.childButtons.hasOwnProperty(i)) continue;
 
