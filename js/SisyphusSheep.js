@@ -2312,7 +2312,7 @@ var SisyphusSheepGame = function(){
 			bubble._radius = 40;
 			bubble.beginFill(0xcfd8dc)
 				.drawRoundedRect(-bubble._width/2,-bubble._height/2,bubble._width,bubble._height,bubble._radius)
-				.drawPolygon( new PIXI.Point(-bubble._width/2+275,-bubble._height/2-45) , new PIXI.Point(-125,-bubble._height/2), new PIXI.Point(-95,-bubble._height/2) )
+				.drawPolygon( new PIXI.Point(-bubble._width/2+255,-bubble._height/2-45) , new PIXI.Point(-125,-bubble._height/2), new PIXI.Point(-95,-bubble._height/2) )
 			.endFill();
 
 			//-Text
@@ -4174,7 +4174,7 @@ var SisyphusSheepGame = function(){
 				}
 				else{
 					currFrame = this.hero.sheep.currentFrame;
-					this.hero.sheep.textures = this.animations[((accessory=="little_lamb" || accessory == "sheep_running")?"sheep_base":accessory)];
+					this.hero.sheep.texture = this.animations[((accessory=="little_lamb" || accessory == "sheep_running")?"sheep_base":accessory)];
 					this.hero.sheep.gotoAndPlay(currFrame);
 
 					scaleDir = (this.hero.sheep.scale.x<0)?-1:1;
