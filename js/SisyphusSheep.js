@@ -2570,7 +2570,7 @@ var SisyphusSheepGame = function(){
 		this.playButtons.styles = {
 			"bottomMargin": 35,
 			"sideMargin": 50,
-			"width": 160,
+			"width": 220,
 			"color": 0xffd54f, //0xFFA000,
 			"disabledTint": 0x9e9e9e,
 			"alpha": 0.6,
@@ -2578,7 +2578,7 @@ var SisyphusSheepGame = function(){
 			"icon": {
 				"tint": 0x212121,
 				"alpha": 1,
-				"scale": new PIXI.Point(1.1, 1.1),
+				"scale": new PIXI.Point(1.4, 1.4),
 				"anchor": new PIXI.Point(0.5, 0.5),
 				"y": 5,
 				"rotation": 5/(180/Math.PI) //in radians
