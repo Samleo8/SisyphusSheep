@@ -521,6 +521,13 @@ var SisyphusSheepGame = function(){
 				'points': 20,
 				'complete': false,
 				'synced': false
+			}],
+			"sprint_spent": [{
+				'id': 'CgkIzb_h1oMQEAIQHA',
+				'name': 'Sprinter Sheep',
+				'points': 5,
+				'complete': false,
+				'synced': false
 			}]
 		},
 		"incremental": {
@@ -2980,6 +2987,11 @@ var SisyphusSheepGame = function(){
 					this.hero.sheep.animationSpeed = 0.35;
 	            }
 				else {
+					//Achievement
+					if(!this.achievements.single.sprint_spent[0].complete || !this.achievements.single.sprint_spent[0].synced)  {
+						this.GooglePlayServices.unlockAchievement("sprint_spent");
+					}
+
 					overallSpd += this.heroSpeed;
 					this.hero.sheep.animationSpeed = 0.15;
 				}
