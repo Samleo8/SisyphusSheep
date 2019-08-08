@@ -413,7 +413,7 @@ var SisyphusSheepGame = function(){
 
 	this.tips = [
 		"Did you know about the achievements under Google Play Games?",
-		"Watching the ad after gaining a >15 highscore earns you coins",
+		"Watching the ad after gaining a >100 highscore earns you coins",
 		"Upgrade your sheep in the store to improve your highscore",
 		"Log into Google Play Games to trash your friends' highscores",
 		"Smashing into a spike with a shield destroys both the shield and the spike",
@@ -466,73 +466,66 @@ var SisyphusSheepGame = function(){
 
 	//TODO: Adapt accordingly
 	this.achievements = {
-		"single":{
-			"support":[{
-				'id': 'CgkI8sq82fwOEAIQBg',
+		"single": {
+			"support": [{
+				'id': 'CgkIzb_h1oMQEAIQAg',
 				'name': 'Supportive Sheep',
 				'points': 5,
 				'complete': false,
 				'synced': false
 			}],
-			"curiosity":[{
-				'id': 'CgkI8sq82fwOEAIQBw',
+			"curiosity": [{
+				'id': 'CgkIzb_h1oMQEAIQAw',
 				'name': 'Curiosity slayed the lamb',
 				'points': 5
 			}],
-			"score":[{
-				'id': 'CgkI8sq82fwOEAIQDQ',
-				'name': 'Soaring beyond limits 1',
+			"score": [{
+				'id': 'CgkIzb_h1oMQEAIQCg',
+				'name': 'Over Achiever 1',
 				'points': 10,
-				'value': 10,
+				'value': 150,
 				'complete': false,
 				'synced': false
 			}, {
-				'id': 'CgkI8sq82fwOEAIQDg',
-				'name': 'Soaring Beyond Limits 2',
+				'id': 'CgkIzb_h1oMQEAIQCw',
+				'name': 'Over Achiever 2',
 				'points': 20,
-				'value': 15,
+				'value': 250,
 				'complete': false,
 				'synced': false
 			}, {
-				'id': 'CgkI8sq82fwOEAIQDw',
-				'name': 'Soaring Beyond Limits 3',
-				'points': 50,
-				'value': 20,
-				'complete': false,
-				'synced': false
-			}, {
-				'id': 'CgkI8sq82fwOEAIQEA',
-				'name': 'Soaring Beyond Limits - Crazy',
+				'id': 'CgkIzb_h1oMQEAIQDQ',
+				'name': 'Over Achiever - Crazy',
 				'points': 100,
-				'value': 30,
+				'value': 500,
 				'complete': false,
 				'synced': false
 			}],
-			"shield_once":[{
-				'id': 'CgkI8sq82fwOEAIQFw',
+			"shield_once": [{
+				'id': 'CgkIzb_h1oMQEAIQEw',
 				'name': 'Strong Sheep 1',
 				'points': 5,
 				'complete': false,
 				'synced': false
 			}],
-			"enhanced_once":[{
-					'id': 'CgkI8sq82fwOEAIQHA',
-					'name': 'Enhanced Sheep 1',
-					'points': 5,
-					'complete': false,
-					'synced': false
+			"enhanced_once": [{
+				'id': 'CgkIzb_h1oMQEAIQFw',
+				'name': 'Enhanced Sheep 1',
+				'points': 5,
+				'complete': false,
+				'synced': false
 			}],
-			"max_upgrade":[{
-				'id': 'CgkI8sq82fwOEAIQHg',
+			"max_upgrade": [{
+				'id': 'CgkIzb_h1oMQEAIQGg',
 				'name': 'Super Sheep',
 				'points': 20,
 				'complete': false,
 				'synced': false
 			}]
 		},
-		"incremental":{
-			"die":[{
-				'id': 'CgkI8sq82fwOEAIQCQ',
+		"incremental": {
+			"die": [{
+				'id': 'CgkIzb_h1oMQEAIQBA',
 				'name': 'Sacrificial Lamb 1',
 				'points': 5,
 				'completedSteps': 0,
@@ -541,7 +534,7 @@ var SisyphusSheepGame = function(){
 				'complete': false,
 				'synced': false
 			}, {
-				'id': 'CgkI8sq82fwOEAIQCA',
+				'id': 'CgkIzb_h1oMQEAIQBQ',
 				'name': 'Sacrificial Lamb 2',
 				'points': 10,
 				'completedSteps': 0,
@@ -550,7 +543,7 @@ var SisyphusSheepGame = function(){
 				'complete': false,
 				'synced': false
 			}, {
-				'id': 'CgkI8sq82fwOEAIQCg',
+				'id': 'CgkIzb_h1oMQEAIQBg',
 				'name': 'Sacrificial Lamb 3',
 				'points': 15,
 				'completedSteps': 0,
@@ -559,8 +552,8 @@ var SisyphusSheepGame = function(){
 				'complete': false,
 				'synced': false
 			}, {
-				'id': 'CgkI8sq82fwOEAIQCw',
-				'name': 'Sacrificial Lamb 4',
+				'id': 'CgkIzb_h1oMQEAIQBw',
+				'name': 'Sacrificial Lamb -  Extreme',
 				'points': 25,
 				'completedSteps': 0,
 				'completedSteps_synced': 0,
@@ -568,8 +561,8 @@ var SisyphusSheepGame = function(){
 				'complete': false,
 				'synced': false
 			}, {
-				'id': 'CgkI8sq82fwOEAIQDA',
-				'name': 'Sacrificial Lamb -  Extreme',
+				'id': 'CgkIzb_h1oMQEAIQCQ',
+				'name': 'Sacrificial Lamb - Clearly addicted',
 				'points': 50,
 				'completedSteps': 0,
 				'completedSteps_synced': 0,
@@ -577,19 +570,9 @@ var SisyphusSheepGame = function(){
 				'complete': false,
 				'synced': false
 			}],
-			"die_addicted":[{
-				'id': 'CgkI8sq82fwOEAIQFQ',
-				'name': 'Sacrificial Lamb - Clearly addicted',
-				'points': 100,
-				'completedSteps': 0,
-				'completedSteps_synced': 0,
-				'totalSteps': 1000,
-				'complete': false,
-				'synced': false
-			}],
-			"score_times":[{
-				'id': 'CgkI8sq82fwOEAIQEQ',
-				'name': 'Gliding Along 1',
+			"score_times": [{
+				'id': 'CgkIzb_h1oMQEAIQDg',
+				'name': 'Sporty Sheep 1',
 				'points': 15,
 				'completedSteps': 0,
 				'completedSteps_synced': 0,
@@ -597,8 +580,8 @@ var SisyphusSheepGame = function(){
 				'complete': false,
 				'synced': false
 			}, {
-				'id': 'CgkI8sq82fwOEAIQEg',
-				'name': 'Gliding Along 2',
+				'id': 'CgkIzb_h1oMQEAIQDw',
+				'name': 'Sporty Sheep 2',
 				'points': 25,
 				'completedSteps': 0,
 				'completedSteps_synced': 0,
@@ -606,8 +589,8 @@ var SisyphusSheepGame = function(){
 				'complete': false,
 				'synced': false
 			}, {
-				'id': 'CgkI8sq82fwOEAIQEw',
-				'name': 'Gliding Along 3',
+				'id': 'CgkIzb_h1oMQEAIQEA',
+				'name': 'Sporty Sheep 3',
 				'points': 40,
 				'completedSteps': 0,
 				'completedSteps_synced': 0,
@@ -615,26 +598,26 @@ var SisyphusSheepGame = function(){
 				'complete': false,
 				'synced': false
 			}, {
-				'id': 'CgkI8sq82fwOEAIQFA',
-				'name': 'Soaring Along!',
-				'points': 100,
+				'id': 'CgkIzb_h1oMQEAIQEQ',
+				'name': 'Olympic Sheep!',
+				'points': 80,
 				'completedSteps': 0,
 				'completedSteps_synced': 0,
 				'totalSteps': 50,
 				'complete': false,
 				'synced': false
 			}, {
-				'id': 'CgkI8sq82fwOEAIQFg',
-				'name': 'Soaring Along - Clearly Addicted!',
-				'points': 200,
+				'id': 'CgkIzb_h1oMQEAIQEg',
+				'name': 'Olympic Sheep - Clearly Addicted!',
+				'points': 150,
 				'completedSteps': 0,
 				'completedSteps_synced': 0,
 				'totalSteps': 100,
 				'complete': false,
 				'synced': false
 			}],
-			"shield":[{
-				'id': 'CgkI8sq82fwOEAIQGA',
+			"shield": [{
+				'id': 'CgkIzb_h1oMQEAIQFA',
 				'name': 'Strong Sheep 2',
 				'points': 10,
 				'completedSteps': 0,
@@ -643,7 +626,7 @@ var SisyphusSheepGame = function(){
 				'complete': false,
 				'synced': false
 			}, {
-				'id': 'CgkI8sq82fwOEAIQGQ',
+				'id': 'CgkIzb_h1oMQEAIQFQ',
 				'name': 'Strong Sheep 3',
 				'points': 20,
 				'completedSteps': 0,
@@ -652,7 +635,7 @@ var SisyphusSheepGame = function(){
 				'complete': false,
 				'synced': false
 			}, {
-				'id': 'CgkI8sq82fwOEAIQGg',
+				'id': 'CgkIzb_h1oMQEAIQFg',
 				'name': 'Strong Sheep - Clearly Addicted',
 				'points': 50,
 				'completedSteps': 0,
@@ -661,28 +644,29 @@ var SisyphusSheepGame = function(){
 				'complete': false,
 				'synced': false
 			}],
-			"enhanced":[{
-				'id': 'CgkI8sq82fwOEAIQHQ',
-				'name': 'Enhanced Sheep 2',
-				'points': 10,
-				'completedSteps': 0,
-				'completedSteps_synced': 0,
-				'totalSteps': 10,
-				'complete': false,
-				'synced': false
-			},
-			{
-				'id': 'CgkI8sq82fwOEAIQHQ',
-				'name': 'Enhanced Sheep 3',
-				'points': 15,
-				'completedSteps': 0,
-				'completedSteps_synced': 0,
-				'totalSteps': 25,
-				'complete': false,
-				'synced': false
-			}],
-			"addicted":[{
-				'id': 'CgkI8sq82fwOEAIQGw',
+			"enhanced": [{
+					'id': 'CgkIzb_h1oMQEAIQGA',
+					'name': 'Enhanced Sheep 2',
+					'points': 10,
+					'completedSteps': 0,
+					'completedSteps_synced': 0,
+					'totalSteps': 10,
+					'complete': false,
+					'synced': false
+				},
+				{
+					'id': 'CgkIzb_h1oMQEAIQGQ',
+					'name': 'Enhanced Sheep 3',
+					'points': 15,
+					'completedSteps': 0,
+					'completedSteps_synced': 0,
+					'totalSteps': 25,
+					'complete': false,
+					'synced': false
+				}
+			],
+			"addicted": [{
+				'id': 'CgkIzb_h1oMQEAIQGw',
 				'name': 'Clearly Addicted',
 				'points': 50,
 				'completedSteps': 0,
@@ -692,7 +676,7 @@ var SisyphusSheepGame = function(){
 				'synced': false
 			}]
 		},
-		"totalSteps":{} //Dynamically generated based on this.achievements data
+		"totalSteps": {} //Dynamically generated based on this.achievements data
 	};
 
 	this.achievements.totalSteps["score"] = [];
@@ -850,7 +834,7 @@ var SisyphusSheepGame = function(){
 				case "rewardvideo":
 					type = "rewardvideo";
 					this.reward_type = (reward_type==null)?"coins":reward_type;
-					this.reward_amount = (reward_amount==null)?(50*getRandomInt(1,5)):reward_amount;
+					this.reward_amount = (reward_amount==null)?(50*getRandomInt(1, 5)):reward_amount;
 					break;
 				case "interstitial":
 				case "video":
@@ -1217,11 +1201,11 @@ var SisyphusSheepGame = function(){
 
 			var _width = Math.round(loader.progress/100)*this.loadingBar.progressBar.maxWidth;
 			this.loadingBar.progressBar.beginFill(0xcfd8dc)
-				.drawRect(-this.loadingBar.progressBar.maxWidth/2,0,_width,this.loadingBar.progressBar.maxHeight)
+				.drawRect(-this.loadingBar.progressBar.maxWidth/2, 0,_width,this.loadingBar.progressBar.maxHeight)
 			.endFill();
 
-			//console.log('Progress: ' + loader.progress + '%');
-			//console.log('Loading: ' + resource.name.split("_").join(" ").toUpperCase());
+			//console.log('Progress: '+ loader.progress + '%');
+			//console.log('Loading: '+ resource.name.split("_").join(" ").toUpperCase());
 		});
 
 		renderer.render(stage);
@@ -1257,7 +1241,7 @@ var SisyphusSheepGame = function(){
 				nm = this.hatNames[i].toString();
 				this.sprites.hats[nm] = new PIXI.Sprite(resources["hat_"+nm].texture);
 				this.sprites.hats[nm].anchor.set(0.5);
-				this.sprites.hats[nm].scale.set(0.25,0.25);
+				this.sprites.hats[nm].scale.set(0.25, 0.25);
 				this.sprites.hats[nm].tint = 0x90a4ae;
 				this.sprites.hats[nm].name = nm;
 			}
@@ -1267,7 +1251,7 @@ var SisyphusSheepGame = function(){
 				nm = this.capeNames[i].toString();
 				this.sprites.capes[nm] = new PIXI.Sprite(resources["cape_"+nm].texture);
 				this.sprites.capes[nm].anchor.set(0.5);
-				this.sprites.capes[nm].scale.set(0.25,0.25);
+				this.sprites.capes[nm].scale.set(0.25, 0.25);
 				this.sprites.capes[nm].tint = 0x90a4ae;
 				this.sprites.capes[nm].name = nm;
 			}
@@ -1300,7 +1284,7 @@ var SisyphusSheepGame = function(){
 
 			this.pauseButton.on((_isMobile)?"touchend":"mouseup",this.togglePause.bind(this));
 
-			this.pauseButton.position.set(this.canvasWidth-60,50);
+			this.pauseButton.position.set(this.canvasWidth-60, 50);
 
 			this.pauseButton.addChild(this.sprites.icons["pause"]);
 			this.pauseButton.addChild(this.sprites.icons["play"]);
@@ -1313,7 +1297,7 @@ var SisyphusSheepGame = function(){
 
 			this.muteMusicButton.on((_isMobile)?"touchend":"mouseup",this.toggleMuteMain.bind(this));
 
-			this.muteMusicButton.position.set(this.canvasWidth-145,50);
+			this.muteMusicButton.position.set(this.canvasWidth-145, 50);
 
 			this.muteMusicButton.addChild(this.sprites.icons["music_on"]);
 			this.muteMusicButton.addChild(this.sprites.icons["music_off"]);
@@ -1341,7 +1325,7 @@ var SisyphusSheepGame = function(){
 
 			this.muteFXButton.on((_isMobile)?"touchend":"mouseup",this.toggleMuteFX.bind(this));
 
-			this.muteFXButton.position.set(this.canvasWidth-235,50);
+			this.muteFXButton.position.set(this.canvasWidth-235, 50);
 
 			this.muteFXButton.addChild(this.sprites.icons["fx_on"]);
 			this.muteFXButton.addChild(this.sprites.icons["fx_off"]);
@@ -1362,7 +1346,7 @@ var SisyphusSheepGame = function(){
 
 			this.gamesButton.on((_isMobile)?"touchend":"mouseup",this.showPlayGamesMenu.bind(this));
 
-			this.gamesButton.position.set(80,50);
+			this.gamesButton.position.set(80, 50);
 
 			this.gamesButton.addChild(this.sprites.icons["games"]);
 			this.gamesButton.getChildByName("games").alpha = 1;
@@ -1382,7 +1366,7 @@ var SisyphusSheepGame = function(){
 
 			this.infoButton.on((_isMobile)?"touchend":"mouseup",this.showInfo.bind(this));
 
-			this.infoButton.position.set(190,50);
+			this.infoButton.position.set(190, 50);
 
 			this.infoButton.addChild(this.sprites.icons["info"]);
 			this.infoButton.getChildByName("info").alpha = 1;
@@ -1402,7 +1386,7 @@ var SisyphusSheepGame = function(){
 
 			this.webButton.on((_isMobile)?"touchend":"mouseup",this.gotoURL.bind(this,"https://samleo8.github.io/games/"));
 
-			this.webButton.position.set(292,50);
+			this.webButton.position.set(292, 50);
 
 			this.webButton.addChild(this.sprites.icons["web"]);
 			this.webButton.getChildByName("web").alpha = 1;
@@ -1422,7 +1406,7 @@ var SisyphusSheepGame = function(){
 
 			this.shopButton.on((_isMobile)?"touchend":"mouseup",this.showShop.bind(this));
 
-			this.shopButton.position.set(395,51);
+			this.shopButton.position.set(395, 51);
 
 			this.shopButton.addChild(this.sprites.icons["shop"]);
 			this.shopButton.getChildByName("shop").alpha = 1;
@@ -1507,18 +1491,18 @@ var SisyphusSheepGame = function(){
 		var bg_basic = new PIXI.Graphics();
 		//-Main Bg
 		bg_basic.beginFill(0x37474f);
-		bg_basic.drawRect(0,0,this.canvasWidth,this.canvasHeight);
+		bg_basic.drawRect(0, 0,this.canvasWidth,this.canvasHeight);
 		bg_basic.endFill();
 
 		var rect = new PIXI.Graphics();
 		//-Sides
-		rect.beginFill(0xcfd8dc,0.9);
-		rect.drawRect(0,this.canvasHeight/2-150,500,140);
-		rect.drawRect(1100,this.canvasHeight/2-150,500,140);
+		rect.beginFill(0xcfd8dc, 0.9);
+		rect.drawRect(0,this.canvasHeight/2-150, 500, 140);
+		rect.drawRect(1100,this.canvasHeight/2-150, 500, 140);
 		rect.endFill();
 
 		//-Border for sides
-		rect.lineStyle(8,0x90a4ae)
+		rect.lineStyle(8, 0x90a4ae)
 			.moveTo(0,this.canvasHeight/2-150).lineTo(500,this.canvasHeight/2-150)
 			.moveTo(0,this.canvasHeight/2-10).lineTo(500,this.canvasHeight/2-10)
 			.moveTo(1100,this.canvasHeight/2-150).lineTo(1600,this.canvasHeight/2-150)
@@ -1566,9 +1550,9 @@ var SisyphusSheepGame = function(){
 
 		//--Outline
 		//-(Actual Bar drawn in progress handler)
-		this.loadingBar.progressBar.lineStyle(this.loadingBar.progressBar.strokeWidth,0x90a4ae)
-			.moveTo(-this.loadingBar.progressBar.maxWidth/2,0)
-			.lineTo(this.loadingBar.progressBar.maxWidth/2,0)
+		this.loadingBar.progressBar.lineStyle(this.loadingBar.progressBar.strokeWidth, 0x90a4ae)
+			.moveTo(-this.loadingBar.progressBar.maxWidth/2, 0)
+			.lineTo(this.loadingBar.progressBar.maxWidth/2, 0)
 			.lineTo(this.loadingBar.progressBar.maxWidth/2,this.loadingBar.progressBar.maxHeight)
 			.lineTo(-this.loadingBar.progressBar.maxWidth/2,this.loadingBar.progressBar.maxHeight)
 			.lineTo(-this.loadingBar.progressBar.maxWidth/2,-this.loadingBar.progressBar.strokeWidth/2);
@@ -1603,8 +1587,8 @@ var SisyphusSheepGame = function(){
 		this.pauseOverlay = new PIXI.Container();
 
 		var rect = new PIXI.Graphics();
-		rect.beginFill(0x263238,0.7);
-		rect.drawRect(0,0,this.canvasWidth,this.canvasHeight);
+		rect.beginFill(0x263238, 0.7);
+		rect.drawRect(0, 0,this.canvasWidth,this.canvasHeight);
 		rect.endFill();
 
 		this.pauseOverlay.addChild(rect);
@@ -1629,7 +1613,7 @@ var SisyphusSheepGame = function(){
 		var line = new PIXI.Graphics();
 		line.alpha = 0.85;
 		line.position.set(this.canvasWidth/2-243,this.canvasHeight/2+35);
-		line.lineStyle(1,0xeceff1).moveTo(0,0).lineTo(468,0);
+		line.lineStyle(1, 0xeceff1).moveTo(0, 0).lineTo(468, 0);
 		this.pauseOverlay.addChild(line);
 
 		var text2 = new PIXI.Text(((_isMobile)?"Tap":"Click")+" to continue ",
@@ -1653,8 +1637,8 @@ var SisyphusSheepGame = function(){
 		this.infoOverlay = new PIXI.Container();
 
 		var rect = new PIXI.Graphics();
-		rect.beginFill(0x263238,0.98)
-			.drawRect(0,0,this.canvasWidth,this.canvasHeight)
+		rect.beginFill(0x263238, 0.98)
+			.drawRect(0, 0,this.canvasWidth,this.canvasHeight)
 		.endFill();
 
 		this.infoOverlay.addChild(rect);
@@ -1692,7 +1676,7 @@ var SisyphusSheepGame = function(){
 			((isApp())?"The web version is available on my website at\n https://samleo8.github.io/SisyphusSheep":"The mobile app is available on the Google Play Store under the name \'Sisyphus Sheep\'"),
 			textOpt2
 		);
-		text2.anchor.set(0.5,0);
+		text2.anchor.set(0.5, 0);
 		text2.alpha = 0.98;
 		text2.x = this.canvasWidth/2;
 		text2.y = this.canvasHeight/6+35;
@@ -1710,7 +1694,7 @@ var SisyphusSheepGame = function(){
 		this.infoOverlay.addChild(text3);
 
 		text2 = new PIXI.Text("[Miqz] http://www.newgrounds.com/audio/listen/719242\nhttp://www.noiseforfun.com/",textOpt2);
-		text2.anchor.set(0.5,0);
+		text2.anchor.set(0.5, 0);
 		text2.alpha = 0.98;
 		text2.x = this.canvasWidth/2;
 		text2.y = this.canvasHeight/2+45;
@@ -1718,7 +1702,7 @@ var SisyphusSheepGame = function(){
 		this.infoOverlay.addChild(text2);
 
 		text3 = new PIXI.Text("SPRITES",textOpt3);
-		text3.anchor.set(0.5,0);
+		text3.anchor.set(0.5, 0);
 		text3.alpha = 0.98;
 		text3.x = this.canvasWidth/2;
 		text3.y = this.canvasHeight/2+160;
@@ -1726,7 +1710,7 @@ var SisyphusSheepGame = function(){
 		this.infoOverlay.addChild(text3);
 
 		text2 = new PIXI.Text("Material Design Icons\nSpike: http://scribblenauts.wikia.com/wiki/File:Steel_Spike.png",textOpt2);
-		text2.anchor.set(0.5,0);
+		text2.anchor.set(0.5, 0);
 		text2.alpha = 0.98;
 		text2.x = this.canvasWidth/2;
 		text2.y = this.canvasHeight/2+230;
@@ -1814,12 +1798,12 @@ var SisyphusSheepGame = function(){
 		this.restartButton.icon.tint = 0xcfd8dc;
 
 		this.restartButton.background = new PIXI.Graphics();
-		this.restartButton.background.beginFill(0x263238,0.9)
-			.drawRect(0,0,buttonWidth,buttonHeight)
+		this.restartButton.background.beginFill(0x263238, 0.9)
+			.drawRect(0, 0,buttonWidth,buttonHeight)
 		.endFill();
 
 		this.restartButton.pseudoBg = new PIXI.Graphics();
-		this.restartButton.pseudoBg.beginFill(0x263238,0)
+		this.restartButton.pseudoBg.beginFill(0x263238, 0)
 			.drawRect(-pseudoPaddX,-pseudoPaddY,buttonWidth+2*pseudoPaddX,buttonHeight+2*pseudoPaddY)
 		.endFill();
 		this.restartButton.pseudoBg.alpha = 0;
@@ -1844,7 +1828,7 @@ var SisyphusSheepGame = function(){
 		};
 
 		this.restartButton.footnote = new PIXI.Text("Start a new game",textOpt3);
-		this.restartButton.footnote.anchor.set(0.5,0);
+		this.restartButton.footnote.anchor.set(0.5, 0);
 		this.restartButton.footnote.position.set(buttonWidth/2, buttonHeight+15);
 
 		this.restartButton.addChild(this.restartButton.pseudoBg);
@@ -1861,12 +1845,12 @@ var SisyphusSheepGame = function(){
 		this.reviveButton.position.set(this.canvasWidth/2+padd,this.restartButton.y);
 
 		this.reviveButton.background = new PIXI.Graphics();
-		this.reviveButton.background.beginFill(0x263238,0.9)
-			.drawRect(0,0,buttonWidth,buttonHeight)
+		this.reviveButton.background.beginFill(0x263238, 0.9)
+			.drawRect(0, 0,buttonWidth,buttonHeight)
 		.endFill();
 
 		this.reviveButton.pseudoBg = new PIXI.Graphics();
-		this.reviveButton.pseudoBg.beginFill(0x263238,0)
+		this.reviveButton.pseudoBg.beginFill(0x263238, 0)
 			.drawRect(-pseudoPaddX,-pseudoPaddY,buttonWidth+2*pseudoPaddX,buttonHeight+2*pseudoPaddY)
 		.endFill();
 		this.reviveButton.pseudoBg.alpha = 0;
@@ -1887,13 +1871,13 @@ var SisyphusSheepGame = function(){
 		this.reviveButton.on((_isMobile)?"touchend":"mouseup",this.try_revive.bind(this));
 
 		this.reviveButton.overlay = new PIXI.Graphics();
-		this.reviveButton.overlay.beginFill(0xb0bec5,0.75)
-			.drawRect(0,0,buttonWidth,buttonHeight)
+		this.reviveButton.overlay.beginFill(0xb0bec5, 0.75)
+			.drawRect(0, 0,buttonWidth,buttonHeight)
 		.endFill();
 		this.reviveButton.overlay.visible = false;
 
 		this.reviveButton.footnote = new PIXI.Text("You can only revive once per game",textOpt3);
-		this.reviveButton.footnote.anchor.set(0.5,0);
+		this.reviveButton.footnote.anchor.set(0.5, 0);
 		this.reviveButton.footnote.position.set(buttonWidth/2, buttonHeight+15);
 
 		this.reviveButton.addChild(this.reviveButton.pseudoBg);
@@ -1910,8 +1894,8 @@ var SisyphusSheepGame = function(){
 		this.shareButton.position.set(this.canvasWidth/2+280,(this.gameoverScreen.scoreText.y+this.gameoverScreen.highscoreText.y)/2-20);
 
 		this.shareButton.pseudoBg = new PIXI.Graphics();
-		this.shareButton.pseudoBg.beginFill(0x263238,0)
-			.drawCircle(0, 0,100)
+		this.shareButton.pseudoBg.beginFill(0x263238, 0)
+			.drawCircle(0, 0, 100)
 		.endFill();
 		this.shareButton.pseudoBg.alpha = 0;
 
@@ -1967,8 +1951,8 @@ var SisyphusSheepGame = function(){
 		this.shop = new PIXI.Container();
 
 		rect = new PIXI.Graphics();
-		rect.beginFill(0x263238,0.98)
-			.drawRect(0,0,this.canvasWidth,this.canvasHeight)
+		rect.beginFill(0x263238, 0.98)
+			.drawRect(0, 0,this.canvasWidth,this.canvasHeight)
 		.endFill();
 
 		this.shop.addChild(rect);
@@ -1985,7 +1969,7 @@ var SisyphusSheepGame = function(){
 
 		//Title
 		text = new PIXI.Text("STORE",Object.assign(textOpt,{fontSize:60}));
-		text.anchor.set(0.5,0);
+		text.anchor.set(0.5, 0);
 		text.alpha = 0.98;
 		text.x = this.canvasWidth/2;
 		text.y = 25;
@@ -2007,16 +1991,16 @@ var SisyphusSheepGame = function(){
 		this.shop.coin_icon.alpha = 1;
 		this.shop.coin_icon.tint = 0x455a64;
 		this.shop.coin_icon.scale.set(0.6, 0.6);
-		this.shop.coin_icon.position.set(this.canvasWidth/2-this.coins.toString().length*34*2,140);
+		this.shop.coin_icon.position.set(this.canvasWidth/2-this.coins.toString().length*34*2, 140);
 		*/
 
 		this.shop.coin_title = new PIXI.Text("Total Coins:",textOpt2);
 		this.shop.coin_title.anchor.set(0.5, 0.5);
-		this.shop.coin_title.position.set(this.canvasWidth/2,58);
+		this.shop.coin_title.position.set(this.canvasWidth/2, 58);
 
 		this.shop.coin_text = new PIXI.Text(this.coins,Object.assign(textOpt2,{fontSize:40}));
 		this.shop.coin_text.anchor.set(0.5, 0.5);
-		this.shop.coin_text.position.set(this.canvasWidth/2,118);
+		this.shop.coin_text.position.set(this.canvasWidth/2, 118);
 
 		this.shop.addChild(this.shop.coin_title);
 		this.shop.addChild(this.shop.coin_text);
@@ -2049,8 +2033,8 @@ var SisyphusSheepGame = function(){
 			tab._width = (this.canvasWidth/this.shopTabNames.length);
 
 			tab.bg = new PIXI.Graphics();
-			tab.bg.beginFill(0xcfd8dc,0.98)
-				.drawRect(0,0,tab._width,tab._height)
+			tab.bg.beginFill(0xcfd8dc, 0.98)
+				.drawRect(0, 0,tab._width,tab._height)
 			.endFill();
 
 			tab.text = new PIXI.Text(this.shopTabNames[i].toTitleCase(),textOpt3);
@@ -2058,14 +2042,14 @@ var SisyphusSheepGame = function(){
 			tab.text.position.set(tab._width/2, tab._height/2);
 
 			tab.line = new PIXI.Graphics();
-			tab.line.lineStyle(1,0x607d8b)
-				.moveTo(0,0).lineTo(0,tab._height);
+			tab.line.lineStyle(1, 0x607d8b)
+				.moveTo(0, 0).lineTo(0,tab._height);
 
 			tab.position.set(i*tab._width, tabMarginTop);
 
 			tab.overlay = new PIXI.Graphics();
-			tab.overlay.beginFill(0x455a64,0.45)
-				.drawRect(0,0,tab._width,tab._height)
+			tab.overlay.beginFill(0x455a64, 0.45)
+				.drawRect(0, 0,tab._width,tab._height)
 			.endFill();
 			if(i) tab.overlay.visible = true;
 			else tab.overlay.visible = false;
@@ -2096,8 +2080,8 @@ var SisyphusSheepGame = function(){
 			content.alpha = 1;
 
 			content.bg = new PIXI.Graphics();
-			content.bg.beginFill(0xcfd8dc,0.98)
-				.drawRect(0,0,this.canvasWidth,this.canvasHeight-tabHeight-tabMarginTop+1)
+			content.bg.beginFill(0xcfd8dc, 0.98)
+				.drawRect(0, 0,this.canvasWidth,this.canvasHeight-tabHeight-tabMarginTop+1)
 			.endFill();
 
 			content.position.set(0,tabHeight+tabMarginTop-1);
@@ -2124,8 +2108,8 @@ var SisyphusSheepGame = function(){
 		this.playGamesMenu = new PIXI.Container();
 
 		rect = new PIXI.Graphics();
-		rect.beginFill(0x263238,0.98)
-			.drawRect(0,0,this.canvasWidth,this.canvasHeight)
+		rect.beginFill(0x263238, 0.98)
+			.drawRect(0, 0,this.canvasWidth,this.canvasHeight)
 		.endFill();
 
 		this.playGamesMenu.addChild(rect);
@@ -2142,7 +2126,7 @@ var SisyphusSheepGame = function(){
 
 		//Title
 		text = new PIXI.Text("PLAY GAMES",Object.assign(textOpt,{fontSize:60}));
-		text.anchor.set(0.5,0);
+		text.anchor.set(0.5, 0);
 		text.alpha = 0.98;
 		text.x = this.canvasWidth/2;
 		text.y = 25;
@@ -2162,7 +2146,7 @@ var SisyphusSheepGame = function(){
 		this.playGamesMenu.profile = new PIXI.Container();
 		var profile = this.playGamesMenu.profile;
 
-		profile.position.set(this.canvasWidth/2,225);
+		profile.position.set(this.canvasWidth/2, 225);
 
 		profile.welcome_text = new PIXI.Text("Welcome,",textOpt2);
 		profile.player_text = new PIXI.Text("PLAYER",Object.assign(textOpt2,{fontSize:48}));
@@ -2211,8 +2195,8 @@ var SisyphusSheepGame = function(){
 			tab._marginLeft = (this.canvasWidth-tabsNamesArr.length*tab._width)/(tabsNamesArr.length+1);
 
 			tab.bg = new PIXI.Graphics();
-			tab.bg.beginFill(0xcfd8dc,0.98)
-				.drawRect(0,0,tab._width-2,tab._height)
+			tab.bg.beginFill(0xcfd8dc, 0.98)
+				.drawRect(0, 0,tab._width-2,tab._height)
 			.endFill();
 
 			tab.text = new PIXI.Text(tabsNamesArr[i],textOpt3);
@@ -2221,7 +2205,7 @@ var SisyphusSheepGame = function(){
 
 			tab.icon = this.sprites.icons[_nm];
 			tab.icon.anchor.set(0.5, 0.5);
-			tab.icon.scale.set(1.3,1.3);
+			tab.icon.scale.set(1.3, 1.3);
 			tab.icon.tint = 0x455A64;
 			tab.icon.alpha = 1;
 			tab.icon.position.set(tab.text.x, tab._height/2-25);
@@ -2259,18 +2243,18 @@ var SisyphusSheepGame = function(){
 		this.backButton.position.set(this.canvasWidth-70,this.canvasHeight-100);
 
 		this.backButton.pseudoBg = new PIXI.Graphics();
-		this.backButton.pseudoBg.beginFill(0x263238,0)
-			.drawCircle(0,18,90)
+		this.backButton.pseudoBg.beginFill(0x263238, 0)
+			.drawCircle(0, 18, 90)
 		.endFill();
 		this.backButton.pseudoBg.alpha = 0;
 
 		this.backButton.icon = this.sprites.icons["back"];
 		this.backButton.icon.alpha = 1;
-		this.backButton.icon.position.set(0,0);
+		this.backButton.icon.position.set(0, 0);
 
 		this.backButton.text = new PIXI.Text("BACK",textOpt4);
 		this.backButton.text.anchor.set(0.5, 0.5);
-		this.backButton.text.position.set(-0.5,62);
+		this.backButton.text.position.set(-0.5, 62);
 
 		this.backButton.addChild(this.backButton.pseudoBg);
 		this.backButton.addChild(this.backButton.icon);
@@ -2297,7 +2281,7 @@ var SisyphusSheepGame = function(){
 			//Sheep
 			sheep = new PIXI.Sprite(this.animations.sheep_base.frames[1]);
 			sheep.anchor.set(0.5, 0.5);
-			sheep.scale.set(0.35,0.35);
+			sheep.scale.set(0.35, 0.35);
 			sheep.rotation = -Math.PI/50;
 			sheep.position.set(this.canvasWidth/2-190,this.canvasHeight/2-120);
 
@@ -2485,7 +2469,7 @@ var SisyphusSheepGame = function(){
 		this.highscoreText = new PIXI.Text(this.highscore.toString(), Object.assign(textOpt, { fontSize:40 }));
 
 		this.highscoreText.alpha = 0.7;
-		this.highscoreText.anchor.set(0,0.5);
+		this.highscoreText.anchor.set(0, 0.5);
 		this.highscoreText.x = this.canvasWidth/2 + 70;
 		this.highscoreText.y = this.canvasHeight/2 + 80;
 		stage.addChild(this.highscoreText);
@@ -2556,8 +2540,8 @@ var SisyphusSheepGame = function(){
 
 		//-Hero Shield
 		this.heroShield = new PIXI.Graphics();
-		this.heroShield.beginFill(0xffecb3,0.6)
-			.drawCircle(0,0,this.hero.sheep.width/2+30)
+		this.heroShield.beginFill(0xffecb3, 0.6)
+			.drawCircle(0, 0,this.hero.sheep.width/2+30)
 		.endFill();
 		this.heroShield.position = this.hero.position;
 
@@ -3010,7 +2994,7 @@ var SisyphusSheepGame = function(){
             this.sprint.level += this.sprint.inc;
         }
 
-        this.sprint.level = Math.max(Math.min(100,this.sprint.level),0);
+        this.sprint.level = Math.max(Math.min(100,this.sprint.level), 0);
 
 		//CIRCULAR SPRINT LEVEL
 		this.sprint.circle.bar.clear();
@@ -3317,7 +3301,7 @@ var SisyphusSheepGame = function(){
 			//-Incremental:
 			for(i=0;i<this.achievements.incremental.shield.length;i++){
 				if(!this.achievements.incremental.shield[i].complete || !this.achievements.incremental.shield[i].synced) {
-					this.GooglePlayServices.incrementAchievement("shield",i,1);
+					this.GooglePlayServices.incrementAchievement("shield", i, 1);
 				}
 			}
 	};
@@ -3412,7 +3396,7 @@ var SisyphusSheepGame = function(){
 
 		var footnoteText = "";
 
-		width = (this.canvasWidth)/Math.min(totalUpgrades,5);
+		width = (this.canvasWidth)/Math.min(totalUpgrades, 5);
 		height = contentHeight/2;
 
 		var textOpt = {
@@ -3469,18 +3453,18 @@ var SisyphusSheepGame = function(){
 			this.upgradesSection[nm].position.set(width*(cnt%5),(cnt<5)?-5:(contentHeight/2-25));
 
 			this.upgradesSection[nm].bg = new PIXI.Graphics();
-			this.upgradesSection[nm].bg.lineStyle(1,0x263238,0.2)
-				.moveTo(0,20).lineTo(0,contentHeight-20);
+			this.upgradesSection[nm].bg.lineStyle(1, 0x263238, 0.2)
+				.moveTo(0, 20).lineTo(0,contentHeight-20);
 
 				//-Title
 			this.upgradesSection[nm].title = new PIXI.Text(data["title"],textOpt3);
 			this.upgradesSection[nm].title.anchor.set(0.5, 0.5);
-			this.upgradesSection[nm].title.position.set(width/2,60);
+			this.upgradesSection[nm].title.position.set(width/2, 60);
 
 				//-Desc
 			this.upgradesSection[nm].desc = new PIXI.Text(data["desc"],textOpt4);
 			this.upgradesSection[nm].desc.anchor.set(0.5, 0.5);
-			this.upgradesSection[nm].desc.position.set(width/2,130);
+			this.upgradesSection[nm].desc.position.set(width/2, 130);
 
 				//-Button
 			this.upgradesSection[nm].button = new PIXI.Container();
@@ -3495,12 +3479,12 @@ var SisyphusSheepGame = function(){
 			this.upgradesSection[nm].button.icon.tint = 0xcfd8dc;
 
 			this.upgradesSection[nm].button.background = new PIXI.Graphics();
-			this.upgradesSection[nm].button.background.beginFill(0x263238,0.9)
-				.drawRect(0,0,buttonWidth,buttonHeight)
+			this.upgradesSection[nm].button.background.beginFill(0x263238, 0.9)
+				.drawRect(0, 0,buttonWidth,buttonHeight)
 			.endFill();
 
 			this.upgradesSection[nm].button.pseudoBg = new PIXI.Graphics();
-			this.upgradesSection[nm].button.pseudoBg.beginFill(0x263238,0)
+			this.upgradesSection[nm].button.pseudoBg.beginFill(0x263238, 0)
 				.drawRect(-pseudoPaddX,-pseudoPaddY,buttonWidth+2*pseudoPaddX,buttonHeight+2*pseudoPaddY)
 			.endFill();
 
@@ -3513,12 +3497,12 @@ var SisyphusSheepGame = function(){
 			this.upgradesSection[nm].button.on((_isMobile)?"touchend":"mouseup",this.performUpgrade.bind(this,nm));
 
 			this.upgradesSection[nm].button.footnote = new PIXI.Text(footnoteText,textOpt2);
-			this.upgradesSection[nm].button.footnote.anchor.set(0.5,0);
+			this.upgradesSection[nm].button.footnote.anchor.set(0.5, 0);
 			this.upgradesSection[nm].button.footnote.position.set(buttonWidth/2, buttonHeight+10);
 
 			this.upgradesSection[nm].button.overlay = new PIXI.Graphics();
-			this.upgradesSection[nm].button.overlay.beginFill(0xb0bec5,0.75)
-				.drawRect(0,0,buttonWidth,buttonHeight)
+			this.upgradesSection[nm].button.overlay.beginFill(0xb0bec5, 0.75)
+				.drawRect(0, 0,buttonWidth,buttonHeight)
 			.endFill();
 			this.upgradesSection[nm].button.overlay.visible = false;
 
@@ -3557,22 +3541,22 @@ var SisyphusSheepGame = function(){
 		this.shop.navArrows = new PIXI.Container();
 
 		this.shop.navArrows.pageIndicator = new PIXI.Text("PAGE\n1 / 1",textOpt3);
-		this.shop.navArrows.pageIndicator.anchor.set(0.5,0);
-		this.shop.navArrows.pageIndicator.position.set(navArrowWidth/2,25);
+		this.shop.navArrows.pageIndicator.anchor.set(0.5, 0);
+		this.shop.navArrows.pageIndicator.position.set(navArrowWidth/2, 25);
 		this.shop.navArrows.addChild(this.shop.navArrows.pageIndicator);
 
 		this.shop.navArrows.left = new PIXI.Container();
 		this.shop.navArrows.left.name = "left";
 
-		this.shop.navArrows.left.position.set(0,0);
+		this.shop.navArrows.left.position.set(0, 0);
 		this.shop.navArrows.left.bg = new PIXI.Graphics();
-		this.shop.navArrows.left.bg.beginFill(0x90a4ae,0.5)
-			.drawRect(0,0,navArrowWidth,navArrowHeight)
+		this.shop.navArrows.left.bg.beginFill(0x90a4ae, 0.5)
+			.drawRect(0, 0,navArrowWidth,navArrowHeight)
 		.endFill();
 
 		this.shop.navArrows.left.icon = this.sprites.icons.left_arrow;
 		this.shop.navArrows.left.icon.alpha = 0.6;
-		this.shop.navArrows.left.icon.scale.set(1.1,1.1);
+		this.shop.navArrows.left.icon.scale.set(1.1, 1.1);
 		this.shop.navArrows.left.icon.tint = 0x546e7a;
 		this.shop.navArrows.left.icon.position.set(navArrowWidth/2,navArrowHeight/2);
 
@@ -3588,15 +3572,15 @@ var SisyphusSheepGame = function(){
 		this.shop.navArrows.right = new PIXI.Container();
 		this.shop.navArrows.right.name = "right";
 
-		this.shop.navArrows.right.position.set(this.canvasWidth-navArrowWidth,0);
+		this.shop.navArrows.right.position.set(this.canvasWidth-navArrowWidth, 0);
 		this.shop.navArrows.right.bg = new PIXI.Graphics();
-		this.shop.navArrows.right.bg.beginFill(0x90a4ae,0.5)
-			.drawRect(0,0,navArrowWidth,navArrowHeight)
+		this.shop.navArrows.right.bg.beginFill(0x90a4ae, 0.5)
+			.drawRect(0, 0,navArrowWidth,navArrowHeight)
 		.endFill();
 
 		this.shop.navArrows.right.icon = this.sprites.icons.right_arrow;
 		this.shop.navArrows.right.icon.alpha = 0.6;
-		this.shop.navArrows.right.icon.scale.set(1.1,1.1);
+		this.shop.navArrows.right.icon.scale.set(1.1, 1.1);
 		this.shop.navArrows.right.icon.tint = 0x546e7a;
 		this.shop.navArrows.right.icon.position.set(navArrowWidth/2,navArrowHeight/2);
 
@@ -3652,31 +3636,31 @@ var SisyphusSheepGame = function(){
 
 			this.skinsSection[nm] = new PIXI.Container();
 
-			this.skinsSection[nm].position.set(navArrowWidth+width*(cnt%4),0);//((cnt%8)<4)?-5:(contentHeight/2-27));
+			this.skinsSection[nm].position.set(navArrowWidth+width*(cnt%4), 0);//((cnt%8)<4)?-5:(contentHeight/2-27));
 
 			this.skinsSection[nm].bg = new PIXI.Graphics();
-			this.skinsSection[nm].bg.lineStyle(1,0x263238,0.2)
-				.moveTo(0,20).lineTo(0,contentHeight-20);
+			this.skinsSection[nm].bg.lineStyle(1, 0x263238, 0.2)
+				.moveTo(0, 20).lineTo(0,contentHeight-20);
 
 				//-Title
 			this.skinsSection[nm].title = new PIXI.Text(data["title"],textOpt3);
-			this.skinsSection[nm].title.anchor.set(0.5,0);
-			this.skinsSection[nm].title.position.set(width/2,45);
+			this.skinsSection[nm].title.anchor.set(0.5, 0);
+			this.skinsSection[nm].title.position.set(width/2, 45);
 
 				//-Preview Image
 			this.skinsSection[nm].img = new PIXI.Sprite();
 			this.skinsSection[nm].img.anchor.set(0.5, 0.5);
-			this.skinsSection[nm].img.position.set(width/2,200);
+			this.skinsSection[nm].img.position.set(width/2, 200);
 
 			switch(data["type"]){
 				case "skin":
 					if(this.animations[nm]){
 						this.skinsSection[nm].img.texture = this.animations[nm].frames[0];
-						this.skinsSection[nm].img.scale.set(0.45,0.45);
+						this.skinsSection[nm].img.scale.set(0.45, 0.45);
 					}
 					else if(nm=="little_lamb"){
 						this.skinsSection[nm].img.texture = this.animations["sheep_base"].frames[0];
-						this.skinsSection[nm].img.scale.set(0.28,0.28);
+						this.skinsSection[nm].img.scale.set(0.28, 0.28);
 					}
 					break;
 				case "hat":
@@ -3696,8 +3680,8 @@ var SisyphusSheepGame = function(){
 
 				//-Desc
 			this.skinsSection[nm].desc = new PIXI.Text(data["desc"],textOpt4);
-			this.skinsSection[nm].desc.anchor.set(0.5,0);
-			this.skinsSection[nm].desc.position.set(width/2,320);
+			this.skinsSection[nm].desc.anchor.set(0.5, 0);
+			this.skinsSection[nm].desc.position.set(width/2, 320);
 
 				//-Button
 			this.skinsSection[nm].button = new PIXI.Container();
@@ -3712,12 +3696,12 @@ var SisyphusSheepGame = function(){
 			this.skinsSection[nm].button.icon.tint = 0xcfd8dc;
 
 			this.skinsSection[nm].button.background = new PIXI.Graphics();
-			this.skinsSection[nm].button.background.beginFill(0x263238,0.9)
-				.drawRect(0,0,buttonWidth,buttonHeight)
+			this.skinsSection[nm].button.background.beginFill(0x263238, 0.9)
+				.drawRect(0, 0,buttonWidth,buttonHeight)
 			.endFill();
 
 			this.skinsSection[nm].button.pseudoBg = new PIXI.Graphics();
-			this.skinsSection[nm].button.pseudoBg.beginFill(0x263238,0)
+			this.skinsSection[nm].button.pseudoBg.beginFill(0x263238, 0)
 				.drawRect(-pseudoPaddX,-pseudoPaddY,buttonWidth+2*pseudoPaddX,buttonHeight+2*pseudoPaddY)
 			.endFill();
 
@@ -3730,12 +3714,12 @@ var SisyphusSheepGame = function(){
 			this.skinsSection[nm].button.on((_isMobile)?"touchend":"mouseup",this.setAccessory.bind(this, nm, data["type"]));
 
 			this.skinsSection[nm].button.footnote = new PIXI.Text("",textOpt2);
-			this.skinsSection[nm].button.footnote.anchor.set(0.5,0);
+			this.skinsSection[nm].button.footnote.anchor.set(0.5, 0);
 			this.skinsSection[nm].button.footnote.position.set(buttonWidth/2, buttonHeight+10);
 
 			this.skinsSection[nm].button.overlay = new PIXI.Graphics();
-			this.skinsSection[nm].button.overlay.beginFill(0xb0bec5,0.75)
-				.drawRect(0,0,buttonWidth,buttonHeight)
+			this.skinsSection[nm].button.overlay.beginFill(0xb0bec5, 0.75)
+				.drawRect(0, 0,buttonWidth,buttonHeight)
 			.endFill();
 			this.skinsSection[nm].button.overlay.visible = false;
 
@@ -3781,12 +3765,12 @@ var SisyphusSheepGame = function(){
 		this.coinAdButton.position.set(this.canvasWidth*2/3-buttonWidth/2,height/2+30);
 
 		this.coinAdButton.background = new PIXI.Graphics();
-		this.coinAdButton.background.beginFill(0x263238,0.9)
-			.drawRect(0,0,buttonWidth,buttonHeight)
+		this.coinAdButton.background.beginFill(0x263238, 0.9)
+			.drawRect(0, 0,buttonWidth,buttonHeight)
 		.endFill();
 
 		this.coinAdButton.pseudoBg = new PIXI.Graphics();
-		this.coinAdButton.pseudoBg.beginFill(0x263238,0)
+		this.coinAdButton.pseudoBg.beginFill(0x263238, 0)
 			.drawRect(-pseudoPaddX,-pseudoPaddY,buttonWidth+2*pseudoPaddX,buttonHeight+2*pseudoPaddY)
 		.endFill();
 		this.coinAdButton.pseudoBg.alpha = 0;
@@ -3804,16 +3788,16 @@ var SisyphusSheepGame = function(){
 
 		this.coinAdButton.interactive = true;
 		this.coinAdButton.buttonMode = true;
-		this.coinAdButton.on((_isMobile)?"touchend":"mouseup",this.ads.showAd.bind(this.ads,"rewardvideo","coins",10*getRandomInt(1,15)));
+		this.coinAdButton.on((_isMobile)?"touchend":"mouseup",this.ads.showAd.bind(this.ads,"rewardvideo","coins", 10*getRandomInt(1, 15)));
 
 		this.coinAdButton.overlay = new PIXI.Graphics();
-		this.coinAdButton.overlay.beginFill(0xb0bec5,0.75)
-			.drawRect(0,0,buttonWidth,buttonHeight)
+		this.coinAdButton.overlay.beginFill(0xb0bec5, 0.75)
+			.drawRect(0, 0,buttonWidth,buttonHeight)
 		.endFill();
 		this.coinAdButton.overlay.visible = false;
 
 		this.coinAdButton.footnote = new PIXI.Text("Watch ads to earn between 10-150 coins!",textOpt4);
-		this.coinAdButton.footnote.anchor.set(0.5,0);
+		this.coinAdButton.footnote.anchor.set(0.5, 0);
 		this.coinAdButton.footnote.position.set(buttonWidth/2, buttonHeight+15);
 
 		this.coinAdButton.addChild(this.coinAdButton.pseudoBg);
@@ -3831,12 +3815,12 @@ var SisyphusSheepGame = function(){
 		this.coinBuyButton.position.set(this.canvasWidth*1/3-buttonWidth/2,this.coinAdButton.y);
 
 		this.coinBuyButton.background = new PIXI.Graphics();
-		this.coinBuyButton.background.beginFill(0x263238,0.9)
-			.drawRect(0,0,buttonWidth,buttonHeight)
+		this.coinBuyButton.background.beginFill(0x263238, 0.9)
+			.drawRect(0, 0,buttonWidth,buttonHeight)
 		.endFill();
 
 		this.coinBuyButton.pseudoBg = new PIXI.Graphics();
-		this.coinBuyButton.pseudoBg.beginFill(0x263238,0)
+		this.coinBuyButton.pseudoBg.beginFill(0x263238, 0)
 			.drawRect(-pseudoPaddX,-pseudoPaddY,buttonWidth+2*pseudoPaddX,buttonHeight+2*pseudoPaddY)
 		.endFill();
 		this.coinBuyButton.pseudoBg.alpha = 0;
@@ -3857,13 +3841,13 @@ var SisyphusSheepGame = function(){
 		this.coinBuyButton.on((_isMobile)?"touchend":"mouseup",this.purchases.buy.bind(this.purchases,"coins500"));
 
 		this.coinBuyButton.overlay = new PIXI.Graphics();
-		this.coinBuyButton.overlay.beginFill(0xb0bec5,0.75)
-			.drawRect(0,0,buttonWidth,buttonHeight)
+		this.coinBuyButton.overlay.beginFill(0xb0bec5, 0.75)
+			.drawRect(0, 0,buttonWidth,buttonHeight)
 		.endFill();
 		this.coinBuyButton.overlay.visible = false;
 
 		this.coinBuyButton.footnote = new PIXI.Text("Buy 500 coins for $0.99",textOpt4);
-		this.coinBuyButton.footnote.anchor.set(0.5,0);
+		this.coinBuyButton.footnote.anchor.set(0.5, 0);
 		this.coinBuyButton.footnote.position.set(buttonWidth/2, buttonHeight+15);
 
 		this.coinBuyButton.addChild(this.coinBuyButton.pseudoBg);
@@ -3883,12 +3867,12 @@ var SisyphusSheepGame = function(){
 		this.restorePurchasesButton.position.set(this.canvasWidth/2-buttonWidth/2,height*0.15);
 
 		this.restorePurchasesButton.background = new PIXI.Graphics();
-		this.restorePurchasesButton.background.beginFill(0x263238,0.9)
-			.drawRect(0,0,buttonWidth,buttonHeight)
+		this.restorePurchasesButton.background.beginFill(0x263238, 0.9)
+			.drawRect(0, 0,buttonWidth,buttonHeight)
 		.endFill();
 
 		this.restorePurchasesButton.pseudoBg = new PIXI.Graphics();
-		this.restorePurchasesButton.pseudoBg.beginFill(0x263238,0)
+		this.restorePurchasesButton.pseudoBg.beginFill(0x263238, 0)
 			.drawRect(-pseudoPaddX,-pseudoPaddY,buttonWidth+2*pseudoPaddX,buttonHeight+2*pseudoPaddY)
 		.endFill();
 
@@ -3908,14 +3892,14 @@ var SisyphusSheepGame = function(){
 		this.restorePurchasesButton.on((_isMobile)?"touchend":"mouseup",this.purchases.restore.bind(this.purchases));
 
 		this.restorePurchasesButton.overlay = new PIXI.Graphics();
-		this.restorePurchasesButton.overlay.beginFill(0xb0bec5,0.75)
-			.drawRect(0,0,buttonWidth,buttonHeight)
+		this.restorePurchasesButton.overlay.beginFill(0xb0bec5, 0.75)
+			.drawRect(0, 0,buttonWidth,buttonHeight)
 		.endFill();
 		this.restorePurchasesButton.overlay.visible = false;
 
 		textOpt4 = Object.assign(textOpt4, {"wordWrapWidth": buttonWidth-10});
 		this.restorePurchasesButton.footnote = new PIXI.Text("",textOpt4);
-		this.restorePurchasesButton.footnote.anchor.set(0.5,0);
+		this.restorePurchasesButton.footnote.anchor.set(0.5, 0);
 		this.restorePurchasesButton.footnote.position.set(buttonWidth/2, buttonHeight+15);
 
 		this.restorePurchasesButton.addChild(this.restorePurchasesButton.pseudoBg);
@@ -3964,7 +3948,7 @@ var SisyphusSheepGame = function(){
 			//-Incremental:
 			for(i=0;i<this.achievements.incremental.enhanced.length;i++){
 				if(!this.achievements.incremental.enhanced[i].complete || !this.achievements.incremental.enhanced[i].synced) {
-					this.GooglePlayServices.incrementAchievement("enhanced",i,1);
+					this.GooglePlayServices.incrementAchievement("enhanced", i, 1);
 				}
 			}
 
@@ -4165,10 +4149,10 @@ var SisyphusSheepGame = function(){
 					this.hero.sheep.anchor.set(0.5);
 
 					if(accessory == "little_lamb"){
-						this.hero.sheep.scale.set(0.25,0.25);
+						this.hero.sheep.scale.set(0.25, 0.25);
 						this.hero.jumpStrength = this.heroRunStrength_lamb;
 					} else{
-						this.hero.sheep.scale.set(0.35,0.35);
+						this.hero.sheep.scale.set(0.35, 0.35);
 						this.hero.jumpStrength = this.heroRunStrength;
 					}
 				}
@@ -4180,10 +4164,10 @@ var SisyphusSheepGame = function(){
 					scaleDir = (this.hero.sheep.scale.x<0)?-1:1;
 
 					if(accessory == "little_lamb"){
-						this.hero.sheep.scale.set(0.25*scaleDir,0.25);
+						this.hero.sheep.scale.set(0.25*scaleDir, 0.25);
 						this.hero.jumpStrength = this.heroRunStrength_lamb;
 					} else{
-						this.hero.sheep.scale.set(0.35*scaleDir,0.35);
+						this.hero.sheep.scale.set(0.35*scaleDir, 0.35);
 						this.hero.jumpStrength = this.heroRunStrength;
 					}
 				}
@@ -4438,7 +4422,7 @@ var SisyphusSheepGame = function(){
 				"leaderboardId":"CgkI8sq82fwOEAIQAg" //old leaderboard ID
 			}, function(result){
 				var sc = parseInt(result.playerScore);
-				oldHS = Math.min(sc,20);
+				oldHS = Math.min(sc, 20);
 			}.bind(Game));
 
 			//Syncing Locally-stored and Cloud-stored scores
@@ -4472,14 +4456,14 @@ var SisyphusSheepGame = function(){
 			}.bind(Game));
 
 			//ACHIEVEMENT: CLEARLY ADDICTED
-			if(this.achievements.incremental.die_addicted[0].complete){
-				this.GooglePlayServices.incrementAchievement("addicted",0,1);
+			if(this.achievements.incremental.die[4].complete){
+				this.GooglePlayServices.incrementAchievement("addicted", 0, 1);
 			}
 			if(this.achievements.incremental.score_times[4].complete){
-				this.GooglePlayServices.incrementAchievement("addicted",0,1);
+				this.GooglePlayServices.incrementAchievement("addicted", 0, 1);
 			}
 			if(this.achievements.incremental.shield[2].complete){
-				this.GooglePlayServices.incrementAchievement("addicted",0,1);
+				this.GooglePlayServices.incrementAchievement("addicted", 0, 1);
 			}
 
 			//Sync locally-stored and Google Play achievements
@@ -4788,13 +4772,7 @@ var SisyphusSheepGame = function(){
 		//ACHIEVEMENT: DIE/DIE_ADDICTED
 		for(i=0;i<this.achievements.incremental.die.length;i++){
 			if(!this.achievements.incremental.die[i].complete || !this.achievements.incremental.die[i].synced){
-				this.GooglePlayServices.incrementAchievement("die",i,1);
-			}
-		}
-
-		if(this.achievements.incremental.die[4].complete){
-			if(!this.achievements.incremental.die_addicted[0].complete || !this.achievements.incremental.die_addicted[0].synced){
-				this.GooglePlayServices.incrementAchievement("die_addicted",0,1);
+				this.GooglePlayServices.incrementAchievement("die", i, 1);
 			}
 		}
 
@@ -4803,13 +4781,13 @@ var SisyphusSheepGame = function(){
 		//ACHIEVEMENT: SCORE/SCORE_TIMES
 		for(i=0;i<this.achievements.single.score.length;i++){
 			if(this.score>=this.achievements.single.score[i].value){
-				this.GooglePlayServices.unlockAchievement("score",i);
+				this.GooglePlayServices.unlockAchievement("score", i);
 			}
 		}
 
 		for(i=0;i<this.achievements.incremental.score_times.length;i++){
-			if(this.score>=15){
-				this.GooglePlayServices.incrementAchievement("score_times",i);
+			if(this.score>=150){
+				this.GooglePlayServices.incrementAchievement("score_times", i);
 			}
 		}
 
@@ -4824,9 +4802,9 @@ var SisyphusSheepGame = function(){
 		}
 
 		//ADS
-		if(this.score>=80){
+		if(this.score>=100){
 			this.incCoins(Math.floor(1.1*this.score), true);
-			this.ads.showAd("rewardvideo","coins",10*getRandomInt(5,20));
+			this.ads.showAd("rewardvideo","coins", 10*getRandomInt(5, 20));
 		}
 		else if(this.totalGamesPlayed>=5){
 			this.ads.showAd("interstitial");
@@ -5014,7 +4992,7 @@ var SisyphusSheepGame = function(){
 
 			if(window.localStorage.getItem("coins") != null){
 				this.coins = parseInt(window.localStorage["coins"]);
-				//this.coins = Math.max(this.coins,200);
+				//this.coins = Math.max(this.coins, 200);
 				this.incCoins(0,false);
 			}
 
