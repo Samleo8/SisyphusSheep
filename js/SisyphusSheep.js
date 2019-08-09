@@ -2505,16 +2505,19 @@ var SisyphusSheepGame = function(){
 
 		//--Treadmill Gear Animation
 		this.treadmill.gears = new PIXI.AnimatedSprite(this.animations["treadmill"].frames);
+
 		this.treadmill.gears.animationSpeed = 0.25;
 		this.treadmill.gears.loop = true;
 		this.treadmill.gears.gotoAndPlay(1);
 
+		this.treadmill.gears.anchor.set(0.5, 0.5);
 		var _r = this.treadmill.gears.height/this.treadmill.gears.width;
 		this.treadmill.gears.width = this.canvasWidth;
 		this.treadmill.gears.height = _r * this.treadmill.gears.width;
 		this.treadmill.gears.x = this.canvasWidth/2;
 		this.treadmill.gears.y = this.canvasHeight-this.treadmill.gears.height/2;
-		this.treadmill.gears.anchor.set(0.5);
+
+		this.treadmill.gears.tint = 0x709db4;
 
 		//--Treadmill Flag indicating
 		this.treadmill.flag = new PIXI.Sprite(this.sprites.flag.texture);
