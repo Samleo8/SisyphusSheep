@@ -1593,6 +1593,7 @@ var SisyphusSheepGame = function(){
 		/* PAUSE OVERLAY */
 		this.pauseOverlay = new PIXI.Container();
 
+		var i;
 		var rect = new PIXI.Graphics();
 		rect.beginFill(0x263238, 0.7);
 		rect.drawRect(0, 0,this.canvasWidth,this.canvasHeight);
@@ -2594,7 +2595,7 @@ var SisyphusSheepGame = function(){
 		this.playButtons.y = this.canvasHeight - this.playButtons.styles.bottomMargin - this.playButtons.styles.width/2;
 
 		//--Button setup and positioning
-		var cnt = 0;
+		var playButton, cnt = 0;
 		for(i in this.playButtons.childButtons){
 			if(!this.playButtons.childButtons.hasOwnProperty(i)) continue;
 
@@ -2859,6 +2860,7 @@ var SisyphusSheepGame = function(){
 		this.obstacleTimer = new Date().getTime();
 
 		//CLEAR OBSTACLES
+		var i;
 		for(i=this.obstacles.children.length-1;i>=0;i--){
 			this.obstacles.removeChild(this.obstacles.children[i]);
 		}
@@ -3200,8 +3202,6 @@ var SisyphusSheepGame = function(){
 
 	this.spawnObstacle = function(){
 		if(this.obstaclesFrozen) return;
-
-		var i;
 
 		//RESET TIMERS
 		this.pauseTime["obstacle"] = 0;
@@ -3981,7 +3981,7 @@ var SisyphusSheepGame = function(){
 			this.upgradesSection[nm].button.text.text = trueCost;
 
 			//Footnote Text
-			footnoteText = "Current "+data["type"]+": ";
+			var footnoteText = "Current "+data["type"]+": ";
 			switch(data["type"]){
 				case "one-off":
 					footnoteText = (data["increment_count"]==data["max_increments"])?"Activated":"Activate";
