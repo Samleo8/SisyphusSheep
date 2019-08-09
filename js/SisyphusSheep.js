@@ -4374,7 +4374,7 @@ var SisyphusSheepGame = function(){
 		renderer.render(stage);
 	};
 
-	this.showInfo = function(e){../
+	this.showInfo = function(e){
 		if(typeof e == "object"){
 			if(e.type=="mouseup" || e.type=="touchend"){
 				this.preventHeroMovement++;
