@@ -4374,8 +4374,7 @@ var SisyphusSheepGame = function(){
 		renderer.render(stage);
 	};
 
-	this.showInfo = function(e){
-
+	this.showInfo = function(e){../
 		if(typeof e == "object"){
 			if(e.type=="mouseup" || e.type=="touchend"){
 				this.preventHeroMovement++;
@@ -5087,7 +5086,6 @@ var SisyphusSheepGame = function(){
 
 	this.GooglePlayServices = {
 		//REMEMBER: "this" does NOT refer to the game object; it refers to the GooglePlayServices object.
-
 		"player":{
 			"id":"",
 			"name":"UNKNOWN",
@@ -5107,7 +5105,6 @@ var SisyphusSheepGame = function(){
 				renderer.render(stage);
 			}.bind(_self));
 		},
-
 		"sendScore": function(score, leaderboardID){
 				if(typeof score == "undefined" || score == null) return;
 
@@ -5136,7 +5133,6 @@ var SisyphusSheepGame = function(){
 				window.plugins.playGamesServices.showLeaderboard(data);
 			}
 		},
-
 		"unlockAchievement": function(achievementName, num){
 			if(typeof achievementName == "undefined" || achievementName == null){
 				return;
