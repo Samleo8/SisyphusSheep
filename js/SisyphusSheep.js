@@ -783,7 +783,7 @@ var SisyphusSheepGame = function(){
 
 				console.log(nm);
 				document.addEventListener('admob.'+nm+'.events.LOAD_FAIL', function(event) {
-					console.log("Load failed", event.adType);
+					console.log("Load failed:", event.adType);
 					data["loaded"] = false;
 
 					if(event.adType == "rewardvideo"){
@@ -796,11 +796,12 @@ var SisyphusSheepGame = function(){
 				}.bind(self));
 
 				document.addEventListener('admob.'+nm+'.events.LOAD', function(event) {
-					console.log("Load successful", event);
+					var _nm = event.type.split(".")[1];
+					console.log("Load successful:", _nm);
 
 					data["loaded"] = true;
 
-					if(event.adType == "rewardvideo"){
+					if(_nm == "rewardvideo"){
 						this.updateButtons();
 					}
 				}.bind(self));
@@ -2717,7 +2718,7 @@ var SisyphusSheepGame = function(){
 
 		this.totalGamesPlayed = 0;
 
-		this.ads.showAd("banner");
+		//this.ads.showAd("banner");
 
 		this.newGame();
 	};
