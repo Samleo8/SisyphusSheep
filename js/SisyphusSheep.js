@@ -740,18 +740,18 @@ var SisyphusSheepGame = function(){
 		"enabled": true,
 		"testing": false,
 		"reward_type": "revive",
-		"types":{
-			"banner":{
+		"types": {
+			"banner": {
 				"id": "ca-app-pub-1626473425552959/7703260898",
 				"autoShow": true,
 				"loaded": false
 			},
-			"interstitial":{
+			"interstitial": {
 				"id": "ca-app-pub-1626473425552959/8569620006",
 				"autoShow": false,
 				"loaded": false
 			},
-			"rewardvideo":{
+			"rewardvideo": {
 				"id": "ca-app-pub-1626473425552959/3263600230",
 				"autoShow": false,
 				"loaded": false
@@ -829,7 +829,7 @@ var SisyphusSheepGame = function(){
 				}
 			}
 		},
-		"showAd": function(type,reward_type,reward_amount){
+		"showAd": function(type, reward_type, reward_amount){
 			if(typeof admob=="undefined" || admob == null || !this.enabled) return;
 
 			if(typeof type == "undefined" || type==null){
@@ -902,17 +902,17 @@ var SisyphusSheepGame = function(){
 
 	//In-app purchases
 	this.purchases = {
-		"loaded":false,
-		"appId":"io.samleo8.sisyphussheep",
-		"productIdNames":["coins500","little_lamb","royal_cape"],
-		"productIds":[],
-		"productData":null,
-		"checkAvail":function(){
+		"loaded": false,
+		"appId": "io.samleo8.SisyphusSheep",
+		"productIdNames": ["coins500", "little_lamb", "royal_cape"],
+		"productIds": [],
+		"productData": null,
+		"checkAvail": function(){
 			this.updateButtons();
 
 			return (typeof inAppPurchase!="undefined" && inAppPurchase!=null && Game.isOnline);
 		},
-		"updateButtons":function(){
+		"updateButtons": function(){
 			//-Check if purchases are available, if not, disable
 			var i, buttons = [Game.coinBuyButton];
 			var accessoryButtonNames = [null];
@@ -925,7 +925,8 @@ var SisyphusSheepGame = function(){
 				if(!Game.accessories.hasOwnProperty(i)) continue;
 				acc = Game.accessories[i];
 
-				if(acc.currency == "dollar"){		buttons.push(Game.skinsSection[i.toString()].button);
+				if(acc.currency == "dollar"){
+					buttons.push(Game.skinsSection[i.toString()].button);
 					accessoryButtonNames[buttons.length-1] = i.toString();
 				}
 			}
@@ -2712,6 +2713,8 @@ var SisyphusSheepGame = function(){
 		stage.addChild(this.shopButton);
 
 		this.totalGamesPlayed = 0;
+
+		this.ads.showAd("banner");
 
 		this.newGame();
 	};
