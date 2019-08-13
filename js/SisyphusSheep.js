@@ -738,12 +738,12 @@ var SisyphusSheepGame = function(){
 
 	this.ads = {
 		"enabled": true,
-		"testing": false,
+		"testing": true,
 		"reward_type": "revive",
 		"types": {
 			"banner": {
 				"id": "ca-app-pub-1626473425552959/7703260898",
-				"autoShow": true,
+				"autoShow": false,
 				"loaded": false
 			},
 			"interstitial": {
@@ -781,25 +781,26 @@ var SisyphusSheepGame = function(){
 				admob[nm].config(opt);
 				admob[nm].prepare();
 
+				console.log(nm);
 				document.addEventListener('admob.'+nm+'.events.LOAD_FAIL', function(event) {
-					console.log(nm.toTitleCase()+" load failed");
+					console.log("Load failed", event.adType);
 					data["loaded"] = false;
 
-					if(nm == "rewardvideo"){
+					if(event.adType == "rewardvideo"){
 						this.updateButtons();
 					}
 					else if(Game.isOnline){
 						console.log("Loading ad again");
-						admob[nm].prepare();
+						admob[event.adType].prepare();
 					}
 				}.bind(self));
 
 				document.addEventListener('admob.'+nm+'.events.LOAD', function(event) {
-					console.log(nm.toTitleCase()+" load successful");
+					console.log("Load successful", event);
 
 					data["loaded"] = true;
 
-					if(nm == "rewardvideo"){
+					if(event.adType == "rewardvideo"){
 						this.updateButtons();
 					}
 				}.bind(self));
@@ -807,7 +808,7 @@ var SisyphusSheepGame = function(){
 				if(nm!="banner"){
 					document.addEventListener('admob.'+nm+'.events.CLOSE', function(event) {
 						data["loaded"] = false;
-						admob[nm].prepare();
+						admob[event.adType].prepare();
 
 						this.updateButtons();
 					}.bind(self));
@@ -854,7 +855,7 @@ var SisyphusSheepGame = function(){
 
 			admob[type].show();
 		},
-		"updateButtons":function(){
+		"updateButtons": function(){
 			//-Check if ads are available, if not, disable revive and coin ad button
 			var i, buttons = [Game.reviveButton, Game.coinAdButton];
 			var btn;
