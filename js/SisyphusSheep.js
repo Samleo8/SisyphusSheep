@@ -782,7 +782,7 @@ var SisyphusSheepGame = function(){
 				admob[nm].prepare();
 
 				document.addEventListener('admob.'+nm+'.events.LOAD_FAIL', function(event) {
-					console.log("Load failed");
+					console.log(nm.toTitleCase()+" load failed");
 					data["loaded"] = false;
 
 					if(nm == "rewardvideo"){
@@ -795,6 +795,8 @@ var SisyphusSheepGame = function(){
 				}.bind(self));
 
 				document.addEventListener('admob.'+nm+'.events.LOAD', function(event) {
+					console.log(nm.toTitleCase()+" load successful");
+
 					data["loaded"] = true;
 
 					if(nm == "rewardvideo"){
