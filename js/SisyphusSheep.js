@@ -737,8 +737,8 @@ var SisyphusSheepGame = function(){
 	this.totalGamesPlayed = 0;
 
 	this.ads = {
-		"enabled": false,
-		"testing": true,
+		"enabled": true,
+		"testing": false,
 		"reward_type": "revive",
 		"types":{
 			"banner":{
