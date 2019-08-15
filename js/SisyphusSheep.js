@@ -1644,7 +1644,7 @@ var SisyphusSheepGame = function(){
 		this.pauseOverlay.addChild(text2);
 
 		//-Add Event Listener
-		this.pauseOverlay.on((_isMobile)?"touchend":"mouseup",this.togglePause.bind(this,false));
+		this.pauseOverlay.on((_isMobile)?"tap":"click", this.togglePause.bind(this,false));
 
 		/* INFO OVERLAY */
 		this.infoOverlay = new PIXI.Container();
