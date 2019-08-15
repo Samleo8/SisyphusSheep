@@ -4783,6 +4783,7 @@ var SisyphusSheepGame = function(){
 
 		//Need to make sure score is an integer!
 		this.score = Math.floor(this.score);
+		this.saveOptions();
 
 		//SEND HIGHSCORE IF PLAY GAMES AVAILABLE
 		if(this.isLoggedIn){
