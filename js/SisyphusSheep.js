@@ -130,8 +130,8 @@ var SisyphusSheepGame = function(){
 	//Hero
 	this.hero = null;
 	this.heroShield = null;
-	this.heroRunStrength = 5.5;
-	this.heroRunStrength_lamb = 7.5;
+	this.this.heroSpeed = 5.5;
+	this.this.heroSpeed_lamb = 7.5;
 
 	this.startingShield = this.upgrades.shieldTimeInc.value;
 	this.shieldTimer = null;
@@ -179,7 +179,9 @@ var SisyphusSheepGame = function(){
 	this.fadeInTimer = null;
 
 	//Treadmill
-	this.heroSpeed = 13; //cannot be below treadmillMaxSpeed
+	this.heroSpeed_default = 13;
+	this.heroSpeed_lamb = 12.5;
+	this.heroSpeed = this.heroSpeed_default; //cannot be below treadmillMaxSpeed
 
 	this.treadmill = null;
 	this.treadmillMinSpeed = 6;
@@ -284,7 +286,7 @@ var SisyphusSheepGame = function(){
 		},
 		"little_lamb":{
 			"title":"Little Lamb",
-			"desc":"A cute little lamb.\n\nSmaller surface area, but jumping is harder to control",
+			"desc":"A cute little lamb.\n\nSmaller surface area but runs slightly slower",
 			"type":"skin",
 			"currency":"dollar",
 			"cost":1.99,
@@ -2792,7 +2794,7 @@ var SisyphusSheepGame = function(){
 		this.hero.ax = 0;
 		this.hero.vy = 0;
 		this.hero.ay = 0;
-		//this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.heroRunStrength:this.heroRunStrength_lamb;
+		//this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.this.heroSpeed:this.this.heroSpeed_lamb;
 
 		this.treadmill.speed = this.treadmillMinSpeed;
 		this.sprint.level = 100;
@@ -4172,10 +4174,10 @@ var SisyphusSheepGame = function(){
 
 					if(accessory == "little_lamb"){
 						this.hero.sheep.scale.set(0.25, 0.25);
-						this.hero.jumpStrength = this.heroRunStrength_lamb;
+						this.heroSpeed = this.this.heroSpeed_lamb;
 					} else{
 						this.hero.sheep.scale.set(0.35, 0.35);
-						this.hero.jumpStrength = this.heroRunStrength;
+						this.heroSpeed = this.this.heroSpeed;
 					}
 				}
 				else{
@@ -4187,10 +4189,10 @@ var SisyphusSheepGame = function(){
 
 					if(accessory == "little_lamb"){
 						this.hero.sheep.scale.set(0.25*scaleDir, 0.25);
-						this.hero.jumpStrength = this.heroRunStrength_lamb;
+						this.heroSpeed = this.this.heroSpeed_lamb;
 					} else{
 						this.hero.sheep.scale.set(0.35*scaleDir, 0.35);
-						this.hero.jumpStrength = this.heroRunStrength;
+						this.heroSpeed = this.this.heroSpeed;
 					}
 				}
 
