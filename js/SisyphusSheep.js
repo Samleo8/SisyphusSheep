@@ -907,8 +907,8 @@ var SisyphusSheepGame = function(){
 	//In-app purchases
 	this.purchases = {
 		"loaded": false,
-		"appId": "io.samleo8.SisyphusSheep",
-		"productIdNames": ["coins500", "little_lamb", "royal_cape"],
+		"appId": "io.samleo8.sisyphussheep",
+		"productIdNames": ["coins_500", "little_lamb", "royal_cape"],
 		"productIds": [],
 		"productData": null,
 		"checkAvail": function(){
