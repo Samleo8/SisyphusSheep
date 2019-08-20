@@ -130,8 +130,15 @@ var SisyphusSheepGame = function(){
 	//Hero
 	this.hero = null;
 	this.heroShield = null;
-	this.this.heroSpeed = 5.5;
-	this.this.heroSpeed_lamb = 7.5;
+
+	this.heroStartX = {
+		"min": this.canvasWidth*(1/3),
+		"max": this.canvasWidth*(1/5),
+		"inc": this.canvasWidth*(1/60)
+	}
+
+	this.heroSpeed = 5.5;
+	this.heroSpeed_lamb = 7.5;
 
 	this.startingShield = this.upgrades.shieldTimeInc.value;
 	this.shieldTimer = null;
@@ -2541,7 +2548,7 @@ var SisyphusSheepGame = function(){
 		this.treadmill.addChild(this.treadmill.flag);
 
 		//HERO INITIALIZE
-		this.hero.x = this.canvasWidth*(1/5);
+		this.hero.x = this.heroStartX.min;
 		this.hero.y = this.canvasHeight - this.hero.sheep.height/2 - this.treadmill.gears.height;
 		this.portalsPassed = 0;
 
@@ -2780,7 +2787,7 @@ var SisyphusSheepGame = function(){
 		this.playButtons.visible = true;
 		this.treadmill.visible = true;
 		this.hero.visible = true;
-		this.hero.x = this.canvasWidth*(1/5);
+		this.hero.x = this.heroStartX.min;
 
 		this.hero.running = false;
 		this.hero.sprinting = false;
@@ -2794,7 +2801,7 @@ var SisyphusSheepGame = function(){
 		this.hero.ax = 0;
 		this.hero.vy = 0;
 		this.hero.ay = 0;
-		//this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.this.heroSpeed:this.this.heroSpeed_lamb;
+		//this.hero.jumpStrength = (this.hero.scale.y>=0.35)?this.heroSpeed:this.heroSpeed_lamb;
 
 		this.treadmill.speed = this.treadmillMinSpeed;
 		this.sprint.level = 100;
@@ -2851,13 +2858,14 @@ var SisyphusSheepGame = function(){
 	this.nextLevel = function(){
 		//HERO
 		//--Reset positions of hero, shield and accessories
-		this.hero.x = this.canvasWidth*(1/5);
+		console.log(this.heroStartX);
+		this.hero.x = Math.max(this.heroStartX.min - this.heroStartX.inc * this.portalsPassed, this.heroStartX.max);
 
 		this.heroShield.position = this.hero.position;
 		this.setAccessoriesPositions(1);
 
 		//--Increase Hero Sprint Level
-		this.sprint.level += Math.max(25*Math.pow(0.9,this.portalsPassed), 10);
+		this.sprint.level += Math.max(25*Math.pow(0.9, this.portalsPassed), 10);
 
 		this.sprint.level = Math.min(Math.max(this.sprint.level, 0), 100);
 
@@ -4174,10 +4182,10 @@ var SisyphusSheepGame = function(){
 
 					if(accessory == "little_lamb"){
 						this.hero.sheep.scale.set(0.25, 0.25);
-						this.heroSpeed = this.this.heroSpeed_lamb;
+						this.heroSpeed = this.heroSpeed_lamb;
 					} else{
 						this.hero.sheep.scale.set(0.35, 0.35);
-						this.heroSpeed = this.this.heroSpeed;
+						this.heroSpeed = this.heroSpeed;
 					}
 				}
 				else{
@@ -4189,10 +4197,10 @@ var SisyphusSheepGame = function(){
 
 					if(accessory == "little_lamb"){
 						this.hero.sheep.scale.set(0.25*scaleDir, 0.25);
-						this.heroSpeed = this.this.heroSpeed_lamb;
+						this.heroSpeed = this.heroSpeed_lamb;
 					} else{
 						this.hero.sheep.scale.set(0.35*scaleDir, 0.35);
-						this.heroSpeed = this.this.heroSpeed;
+						this.heroSpeed = this.heroSpeed;
 					}
 				}
 
@@ -4930,7 +4938,7 @@ var SisyphusSheepGame = function(){
 		this.playButtons.visible = true;
 		this.treadmill.visible = true;
 		this.hero.visible = true;
-		this.hero.x = this.canvasWidth*(1/5);
+		this.hero.x = this.heroStartX.min;
 
 		this.heroShield.position = this.hero.position;
 		if(this.startingShield){
