@@ -2806,11 +2806,13 @@ var SisyphusSheepGame = function(){
 		this.treadmill.speed = this.treadmillMinSpeed;
 		this.sprint.level = 100;
 
+		/*
 		for(var i=0;i<this.sprint.circle.children.length;i++){
 			this.sprint.circle.children[i].tint = this.playButtons.styles.disabledTint;
 		}
 		this.playButtons.sprint.circle.tint = this.playButtons.styles.disabledTint;
-
+		*/
+		
 		//--Hero's shield
 		this.heroShield.position = this.hero.position;
 		if(this.startingShield){
@@ -2935,11 +2937,13 @@ var SisyphusSheepGame = function(){
 				this.hero.running = true;
 				this.hero.sheep.play();
 
+				/*
 				for(var i=0;i<this.sprint.circle.children.length;i++){
 					this.sprint.circle.children[i].tint = 0xFFFFFF;
 				}
 				this.playButtons.sprint.circle.tint = 0xFFFFFF;
 				//this.playButtons.sprint.visible = true;
+				*/
 				break;
 			case "mouseup":
 			case "touchend":
@@ -2947,15 +2951,17 @@ var SisyphusSheepGame = function(){
 			case "touchendoutside":
 			case "keyup":
 				this.hero.running = false;
-				this.hero.sprinting = false;
-				this.hero.sheep.gotoAndStop(4);
+				//this.hero.sprinting = false;
+				if(!this.hero.sprinting) this.hero.sheep.gotoAndStop(4);
 
+				/*
 				for(var i=0;i<this.sprint.circle.children.length;i++){
 					this.sprint.circle.children[i].tint = this.playButtons.styles.disabledTint;
 				}
 				this.playButtons.sprint.circle.tint = this.playButtons.styles.disabledTint;
 
 				//this.playButtons.sprint.visible = false;
+				*/
 				break;
 			default: return;
 		}
@@ -2973,6 +2979,10 @@ var SisyphusSheepGame = function(){
 			case "touchstart":
 			case "keydown":
 				this.hero.sprinting = true;
+
+				if(!this.hero.running){
+					this.hero.sheep.play();
+				}
 				break;
 			case "mouseup":
 			case "touchend":
@@ -2980,6 +2990,8 @@ var SisyphusSheepGame = function(){
 			case "touchendoutside":
 			case "keyup":
 				this.hero.sprinting = false;
+
+				if(!this.hero.running) this.hero.sheep.gotoAndStop(4);
 				break;
 			default: return;
 		}
@@ -3000,29 +3012,27 @@ var SisyphusSheepGame = function(){
 		this.treadmill.visible = true;
 		this.hero.visible = true;
 
-		if(this.hero.running){
-			if(this.hero.sprinting){
-	            if(this.sprint.level>0){
-	                overallSpd += this.heroSpeed * this.sprint.multiplier;
-	                this.sprint.level -= this.sprint.dec;
+		if(this.hero.sprinting){
+            if(this.sprint.level>0){
+                overallSpd += this.heroSpeed * this.sprint.multiplier;
+                this.sprint.level -= this.sprint.dec;
 
-					this.hero.sheep.animationSpeed = 0.35;
-	            }
-				else {
-					//Achievement
-					if(!this.achievements.single.sprint_spent[0].complete || !this.achievements.single.sprint_spent[0].synced)  {
-						this.GooglePlayServices.unlockAchievement("sprint_spent");
-					}
-
-					overallSpd += this.heroSpeed;
-					this.hero.sheep.animationSpeed = 0.15;
+				this.hero.sheep.animationSpeed = 0.35;
+            }
+			else {
+				//Achievement
+				if(!this.achievements.single.sprint_spent[0].complete || !this.achievements.single.sprint_spent[0].synced)  {
+					this.GooglePlayServices.unlockAchievement("sprint_spent");
 				}
-	        }
-			else{
-				overallSpd += this.heroSpeed;
 
+				overallSpd += this.heroSpeed;
 				this.hero.sheep.animationSpeed = 0.15;
 			}
+        }
+		else if(this.hero.running){
+			overallSpd += this.heroSpeed;
+
+			this.hero.sheep.animationSpeed = 0.15;
         }
         else{
             this.sprint.level += this.sprint.inc;
