@@ -2835,7 +2835,6 @@ var SisyphusSheepGame = function(){
 		this.shop.visible = false;
 
 		//-Obstacles
-		var i;
 
 		this.obstaclesFrozen = false;
 
@@ -4195,7 +4194,6 @@ var SisyphusSheepGame = function(){
 						this.heroSpeed = this.heroSpeed_lamb;
 					} else{
 						this.hero.sheep.scale.set(0.35, 0.35);
-						this.heroSpeed = this.heroSpeed;
 					}
 				}
 				else{
@@ -4210,7 +4208,6 @@ var SisyphusSheepGame = function(){
 						this.heroSpeed = this.heroSpeed_lamb;
 					} else{
 						this.hero.sheep.scale.set(0.35*scaleDir, 0.35);
-						this.heroSpeed = this.heroSpeed;
 					}
 				}
 
