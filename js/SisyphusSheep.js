@@ -1140,7 +1140,7 @@ var SisyphusSheepGame = function(){
 			backgroundColor: 0x90a4ae
 		};
 
-		var renderer = PIXI.autoDetectRenderer(rendererOptions);
+		renderer = PIXI.autoDetectRenderer(rendererOptions);
 
 		//INIT STAGE AND RESIZE TO FIT SCREEN
 		stage = new PIXI.Container();
