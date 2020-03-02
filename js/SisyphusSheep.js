@@ -76,7 +76,7 @@ var SisyphusSheepGame = function(){
 		},
 		"noDeathChance": {
 			"title": "Adrenaline",
-			"desc": "Increases chance that you won't die from a spike",
+			"desc": "Increases chance that you won't die from a rock",
 			"increment_value": 0.025,
 			"max_increments": 5,
 			"increment_count": 0,
@@ -425,12 +425,12 @@ var SisyphusSheepGame = function(){
 		"Watching the ad after gaining a >100 highscore earns you coins",
 		"Upgrade your sheep in the store to improve your highscore",
 		"Log into Google Play Games to trash your friends' highscores",
-		"Smashing into a spike with a shield destroys both the shield and the spike",
-		"Smashing into a spike with a shield collects its attached powerup",
+		"Smashing into a rock with a shield destroys both the shield and the rock",
+		"Smashing into a rock with a shield collects its attached powerup",
 		"Customise your sheep's appearance using coins in the store",
 		"Coins can be used to upgrade or customise your sheep!",
 		"Earn coins by watching ads or collecting them as powerups",
-		"You can still die from running into a frozen spike, so watch out!",
+		"You can still die from running into a frozen rock, so watch out!",
 		"Reviving gives you an opportunity to crush your friends' highscores",
 		"Every score above 10 gives you coins proportional to your score",
 		"Complete achievements and earn coins!",
@@ -1181,7 +1181,7 @@ var SisyphusSheepGame = function(){
 		//PRELOADING OF IMAGES INTO PIXI LOADER
 		this.loader = new PIXI.Loader();
 		this.loader.add("sprite_background","img/background.png");
-		this.loader.add("sprite_spike","img/spike.png");
+		this.loader.add("sprite_rock","img/rock.png");
 		this.loader.add("sprite_flag","img/flag.png");
 		this.loader.add("dead_sheep","img/dead_sheep.png");
 
@@ -1243,8 +1243,8 @@ var SisyphusSheepGame = function(){
 			);
 			//this.sprites.background.tint = 0xeceff1;
 
-			//-Spike
-			this.sprites.spike = new PIXI.Sprite(resources["sprite_spike"].texture);
+			//-rock
+			this.sprites.rock = new PIXI.Sprite(resources["sprite_rock"].texture);
 
 			//-Dead Sheep
 			this.sprites.dead_sheep = new PIXI.Sprite(resources["dead_sheep"].texture);
@@ -1284,7 +1284,7 @@ var SisyphusSheepGame = function(){
 				this.sprites.powerups[nm] = new PIXI.Sprite(resources["powerup_"+nm].texture);
 			}
 
-			this.powerupOffset = this.sprites.spike.height/100+this.sprites.powerups[this.powerupNames[0]].height*(0.3)+50;
+			this.powerupOffset = this.sprites.rock.height/100+this.sprites.powerups[this.powerupNames[0]].height*(0.3)+50;
 
 			//-ICONS/BUTTONS
 			this.sprites.icons = {};
@@ -1731,7 +1731,7 @@ var SisyphusSheepGame = function(){
 
 		this.infoOverlay.addChild(text3);
 
-		text2 = new PIXI.Text("Material Design Icons\nSpike: http://scribblenauts.wikia.com/wiki/File:Steel_Spike.png",textOpt2);
+		text2 = new PIXI.Text("Material Design Icons\nrock: http://scribblenauts.wikia.com/wiki/File:Steel_rock.png",textOpt2);
 		text2.anchor.set(0.5, 0);
 		text2.alpha = 0.98;
 		text2.x = this.canvasWidth/2;
@@ -2332,7 +2332,7 @@ var SisyphusSheepGame = function(){
 			};
 
 			var text = new PIXI.Text(
-				"Run to the End of the Treadmill. \nAvoid the Spikes. Repeat. \n"+
+				"Run to the End of the Treadmill. \nAvoid the rocks. Repeat. \n"+
 				((_isMobile)?"Left button":"[RIGHT]")+
 				" to RUN\n"+
 				((_isMobile)?"Right button":"[SPACE]+RUN")+
@@ -3243,7 +3243,7 @@ var SisyphusSheepGame = function(){
 
 		//SET SIZES FOR OBSTACLE OR POWERUP
 		//-Need these sizes for calculation of X/Y positions
-		var obs = new PIXI.Sprite(this.sprites.spike.texture);
+		var obs = new PIXI.Sprite(this.sprites.rock.texture);
 
 		obs.anchor.set(0.5);
 		obs.scale.set(0.2,-0.2);
@@ -3280,7 +3280,7 @@ var SisyphusSheepGame = function(){
 
 	//-"Algo" to generate positions of the obstacle or powerup. Very Evil.
 	this.setObstaclePosition = function(obj){
-		var _dir = (Math.random() < 0.3) ? -1 : 1; //choose whether spike is behind or in front of player
+		var _dir = (Math.random() < 0.3) ? -1 : 1; //choose whether rock is behind or in front of player
 		var _range = obj.width*this.obstacleRange; //maximum range away from center of player
 
 		//--Set X positions somewhere around the player
