@@ -2923,8 +2923,6 @@ var SisyphusSheepGame = function() {
         this.shop.visible = false;
 
         //-Obstacles
-        var i;
-
         this.obstaclesFrozen = false;
 
         //-Games Played
